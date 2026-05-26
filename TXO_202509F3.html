@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>加權指數 202509F3｜選擇權指標圖表</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0e1116;
+    --panel: #171b22;
+    --ink: #e6e9ef;
+    --muted: #8b93a3;
+    --line: #2a2f3a;
+    --call: #e5484d;     /* 買權：紅 */
+    --put:  #4f8cff;     /* 賣權：藍 */
+    --accent: #ffb454;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: -apple-system, "PingFang TC", "Microsoft JhengHei",
+                 "Helvetica Neue", Arial, sans-serif;
+    padding: 28px clamp(16px, 4vw, 56px);
+  }
+  header { margin-bottom: 22px; }
+  h1 {
+    font-size: clamp(20px, 2.4vw, 28px); margin: 0 0 6px;
+    letter-spacing: .5px; font-weight: 700;
+  }
+  .sub { color: var(--muted); font-size: 14px; }
+  .controls {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 12px; padding: 14px 18px; margin: 18px 0 26px;
+  }
+  .controls label { font-size: 14px; color: var(--muted); }
+  select {
+    background: #11151c; color: var(--ink);
+    border: 1px solid var(--line); border-radius: 8px;
+    padding: 8px 12px; font-size: 15px; min-width: 280px;
+  }
+  .card {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px 18px 8px; margin-bottom: 22px;
+  }
+  .card h2 {
+    font-size: 16px; margin: 0 0 4px; display: flex; align-items: center; gap: 8px;
+  }
+  .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+  .dot.call { background: var(--call); }
+  .dot.put  { background: var(--put); }
+  .chart-wrap { position: relative; height: 340px; }
+  footer { color: var(--muted); font-size: 12px; margin-top: 10px; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>加權指數 202509F3 ｜ 選擇權指標時間序列</h1>
+    <div class="sub">買權（C）與賣權（P）分開呈現，可切換不同指標檢視</div>
+  </header>
+
+  <div class="controls">
+    <label for="metric">指標：</label>
+    <select id="metric"></select>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot call"></span>買權 Call（C）</h2>
+    <div class="chart-wrap"><canvas id="chartC"></canvas></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot put"></span>賣權 Put（P）</h2>
+    <div class="chart-wrap"><canvas id="chartP"></canvas></div>
+  </div>
+
+  <footer>資料來源：加權指數 202509F3_results　·　橫軸為交易日，缺值處線段斷開。</footer>
+
+<script>
+const LABELS  = ["2025-09-05", "2025-09-08", "2025-09-09", "2025-09-10", "2025-09-11", "2025-09-12", "2025-09-15", "2025-09-16", "2025-09-17", "2025-09-18", "2025-09-19"];
+const DATA_C  = {"mjd_sigma": [0.0908024755934914, null, 0.10622978072896705, 0.14662486936890223, 0.13591074934594483, 0.1331353813852786, 0.1402208446633687, 0.13700235734067515, 0.14329772495735119, 0.06411681390537506, 0.010000000000000002], "mjd_lambda": [6.232073895919291, null, 9.999999999999512, 0.04097430711054711, 2.2226059138626177, 0.019292523683205668, 0.9539412587535842, 9.999999999995376, 4.2120437934082435, 5.719577314143192, 2.095056908207138], "mjd_gamma": [-0.012767908717547533, null, -0.0037868129172716194, -1.4999999999633882, -0.05339465722290136, -0.5004665660599215, -0.2252738202022201, -0.01584584296502364, -0.09572166131747475, 0.008663903833452585, -1.4999999999997584], "mjd_delta": [0.036178377269354335, null, 0.02486209432551951, 0.9047244859945066, 0.06974884320933637, 0.9999999990911911, 0.2200370643402329, 0.03072195194306265, 0.07522294322305578, 0.013332090580927849, 0.5953863896758534], "rnd_mean": [0.04222489802645673, null, 0.00031831407277247423, 0.00021127670072005743, -0.00015111122949452516, 0.0002042350620731034, 8.694993562021746e-05, 5.671485770955845e-05, -0.00021138598467311445, 7.533004217654627e-05, -0.0018797253579783027], "rnd_variance": [0.00010256871804185141, null, 0.000431451681763963, 0.0005215795424649211, 0.0008945561281540576, 0.0003604786117897017, 0.00010040002232193632, 0.00024098645042612253, 0.0006826469204732152, 3.656151589508102e-05, 0.00509757076926484], "rnd_skewness": [0.22277136861043698, null, -0.6246547543873077, -0.020277761893842793, -1.8509662636834168, -0.020650610105742918, 0.9334992747410159, -0.5796386498951042, -4.513218521215863, 1.2208509631416127, -11.80804332732564], "rnd_kurtosis": [3.3374558687402947, null, 3.937029597317163, 3.839574748223465, 12.092875291008813, 3.148482383534478, 3.7669823352332275, 5.263217753329554, 32.03547443884142, 10.996843824449613, 143.27232198653294]};
+const DATA_P  = {"mjd_sigma": [0.15624392624893105, 0.13516404861968281, 0.1624585564727906, 0.15481546451796716, 0.11787079140890304, 0.15209627240751042, 0.13940952975119197, 0.1665745825167393, 0.13336966742675888, 0.10938886871498026, 0.010000000000000002], "mjd_lambda": [1.948517916882227, 2.0761748324080065, 2.4452737765023214, 2.114560773496719, 4.7602606451226075, 1.838084203300808, 7.481831420533722, 1.4487949948932808, 9.628140138550076, 4.02529437615892, 0.00507772861035221], "mjd_gamma": [-0.05634077516001061, -0.06081934664064396, -0.015368495175039432, -0.04371355268448038, -0.04286698823528987, -0.034455328193283084, -0.03252181071317553, -0.03671485900471544, -0.026723466690977592, 0.1002659018769473, -1.4999999999999674], "mjd_delta": [0.07545959856686647, 0.05507182530451678, 0.07485310490652604, 0.06025619674494645, 0.04692885173684878, 0.07131730657052297, 0.03021642699444264, 0.05658438347577104, 0.025517291629178325, 0.0934572275195705, 0.9999999999999999], "rnd_mean": [0.00021690140975623852, 3.827800571082919e-05, -0.0005478765236067335, -6.744715575207142e-05, -2.554436415487309e-05, 7.658368480471213e-05, 3.970569721605573e-05, 2.6812799261804124e-05, 2.1614147017963785e-05, -8.823288948825816e-05, -0.0031833504429133724], "rnd_variance": [0.001292833504579466, 0.0010735170812654535, 0.0022553999927503675, 0.0010602219562913023, 0.0008021749258038895, 0.0006360945924624435, 0.0004515281787894783, 0.00034110066729475683, 0.0002376690072581339, 0.00034677928253776453, 4.424811630756368e-05], "rnd_skewness": [-0.03345736331989292, -1.2780855229724493, -0.9752304493948101, -1.1486059735925835, -1.7504703107788266, -0.3208702183854432, -1.2637648624211741, -0.5044419175171495, -1.0256842045398038, 7.010444116369469, -44.712426814362246], "rnd_kurtosis": [3.667862892745624, 7.367048114230397, 9.212467956629578, 8.37086196540219, 9.998803167870106, 5.9047845703720805, 7.852501336503767, 6.299974438540302, 6.266452777931252, 72.75390901236389, 2145.616809019312]};
+const METRICS = {"mjd_sigma": "MJD σ（擴散波動率 sigma）", "mjd_lambda": "MJD λ（跳躍強度 lambda）", "mjd_gamma": "MJD γ（平均跳躍幅度 gamma）", "mjd_delta": "MJD δ（跳躍波動率 delta）", "rnd_mean": "RND 平均數（mean）", "rnd_variance": "RND 變異數（variance）", "rnd_skewness": "RND 偏態（skewness）", "rnd_kurtosis": "RND 峰態（kurtosis）"};   // {key: 顯示名稱}
+
+const sel = document.getElementById('metric');
+Object.entries(METRICS).forEach(([k, name]) => {
+  const o = document.createElement('option');
+  o.value = k; o.textContent = name;
+  sel.appendChild(o);
+});
+
+const baseOpts = (color) => ({
+  responsive: true,
+  maintainAspectRatio: false,
+  interaction: { mode: 'index', intersect: false },
+  plugins: {
+    legend: { display: false },
+    tooltip: {
+      backgroundColor: '#11151c', borderColor: '#2a2f3a', borderWidth: 1,
+      titleColor: '#e6e9ef', bodyColor: '#e6e9ef',
+    }
+  },
+  scales: {
+    x: { ticks: { color: '#8b93a3', maxRotation: 60, minRotation: 60 },
+         grid: { color: 'rgba(255,255,255,.05)' } },
+    y: { ticks: { color: '#8b93a3' },
+         grid: { color: 'rgba(255,255,255,.06)' } }
+  },
+  elements: { point: { radius: 3, hoverRadius: 5 }, line: { tension: .25 } }
+});
+
+function makeChart(canvasId, color) {
+  return new Chart(document.getElementById(canvasId), {
+    type: 'line',
+    data: { labels: LABELS, datasets: [{
+      data: [], borderColor: color, backgroundColor: color,
+      spanGaps: false, borderWidth: 2, fill: false
+    }]},
+    options: baseOpts(color)
+  });
+}
+
+const chartC = makeChart('chartC', getComputedStyle(document.documentElement).getPropertyValue('--call').trim());
+const chartP = makeChart('chartP', getComputedStyle(document.documentElement).getPropertyValue('--put').trim());
+
+function update() {
+  const m = sel.value;
+  chartC.data.datasets[0].data = DATA_C[m];
+  chartC.data.datasets[0].label = METRICS[m] + '（C）';
+  chartP.data.datasets[0].data = DATA_P[m];
+  chartP.data.datasets[0].label = METRICS[m] + '（P）';
+  chartC.update();
+  chartP.update();
+}
+
+sel.addEventListener('change', update);
+update();
+</script>
+</body>
+</html>

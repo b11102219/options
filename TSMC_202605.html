@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>台積電 202605｜選擇權指標圖表</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0e1116;
+    --panel: #171b22;
+    --ink: #e6e9ef;
+    --muted: #8b93a3;
+    --line: #2a2f3a;
+    --call: #e5484d;     /* 買權：紅 */
+    --put:  #4f8cff;     /* 賣權：藍 */
+    --accent: #ffb454;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: -apple-system, "PingFang TC", "Microsoft JhengHei",
+                 "Helvetica Neue", Arial, sans-serif;
+    padding: 28px clamp(16px, 4vw, 56px);
+  }
+  header { margin-bottom: 22px; }
+  h1 {
+    font-size: clamp(20px, 2.4vw, 28px); margin: 0 0 6px;
+    letter-spacing: .5px; font-weight: 700;
+  }
+  .sub { color: var(--muted); font-size: 14px; }
+  .controls {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 12px; padding: 14px 18px; margin: 18px 0 26px;
+  }
+  .controls label { font-size: 14px; color: var(--muted); }
+  select {
+    background: #11151c; color: var(--ink);
+    border: 1px solid var(--line); border-radius: 8px;
+    padding: 8px 12px; font-size: 15px; min-width: 280px;
+  }
+  .card {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px 18px 8px; margin-bottom: 22px;
+  }
+  .card h2 {
+    font-size: 16px; margin: 0 0 4px; display: flex; align-items: center; gap: 8px;
+  }
+  .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+  .dot.call { background: var(--call); }
+  .dot.put  { background: var(--put); }
+  .chart-wrap { position: relative; height: 340px; }
+  footer { color: var(--muted); font-size: 12px; margin-top: 10px; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>台積電 202605 ｜ 選擇權指標時間序列</h1>
+    <div class="sub">買權（C）與賣權（P）分開呈現，可切換不同指標檢視</div>
+  </header>
+
+  <div class="controls">
+    <label for="metric">指標：</label>
+    <select id="metric"></select>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot call"></span>買權 Call（C）</h2>
+    <div class="chart-wrap"><canvas id="chartC"></canvas></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot put"></span>賣權 Put（P）</h2>
+    <div class="chart-wrap"><canvas id="chartP"></canvas></div>
+  </div>
+
+  <footer>資料來源：台積電 202605_results　·　橫軸為交易日，缺值處線段斷開。</footer>
+
+<script>
+const LABELS  = ["2026-04-13", "2026-04-14", "2026-04-16", "2026-04-17", "2026-04-20", "2026-04-24"];
+const DATA_C  = {"mjd_sigma": [0.18952713322725023, 0.026415648514476357, 0.32843758364413794, 0.27460932596698495, 0.34275828713308776, 0.11283758047848497], "mjd_lambda": [9.999999984421805, 3.597990119663926, 0.22813101480461737, 9.999999999805032, 0.4475470026061142, 9.999999999999998], "mjd_gamma": [-0.054172645992234474, 0.15127339626322586, -1.4999034790751307, -0.07978628918814094, -0.9402355356300346, 0.11991654823325694], "mjd_delta": [0.08405885879279755, 0.014744990049331911, 0.7868986302061796, 0.010000000186130986, 0.9119920407974429, 0.03351154983589621], "rnd_mean": [-0.006991356645832814, 0.05899389084647395, -0.01739552125770523, -0.006712704902576973, -0.04450682596583187, -0.005419932467394544], "rnd_variance": [0.015685670831518, 0.0002879719975181589, 0.05181795446708285, 0.01101716764261895, 0.1174428028676355, 0.011659400097561298], "rnd_skewness": [-0.7923086298212165, 0.16754729212045338, -5.712171161749356, -0.472897570188229, -3.2895312687668454, 1.1975532423804929], "rnd_kurtosis": [4.369848832093206, 2.6936635416601877, 44.199966887682294, 3.396814632237986, 20.581113489858698, 4.696331217972739]};
+const DATA_P  = {"mjd_sigma": [null, null, null, null, null, 0.3358692782889029], "mjd_lambda": [null, null, null, null, null, 8.655687690003646], "mjd_gamma": [null, null, null, null, null, 0.05229562302614835], "mjd_delta": [null, null, null, null, null, 0.010000015454380546], "rnd_mean": [null, null, null, null, null, -0.004693575072472076], "rnd_variance": [null, null, null, null, null, 0.010354196006519137], "rnd_skewness": [null, null, null, null, null, 0.09785141299140823], "rnd_kurtosis": [null, null, null, null, null, 3.041218994607373]};
+const METRICS = {"mjd_sigma": "MJD σ（擴散波動率 sigma）", "mjd_lambda": "MJD λ（跳躍強度 lambda）", "mjd_gamma": "MJD γ（平均跳躍幅度 gamma）", "mjd_delta": "MJD δ（跳躍波動率 delta）", "rnd_mean": "RND 平均數（mean）", "rnd_variance": "RND 變異數（variance）", "rnd_skewness": "RND 偏態（skewness）", "rnd_kurtosis": "RND 峰態（kurtosis）"};   // {key: 顯示名稱}
+
+const sel = document.getElementById('metric');
+Object.entries(METRICS).forEach(([k, name]) => {
+  const o = document.createElement('option');
+  o.value = k; o.textContent = name;
+  sel.appendChild(o);
+});
+
+const baseOpts = (color) => ({
+  responsive: true,
+  maintainAspectRatio: false,
+  interaction: { mode: 'index', intersect: false },
+  plugins: {
+    legend: { display: false },
+    tooltip: {
+      backgroundColor: '#11151c', borderColor: '#2a2f3a', borderWidth: 1,
+      titleColor: '#e6e9ef', bodyColor: '#e6e9ef',
+    }
+  },
+  scales: {
+    x: { ticks: { color: '#8b93a3', maxRotation: 60, minRotation: 60 },
+         grid: { color: 'rgba(255,255,255,.05)' } },
+    y: { ticks: { color: '#8b93a3' },
+         grid: { color: 'rgba(255,255,255,.06)' } }
+  },
+  elements: { point: { radius: 3, hoverRadius: 5 }, line: { tension: .25 } }
+});
+
+function makeChart(canvasId, color) {
+  return new Chart(document.getElementById(canvasId), {
+    type: 'line',
+    data: { labels: LABELS, datasets: [{
+      data: [], borderColor: color, backgroundColor: color,
+      spanGaps: false, borderWidth: 2, fill: false
+    }]},
+    options: baseOpts(color)
+  });
+}
+
+const chartC = makeChart('chartC', getComputedStyle(document.documentElement).getPropertyValue('--call').trim());
+const chartP = makeChart('chartP', getComputedStyle(document.documentElement).getPropertyValue('--put').trim());
+
+function update() {
+  const m = sel.value;
+  chartC.data.datasets[0].data = DATA_C[m];
+  chartC.data.datasets[0].label = METRICS[m] + '（C）';
+  chartP.data.datasets[0].data = DATA_P[m];
+  chartP.data.datasets[0].label = METRICS[m] + '（P）';
+  chartC.update();
+  chartP.update();
+}
+
+sel.addEventListener('change', update);
+update();
+</script>
+</body>
+</html>
