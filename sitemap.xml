@@ -7,11 +7,6 @@
   </url>
 
   <url>
-    <loc>https://b11102219.github.io/options/index.html</loc>
-    <priority>1.0</priority>
-  </url>
-
-  <url>
     <loc>https://b11102219.github.io/options/TSMC_202605.html</loc>
     <priority>0.8</priority>
   </url>
@@ -31,4 +26,8 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://b11102219.github.io/options/sc.html</loc>
+    <priority>1.0</priority>
+  </url>
 </urlset>
