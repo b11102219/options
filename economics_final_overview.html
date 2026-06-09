@@ -316,6 +316,93 @@
   @media (max-width:860px){
     .triple-panel{grid-template-columns:1fr}
   }
+
+  /* ====== MathJax: force inline math to stay inline ====== */
+  mjx-container[jax="SVG"][display="false"]{
+    display:inline-block !important;
+    vertical-align:-0.15em;
+    margin:0 .15em;
+  }
+  mjx-container[jax="SVG"]:not([display="true"]){
+    display:inline-block !important;
+  }
+  /* Block display only when explicitly $$...$$ */
+  mjx-container[jax="SVG"][display="true"]{
+    display:block;
+    margin:.6em auto;
+  }
+
+  /* ====== Mobile responsive (≤768px) ====== */
+  @media (max-width:768px){
+    body{font-size:14px;line-height:1.65}
+    .wrap{padding:18px 14px 60px}
+    header.top{padding-bottom:14px;margin-bottom:22px}
+    header.top h1{font-size:24px;line-height:1.25}
+    header.top .sub{font-size:12.5px;line-height:1.55}
+    header.top .eyebrow{font-size:10px;letter-spacing:.14em}
+
+    section{margin:34px 0}
+    h2.sec{
+      font-size:18px;
+      flex-wrap:wrap;
+      gap:8px;
+      padding-bottom:6px;
+    }
+    h2.sec .num{font-size:11px}
+    h2.sec .en{
+      font-size:10px;
+      margin-left:0;
+      width:100%;
+      letter-spacing:.05em;
+    }
+    h3{font-size:15px;margin:18px 0 6px}
+
+    figure{padding:10px;margin:10px 0}
+    figcaption{font-size:11.5px;line-height:1.55}
+
+    table{font-size:12px}
+    th,td{padding:6px 7px}
+    /* table horizontal scroll wrapper */
+    .table-wrap, .card table, section table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+    /* Causal chain wraps on mobile */
+    .chain{
+      flex-wrap:wrap;
+      gap:6px 4px;
+      padding:8px 10px;
+      font-size:12px;
+    }
+    .chain .node{padding:3px 7px;font-size:11.5px}
+    .chain .arrow{font-size:13px}
+
+    /* Cards */
+    .card{padding:12px}
+    .card .head{font-size:13px}
+
+    /* Force any 2/3-column grids to single column earlier */
+    .grid-2,.grid-3,.triple-panel{grid-template-columns:1fr !important;gap:10px}
+
+    /* TOC */
+    .toc{padding:14px}
+    .toc h3{font-size:14px}
+    .toc ol{font-size:13px;padding-left:20px}
+
+    /* Formula cards */
+    .formula-card{padding:10px}
+    .formula-card .label{font-size:11px}
+
+    /* Footer */
+    footer{font-size:11px}
+  }
+
+  /* ====== Extra small (≤420px) ====== */
+  @media (max-width:420px){
+    .wrap{padding:14px 10px 50px}
+    header.top h1{font-size:21px}
+    h2.sec{font-size:16px}
+    .chain{font-size:11.5px}
+    .chain .node{padding:2px 6px;font-size:11px}
+  }
 </style>
 </head>
 <body>
@@ -593,7 +680,7 @@
   <text x="50" y="134" text-anchor="end" class="ax-label">r*</text>
   <text x="200" y="255" text-anchor="middle" class="ax-label">Q*</text>
 </svg>
-<figcaption><span class="fig-no">圖 1</span>可貸資金市場基本均衡。利率 $r^*$ 同時為「儲蓄報酬」與「借款成本」。</figcaption>
+<figcaption><span class="fig-no">圖 1</span>可貸資金市場基本均衡。利率 r* 同時為「儲蓄報酬」與「借款成本」。</figcaption>
 </figure>
 
 <div class="grid-3">
@@ -645,7 +732,7 @@
   <!-- shift arrow -->
   <path class="arrow-shift" d="M 250 150 Q 280 145 290 140" />
 </svg>
-<figcaption><span class="fig-no">圖 2</span>儲蓄稅優 → $S$ 右移 → $r↓$、$I↑$。</figcaption>
+<figcaption><span class="fig-no">圖 2</span>儲蓄稅優 → S 右移 → r↓、I↑。</figcaption>
 </figure>
 
 <figure>
@@ -680,7 +767,7 @@
   <text x="50" y="129" text-anchor="end" class="ax-label" fill="#B8473A">r₂=6%</text>
   <text x="222" y="270" text-anchor="middle" class="ax-label" fill="#B8473A">Q₂=70</text>
 </svg>
-<figcaption><span class="fig-no">圖 3</span>投資稅優 → $D$ 右移 → $r↑$、$S$ 與 $I$ 都增加。</figcaption>
+<figcaption><span class="fig-no">圖 3</span>投資稅優 → D 右移 → r↑、S 與 I 都增加。</figcaption>
 </figure>
 
 <figure>
@@ -716,7 +803,7 @@
   <text x="50" y="131" text-anchor="end" class="ax-label" fill="#B8473A">r₂=6%</text>
   <text x="180" y="270" text-anchor="middle" class="ax-label" fill="#B8473A">Q₂(↓)</text>
 </svg>
-<figcaption><span class="fig-no">圖 4</span>政府赤字 → 公部門儲蓄↓ → $S$ <b>左移</b> → $r↑$、$Q↓$ ＝ <b>排擠效果</b>。</figcaption>
+<figcaption><span class="fig-no">圖 4</span>政府赤字 → 公部門儲蓄↓ → S <b>左移</b> → r↑、Q↓ ＝ <b>排擠效果</b>。</figcaption>
 </figure>
 </div>
 
@@ -876,7 +963,7 @@
   <!-- annotation -->
   <text x="280" y="50" font-family="IBM Plex Mono" font-size="10" fill="#8A8479">↑MS → ↓(1/P) → ↑P</text>
 </svg>
-<figcaption><span class="fig-no">圖 6</span>貨幣市場：縱軸是<b>貨幣價值 1/P</b>。MS 右移，貨幣價值下跌，等同 $P$ 上升 ＝ 通膨。</figcaption>
+<figcaption><span class="fig-no">圖 6</span>貨幣市場：縱軸是<b>貨幣價值 1/P</b>。MS 右移，貨幣價值下跌，等同 P 上升 ＝ 通膨。</figcaption>
 </figure>
 
 <h3>圖 7 — 費雪效果（i = r + π）</h3>
@@ -905,7 +992,7 @@
   <text x="50" y="77" text-anchor="end" class="ax-label">i₂</text>
   <text x="210" y="215" text-anchor="middle" class="ax-label">π₂</text>
 </svg>
-<figcaption><span class="fig-no">圖 7</span>費雪效果：$π$ 每升 1%，$i$ <b>等幅</b>升 1%（45° 斜線）。$r$ 不變（綠色虛線）＝ 貨幣中立。</figcaption>
+<figcaption><span class="fig-no">圖 7</span>費雪效果：π 每升 1%，i <b>等幅</b>升 1%（45° 斜線）。r 不變（綠色虛線）＝ 貨幣中立。</figcaption>
 </figure>
 
 <div class="chain"><span class="node start">MS↑（央行印錢）</span><span class="arrow">→</span><span class="node">短期 Y↑（流動性效果）</span><span class="arrow">→</span><span class="node">長期 P↑（中立性）</span><span class="arrow">→</span><span class="node">π↑</span><span class="arrow">→</span><span class="node end">i↑（費雪效果，r 不變）</span></div>
@@ -1317,7 +1404,7 @@
   <text x="230" y="275" text-anchor="middle" class="ax-label">Y_N</text>
   <text x="68" y="46" font-family="IBM Plex Mono" font-size="10" fill="#8A8479">長期：三線交於 Y_N</text>
 </svg>
-<figcaption><span class="fig-no">圖 13</span>長期均衡：AD、SRAS、LRAS 三線交於自然產出 $Y_N$。</figcaption>
+<figcaption><span class="fig-no">圖 13</span>長期均衡：AD、SRAS、LRAS 三線交於自然產出 Yₙ。</figcaption>
 </figure>
 
 <div class="grid-2">
@@ -1361,7 +1448,7 @@
   <text x="210" y="275" text-anchor="middle" class="ax-label" fill="#B8473A">Y₂</text>
   <text x="230" y="275" text-anchor="middle" class="ax-label">Y_N</text>
 </svg>
-<figcaption><span class="fig-no">圖 14</span>股市崩盤 → C↓ → AD 左移。短期 A→B：產出 Y₂ 低於 Y_N、$P↓$（衰退）；長期 $P^e$ 下修 → SRAS 右移 → C 點，產出回 $Y_N$、物價更低（$P_3 &lt; P_2 &lt; P_1$）。</figcaption>
+<figcaption><span class="fig-no">圖 14</span>股市崩盤 → C↓ → AD 左移。短期 A→B：產出 Y₂ 低於 Yₙ、P↓（衰退）；長期 Pᵉ 下修 → SRAS 右移 → C 點，產出回 Yₙ、物價更低（P₃ < P₂ < P₁）。</figcaption>
 </figure>
 
 <figure>
@@ -1393,7 +1480,7 @@
   <text x="210" y="275" text-anchor="middle" class="ax-label" fill="#B8473A">Y₂↓</text>
   <text x="230" y="275" text-anchor="middle" class="ax-label">Y_N</text>
 </svg>
-<figcaption><span class="fig-no">圖 15</span>不利供給衝擊（油價↑、工資衝擊）：SRAS 左移 → A→B → 產出 $Y₂↓$ + 物價 $P₂↑$ ＝ <b>停滯性通膨</b>（stagflation）。</figcaption>
+<figcaption><span class="fig-no">圖 15</span>不利供給衝擊（油價↑、工資衝擊）：SRAS 左移 → A→B → 產出 Y₂↓ + 物價 P₂↑ ＝ <b>停滯性通膨</b>（stagflation）。</figcaption>
 </figure>
 </div>
 
@@ -1450,7 +1537,7 @@
   <text x="180" y="275" text-anchor="middle" class="ax-label">M₁</text>
   <text x="240" y="275" text-anchor="middle" class="ax-label" fill="#B8473A">M₂</text>
 </svg>
-<figcaption><span class="fig-no">圖 16A</span>MS 右移（央行 OMO 買債）→ $i↓$。</figcaption>
+<figcaption><span class="fig-no">圖 16A</span>MS 右移（央行 OMO 買債）→ i↓。</figcaption>
 </figure>
 
 <figure>
@@ -1485,7 +1572,7 @@
   <text x="50" y="146" text-anchor="end" class="ax-label" fill="#B8473A">P₂↑</text>
   <text x="240" y="275" text-anchor="middle" class="ax-label" fill="#B8473A">Y₂↑</text>
 </svg>
-<figcaption><span class="fig-no">圖 16B</span>$i↓$ → $I↑$ → $AD$ 右移 → $Y↑$、$P↑$。</figcaption>
+<figcaption><span class="fig-no">圖 16B</span>i↓ → I↑ → AD 右移 → Y↑、P↑。</figcaption>
 </figure>
 </div>
 
@@ -1517,7 +1604,7 @@
   <text x="195" y="120" font-family="IBM Plex Mono" font-size="10" fill="#E89C90">②乘數</text>
   <text x="125" y="135" font-family="IBM Plex Mono" font-size="10" fill="#B8473A">③排擠抵銷</text>
 </svg>
-<figcaption><span class="fig-no">圖 17</span>財政擴張 $G↑$：AD 先右移一單位（①），<b>乘數效果</b>再放大成多倍（②），但 $Y↑$ 引起 $MD↑ → i↑ → I↓$，<b>排擠效果</b>把 AD 拉回部分（③→④）。</figcaption>
+<figcaption><span class="fig-no">圖 17</span>財政擴張 G↑：AD 先右移一單位（①），<b>乘數效果</b>再放大成多倍（②），但 Y↑ 引起 MD↑ → i↑ → I↓，<b>排擠效果</b>把 AD 拉回部分（③→④）。</figcaption>
 </figure>
 
 <div class="grid-2">
