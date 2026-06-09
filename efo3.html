@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch11 貨幣政策與財政政策 — 完整圖解筆記</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=Crimson+Pro:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf8f4;--text:#2a2520;--accent:#b44a2f;--accent2:#2e6b5e;--accent3:#3d5a80;--card-bg:#fff;--shadow:0 2px 20px rgba(42,37,32,.08);--border:#e8e2d8;--highlight:#fef3cd;--formula-bg:#f5f0ea}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);line-height:1.85;font-size:16px}
+.hero{background:linear-gradient(135deg,#2a2520 0%,#3d2b1f 40%,#5a3a28 100%);color:#faf8f4;padding:70px 40px 50px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(180,74,47,.15) 0%,transparent 70%);pointer-events:none}
+.hero h1{font-family:'Noto Serif TC',serif;font-size:2.2rem;font-weight:900;letter-spacing:.02em;margin-bottom:10px;position:relative}
+.hero .sub{font-size:.95rem;opacity:.65;font-weight:300}
+.container{max-width:920px;margin:0 auto;padding:36px 24px 80px}
+.toc{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-bottom:44px;box-shadow:var(--shadow)}
+.toc h2{font-family:'Noto Serif TC',serif;font-size:1.2rem;margin-bottom:14px;color:var(--accent)}
+.toc ol{padding-left:22px}.toc li{margin-bottom:5px}
+.toc a{color:var(--text);text-decoration:none;border-bottom:1px dashed var(--border);transition:color .2s}
+.toc a:hover{color:var(--accent);border-color:var(--accent)}
+.section{margin-bottom:52px}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--border)}
+.sn{font-family:'Crimson Pro',serif;font-size:2rem;font-weight:700;color:var(--accent);opacity:.35;line-height:1}
+.section-header h2{font-family:'Noto Serif TC',serif;font-size:1.4rem;font-weight:700}
+h3{font-family:'Noto Serif TC',serif;font-size:1.1rem;font-weight:700;margin:24px 0 10px;color:var(--accent3)}
+p{margin-bottom:13px}
+.tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.06em;padding:2px 9px;border-radius:4px;color:#fff;text-transform:uppercase;vertical-align:middle}
+.tag.m{background:var(--accent)}.tag.f{background:var(--accent2)}.tag.c{background:var(--accent3)}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:22px 26px;margin:18px 0;box-shadow:var(--shadow)}
+.card.hl{border-left:4px solid var(--accent)}.card.gr{border-left:4px solid var(--accent2)}.card.bl{border-left:4px solid var(--accent3)}
+.formula-box{background:var(--formula-bg);border:1px solid var(--border);border-radius:8px;padding:18px 26px;margin:18px 0;text-align:center}
+.formula{font-family:'Crimson Pro',serif;font-size:1.45rem;font-weight:700;color:var(--accent);margin:6px 0;letter-spacing:.01em}
+.formula-label{font-size:.82rem;color:#888;margin-top:4px}
+.kv{display:grid;grid-template-columns:130px 1fr;gap:5px 14px;margin:10px 0}
+.kv dt{font-weight:700;color:var(--accent3);text-align:right}.kv dd{margin:0}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:14px 0;font-size:.92rem}
+.chain .step{background:var(--formula-bg);border:1px solid var(--border);border-radius:6px;padding:5px 12px;font-weight:500}
+.chain .arrow{color:var(--accent);font-weight:700;font-size:1.1rem}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+th,td{border:1px solid var(--border);padding:9px 12px;text-align:center}
+th{background:var(--formula-bg);font-weight:700;color:var(--accent3)}
+tr:nth-child(even){background:#fdfcfa}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+.compare-grid .col{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:18px}
+.compare-grid .col h4{font-family:'Noto Serif TC',serif;margin-bottom:8px;color:var(--accent)}
+.callout{background:var(--highlight);border-radius:8px;padding:14px 18px;margin:14px 0;font-size:.93rem;border:1px solid #f0e0a0}
+.callout strong{color:var(--accent)}
+.divider{border:none;border-top:1px dashed var(--border);margin:36px 0}
+.example{background:#f9f7f3;border:1px solid var(--border);border-radius:8px;padding:18px 22px;margin:14px 0}
+.example-title{font-weight:700;color:var(--accent2);margin-bottom:6px;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em}
+/* Graph containers */
+.graph-container{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:20px;margin:20px 0;box-shadow:var(--shadow);overflow-x:auto}
+.graph-title{font-family:'Noto Serif TC',serif;font-weight:700;font-size:1.05rem;margin-bottom:6px;color:var(--accent)}
+.graph-explain{margin-top:12px;padding:14px 16px;background:var(--formula-bg);border-radius:8px;font-size:.9rem;line-height:1.8}
+.graph-explain .line-label{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:6px;border-radius:2px}
+.dual-graph{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.dual-graph .graph-panel{flex:1;min-width:300px}
+.footer{text-align:center;padding:36px 20px;font-size:.78rem;color:#aaa;border-top:1px solid var(--border);margin-top:36px}
+@media(max-width:640px){.compare-grid{grid-template-columns:1fr}.hero h1{font-size:1.5rem}.kv{grid-template-columns:1fr}.kv dt{text-align:left}.dual-graph{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Ch11 貨幣政策與財政政策對總需求的影響</h1>
+  <div class="sub">The Influence of Monetary and Fiscal Policy on Aggregate Demand — 完整圖解筆記</div>
+</div>
+
+<div class="container">
+
+<div class="toc">
+  <h2>目錄</h2>
+  <ol>
+    <li><a href="#s1">AD 曲線向下傾斜的三大效果</a></li>
+    <li><a href="#s2">流動性偏好理論＋【圖一】貨幣市場均衡</a></li>
+    <li><a href="#s3">利率效果＋【圖二】雙面板圖解</a></li>
+    <li><a href="#s4">貨幣政策影響 AD＋【圖三】緊縮貨幣政策</a></li>
+    <li><a href="#s5">利率目標、零利率下界與流動性陷阱</a></li>
+    <li><a href="#s6">財政政策方向與基本邏輯</a></li>
+    <li><a href="#s7">乘數效果＋【圖四】乘數效果圖解</a></li>
+    <li><a href="#s8">排擠效果＋【圖五】排擠效果雙面板圖解</a></li>
+    <li><a href="#s9">減稅的效果（永久 vs. 暫時）</a></li>
+    <li><a href="#s10">財政政策與總供給（供給學派）</a></li>
+    <li><a href="#s11">主動穩定政策正反辯論</a></li>
+    <li><a href="#s12">自動穩定因子</a></li>
+    <li><a href="#s13">貨幣 vs. 財政政策總對照＋公式速查</a></li>
+  </ol>
+</div>
+
+<!-- ============ Section 1 ============ -->
+<div class="section" id="s1">
+  <div class="section-header"><span class="sn">01</span><h2>AD 曲線向下傾斜的三大效果</h2></div>
+  <p>總需求曲線（AD）描述每一物價水準下的總需求量。AD 向右下方傾斜，來自三個效果：</p>
+  <div class="card hl">
+    <dl class="kv">
+      <dt>財富效果</dt>
+      <dd><strong>Wealth Effect</strong>：P↓ → 貨幣實質購買力↑ → 消費者更富有 → C↑ → Y↑</dd>
+      <dt>利率效果</dt>
+      <dd><strong>Interest-Rate Effect</strong>：P↓ → M<sup>D</sup>↓ → r↓ → I↑ → Y↑ <span class="tag c">最重要</span></dd>
+      <dt>匯率效果</dt>
+      <dd><strong>Exchange-Rate Effect</strong>：P↓ → r↓ → 資本外流 → 本幣貶值 → NX↑ → Y↑</dd>
+    </dl>
+  </div>
+  <div class="callout"><strong>核心恆等式：</strong>Y = C + I + G + NX</div>
+</div>
+
+<!-- ============ Section 2 ============ -->
+<div class="section" id="s2">
+  <div class="section-header"><span class="sn">02</span><h2>流動性偏好理論＋【圖一】貨幣市場均衡</h2></div>
+  <p>凱因斯的流動性偏好理論：利率 r 調整使貨幣供給（M<sup>S</sup>）與貨幣需求（M<sup>D</sup>）達到均衡。</p>
+  <div class="card bl">
+    <h3>假設</h3>
+    <p>預期通膨率固定；家戶資產只有兩種——貨幣（流動性高、無利息）與債券（流動性低、有利息）。</p>
+    <dl class="kv">
+      <dt>M<sup>S</sup></dt><dd>由央行決定，不受 r 影響 → <strong>垂直線</strong></dd>
+      <dt>M<sup>D</sup></dt><dd>r↓ → 持有貨幣機會成本↓ → 需求量↑ → <strong>向右下傾斜</strong></dd>
+    </dl>
+    <h3>影響 M<sup>D</sup> 移動的變數</h3>
+    <dl class="kv">
+      <dt>Y 上升</dt><dd>交易需求增加 → M<sup>D</sup> <strong>整條右移</strong></dd>
+      <dt>P 上升</dt><dd>每筆交易需更多名目貨幣 → M<sup>D</sup> <strong>整條右移</strong></dd>
+      <dt>r 變動</dt><dd>沿著 M<sup>D</sup> 移動（不是移動整條曲線）</dd>
+    </dl>
+  </div>
+
+  <!-- GRAPH 1: Money Market Equilibrium -->
+  <div class="graph-container">
+    <div class="graph-title">【圖一】貨幣市場均衡</div>
+    <svg viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;display:block;margin:0 auto;">
+      <!-- Axes -->
+      <line x1="80" y1="30" x2="80" y2="320" stroke="#2a2520" stroke-width="2"/>
+      <line x1="80" y1="320" x2="460" y2="320" stroke="#2a2520" stroke-width="2"/>
+      <polygon points="80,30 76,42 84,42" fill="#2a2520"/>
+      <polygon points="460,320 448,316 448,324" fill="#2a2520"/>
+      <!-- Axis Labels -->
+      <text x="40" y="175" font-family="'Noto Sans TC',sans-serif" font-size="13" fill="#2a2520" text-anchor="middle" transform="rotate(-90,40,175)">利率 r</text>
+      <text x="270" y="355" font-family="'Noto Sans TC',sans-serif" font-size="13" fill="#2a2520" text-anchor="middle">貨幣數量 M</text>
+      <!-- MS (vertical line) -->
+      <line x1="260" y1="50" x2="260" y2="310" stroke="#b44a2f" stroke-width="3"/>
+      <text x="268" y="48" font-family="'Crimson Pro',serif" font-size="15" fill="#b44a2f" font-weight="700">M<tspan baseline-shift="super" font-size="10">S</tspan></text>
+      <!-- MD (downward sloping) -->
+      <line x1="120" y1="70" x2="420" y2="280" stroke="#3d5a80" stroke-width="3"/>
+      <text x="425" y="278" font-family="'Crimson Pro',serif" font-size="15" fill="#3d5a80" font-weight="700">M<tspan baseline-shift="super" font-size="10">D</tspan></text>
+      <!-- Equilibrium point -->
+      <circle cx="260" cy="168" r="5" fill="#2e6b5e"/>
+      <text x="275" y="158" font-family="'Noto Sans TC',sans-serif" font-size="12" fill="#2e6b5e" font-weight="700">均衡點 E</text>
+      <!-- Dashed lines to axes -->
+      <line x1="80" y1="168" x2="260" y2="168" stroke="#2e6b5e" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <text x="68" y="172" font-family="'Crimson Pro',serif" font-size="13" fill="#2e6b5e" text-anchor="end">r*</text>
+      <line x1="260" y1="168" x2="260" y2="320" stroke="#2e6b5e" stroke-width="1" stroke-dasharray="4,4" opacity=".3"/>
+      <!-- Annotation: Fed fixes -->
+      <rect x="190" y="290" width="140" height="22" rx="4" fill="#fef3cd" stroke="#f0e0a0"/>
+      <text x="260" y="305" font-family="'Noto Sans TC',sans-serif" font-size="11" fill="#2a2520" text-anchor="middle">Fed 固定的貨幣數量</text>
+    </svg>
+    <div class="graph-explain">
+      <p><span class="line-label" style="background:#b44a2f"></span><strong>M<sup>S</sup>（貨幣供給）</strong>：垂直線。由央行透過公開市場操作決定，與利率無關。</p>
+      <p><span class="line-label" style="background:#3d5a80"></span><strong>M<sup>D</sup>（貨幣需求）</strong>：向右下傾斜。利率越低 → 持有貨幣的機會成本越低 → 需求量越大。</p>
+      <p><span class="line-label" style="background:#2e6b5e"></span><strong>均衡點 E</strong>：M<sup>S</sup> = M<sup>D</sup> 決定均衡利率 r*。<br>
+      若 r > r* → 貨幣供給過剩 → 人們買債券 → 債券價格↑、r↓ → 回到 r*。<br>
+      若 r < r* → 貨幣需求過剩 → 人們賣債券 → 債券價格↓、r↑ → 回到 r*。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ Section 3 ============ -->
+<div class="section" id="s3">
+  <div class="section-header"><span class="sn">03</span><h2>利率效果＋【圖二】AD 斜率的來源</h2></div>
+  <p>利率效果是連結貨幣市場與商品市場的核心機制，也是 AD 曲線向下傾斜的最重要原因。</p>
+
+  <div class="graph-container">
+    <div class="graph-title">【圖二】利率效果：物價水準下降如何增加需求量</div>
+    <div class="dual-graph">
+      <!-- LEFT PANEL: Money Market -->
+      <div class="graph-panel">
+        <svg viewBox="0 0 360 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
+          <text x="180" y="18" font-family="'Noto Sans TC',sans-serif" font-size="13" fill="#888" text-anchor="middle">貨幣市場</text>
+          <line x1="60" y1="30" x2="60" y2="275" stroke="#2a2520" stroke-width="2"/>
+          <line x1="60" y1="275" x2="340" y2="275" stroke="#2a2520" stroke-width="2"/>
+          <polygon points="60,30 56,42 64,42" fill="#2a2520"/>
+          <polygon points="340,275 328,271 328,279" fill="#2a2520"/>
+          <text x="30" y="152" font-family="'Noto Sans TC',sans-serif" font-size="11" fill="#2a2520" text-anchor="middle" transform="rotate(-90,30,152)">利率 r</text>
+          <text x="200" y="298" font-family="'Noto Sans TC',sans-serif" font-size="11" fill="#2a2520" text-anchor="middle">貨幣數量 M</text>
+          <!-- MS vertical -->
+          <line x1="200" y1="45" x2="200" y2="268" stroke="#b44a2f" stroke-width="2.5"/>
+          <text x="210" y="43" font-family="'Crimson Pro',serif" font-size="13" fill="#b44a2f" font-weight="700">M<tspan baseline-shift="super" font-size="9">S</tspan></text>
+          <!-- MD1 (higher, P=P1) -->
+          <line x1="90" y1="55" x2="310" y2="225" stroke="#3d5a80" stroke-width="2.5"/>
+          <text x="316" y="222" font-family="'Crimson Pro',serif" font-size="12" fill="#3d5a80" font-weight="700">MD₁(P₁)</text>
+          <!-- MD2 (lower, P=P2<P1) -->
+          <line x1="90" y1="110" x2="310" y2="260" stroke="#3d5a80" stroke-width="2.5" stroke-dasharray="8,4"/>
+          <text x="316" y="258" font-family="'Crimson Pro',serif" font-size="12" fill="#3d5a80" font-weight="700">MD₂(P₂)</text>
+          <!-- E1 -->
+          <circle cx="200" cy="134" r="4" fill="#2e6b5e"/>
+          <line x1="60" y1="134" x2="200" y2="134" stroke="#2e6b5e" stroke-width="1.2" stroke-dasharray="5,3"/>
+          <text x="50" y="138" font-family="'Crimson Pro',serif" font-size="12" fill="#2e6b5e" text-anchor="end">r₁</text>
+          <!-- E2 -->
+          <circle cx="200" cy="180" r="4" fill="#b44a2f"/>
+          <line x1="60" y1="180" x2="200" y2="180" stroke="#b44a2f" stroke-width="1.2" stroke-dasharray="5,3"/>
+          <text x="50" y="184" font-family="'Crimson Pro',serif" font-size="12" fill="#b44a2f" text-anchor="end">r₂</text>
+          <!-- Arrow showing MD shift -->
+          <path d="M165,115 C150,130 150,145 165,158" fill="none" stroke="#e67e22" stroke-width="2" marker-end="url(#arrowOrange1)"/>
+          <defs><marker id="arrowOrange1" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e67e22"/></marker></defs>
+          <text x="130" y="142" font-family="'Noto Sans TC',sans-serif" font-size="10" fill="#e67e22" font-weight="700">P↓</text>
+        </svg>
+      </div>
+      <!-- RIGHT PANEL: AD Curve -->
+      <div class="graph-panel">
+        <svg viewBox="0 0 360 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
+          <text x="180" y="18" font-family="'Noto Sans TC',sans-serif" font-size="13" fill="#888" text-anchor="middle">商品市場</text>
+          <line x1="60" y1="30" x2="60" y2="275" stroke="#2a2520" stroke-width="2"/>
+          <line x1="60" y1="275" x2="340" y2="275" stroke="#2a2520" stroke-width="2"/>
+          <polygon points="60,30 56,42 64,42" fill="#2a2520"/>
+          <polygon points="340,275 328,271 328,279" fill="#2a2520"/>
+          <text x="30" y="152" font-family="'Noto Sans TC',sans-serif" font-size="11" fill="#2a2520" text-anchor="middle" transform="rotate(-90,30,152)">物價水準 P</text>
+          <text x="200" y="298" font-family="'Noto Sans TC',sans-serif" font-size="11" fill="#2a2520" text-anchor="middle">產出 Y</text>
+          <!-- AD Curve -->
+          <path d="M100,60 Q200,140 310,250" fill="none" stroke="#b44a2f" stroke-width="3"/>
+          <text x="316" y="248" font-family="'Crimson Pro',serif" font-size="14" fill="#b44a2f" font-weight="700">AD</text>
+          <!-- Point A (P1, Y1) -->
+          <circle cx="155" cy="105" r="4" fill="#2e6b5e"/>
+          <line x1="60" y1="105" x2="155" y2="105" stroke="#2e6b5e" stroke-width="1.2" stroke-dasharray="5,3"/>
+          <line x1="155" y1="105" x2="155" y2="275" stroke="#2e6b5e" stroke-width="1.2" stroke-dasharray="5,3"/>
+          <text x="50" y="109" font-family="'Crimson Pro',serif" font-size="12" fill="#2e6b5e" text-anchor="end">P₁</text>
+          <text x="155" y="290" font-family="'Crimson Pro',serif" font-size="12" fill="#2e6b5e" text-anchor="middle">Y₁</text>
+          <!-- Point B (P2, Y2) -->
+          <circle cx="240" cy="185" r="4" fill="#b44a2f"/>
+          <line x1="60" y1="185" x2="240" y2="185" stroke="#b44a2f" stroke-width="1.2" stroke-dasharray="5,3"/>
+          <line x1="240" y1="185" x2="240" y2="275" stroke="#b44a2f" stroke-width="1.2" stroke-dasharray="5,3"/>
+          <text x="50" y="189" font-family="'Crimson Pro',serif" font-size="12" fill="#b44a2f" text-anchor="end">P₂</text>
+          <text x="240" y="290" font-family="'Crimson Pro',serif" font-size="12" fill="#b44a2f" text-anchor="middle">Y₂</text>
+          <!-- Arrow on curve -->
+          <path d="M165,115 C190,140 215,160 230,178" fill="none" stroke="#e67e22" stroke-width="2" marker-end="url(#arrowOrange2)"/>
+          <defs><marker id="arrowOrange2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e67e22"/></marker></defs>
+        </svg>
+      </div>
+    </div>
+    <div class="graph-explain">
+      <p><strong>完整傳導鏈（由左圖到右圖）：</strong></p>
+      <p>① 物價水準從 P₁ 下降到 P₂</p>
+      <p>② 左圖：每筆交易需要的名目貨幣減少 → M<sup>D</sup> 從 MD₁ 左移到 MD₂</p>
+      <p>③ 左圖：M<sup>S</sup> 不變，新均衡利率從 r₁ 降到 r₂</p>
+      <p>④ 右圖：r↓ → 投資 I 增加 → 需求量從 Y₁ 增加到 Y₂</p>
+      <p>⑤ 這就是沿著 AD 曲線從 A 點移動到 B 點（<strong>不是 AD 移動</strong>，是沿線移動）</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ Section 4 ============ -->
+<div class="section" id="s4">
+  <div class="section-header"><span class="sn">04</span><h2>貨幣政策影響 AD＋【圖三】緊縮貨幣政策 <span class="tag m">貨幣政策</span></h2></div>
+  <p>Fed 透過公開市場操作調整 M<sup>S</sup>，目標是聯邦基金利率。</p>
+  <h3>擴張性貨幣政策</h3>
+  <div class="chain">
+    <span class="step">Fed 買入債券</span><span class="arrow">→</span>
+    <span class="step">M<sup>S</sup>↑</span><span class="arrow">→</span>
+    <span class="step">r↓</span><span class="arrow">→</span>
+    <span class="step">I↑</span><span class="arrow">→</span>
+    <span class="step">AD 右移</span><span class="arrow">→</span>
+    <span class="step">Y↑</span>
+  </div>
+  <h3>緊縮性貨幣政策</h3>
+  <div class="chain">
+    <span class="step">Fed 賣出債券</span><span class="arrow">→</span>
+    <span class="step">M<sup>S</sup>↓</span><span class="arrow">→</span>
+    <span class="step">r↑</span><span class="arrow">→</span>
+    <span class="step">I↓</span><span class="arrow">→</span>
+    <span class="step">AD 左移</span><span class="arrow">→</span>
+    <span class="step">Y↓</span>
+  </div>
+
+  <div class="graph-container">
+    <div class="graph-title">【圖三】緊縮貨幣政策：Fed 減少 M<sup>S</sup></div>
+    <div class="dual-graph">
+      <div class="graph-panel">
+        <svg viewBox="0 0 360 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
+          <text x="180" y="18" font-family="'Noto Sans TC',sans-serif" font-size="13" fill="#888" text-anchor="middle">貨幣市場</text>
+          <line x1="60" y1="30" x2="60" y2="275" stroke="#2a2520" stroke-width="2"/>
+          <line x1="60" y1="275" x2="340" y2="275" stroke="#2a2520" stroke-width="2"/>
+          <polygon points="60,30 56,42 64,42" fill="#2a2520"/>
+          <polygon points="340,275 328,271 328,279" fill="#2a2520"/>
+          <text x="30" y="152" font-family="'Noto Sans TC',sans-serif" font-size="11" fill="#2a2520" text-anchor="middle" transform="rotate(-90,30,152)">利率 r</text>
+          <text x="200" y="298" font-family="'Noto Sans TC',sans-serif" font-size="11" fill="#2a2520" text-anchor="middle">貨幣數量 M</text>
+          <!-- MS1 -->
+          <line x1="220" y1="45" x2="220" y2="268" stroke="#b44a2f" stroke-width="2.5"/>
+          <text x="228" y="43" font-family="'Crimson Pro',serif" font-size="12" fill="#b44a2f" font-weight="700">MS₁</text>
+          <!-- MS2 (shifted left) -->
+          <line x1="160" y1="45" x2="160" y2="268" stroke="#b44a2f" stroke-width="2.5" stroke-dasharray="8,4"/>
+          <text x="140" y="43" font-family="'Crimson Pro',serif" font-size="12" fill="#b44a2f" font-weight="700">MS₂</text>
+          <!-- MD -->
+          <line x1="90" y1="65" x2="310" y2="240" stroke="#3d5a80" stroke-width="2.5"/>
+          <text x="316" y="238" font-family="'Crimson Pro',serif" font-size="12" fill="#3d5a80" font-weight="700">MD</text>
+          <!-- E1 -->
+          <circle cx="220" cy="168" r="4" fill="#2e6b5e"/>
+          <line x1="60" y1="168" x2="220" y2="168" stroke="#2e6b5e" stroke-width="1.2" stroke-dasharray="5,3"/>
+          <text x="50" y="172" font-family="'Crimson Pro',serif" font-size="12" fill="#2e6b5e" text-anchor="end">r₁</text>
+          <!-- E2 -->
+          <circle cx="160" cy="121" r="4" fill="#c0392b"/>
+          <line x1="60" y1="121" x2="160" y2="121" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="5,3"/>
+          <text x="50" y="125" font-family="'Crimson Pro',serif" font-size="12" fill="#c0392b" text-anchor="end">r₂</text>
+          <!-- Arrow MS shift -->
+          <path d="M215,60 L168,60" fill="none" stroke="#e67e22" stroke-width="2.5" marker-end="url(#arrowO3)"/>
+          <defs><marker id="arrowO3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e67e22"/></marker></defs>
+          <text x="190" y="55" font-family="'Noto Sans TC',sans-serif" font-size="10" fill="#e67e22" font-weight="700">M<tspan baseline-shift="super" font-size="8">S</tspan>↓</text>
+        </svg>
+      </div>
+      <div class="graph-panel">
+        <svg viewBox="0 0 360 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
+          <text x="180" y="18" font-family="'Noto Sans TC',sans-serif" font-size="13" fill="#888" text-anchor="middle">商品市場</text>
+          <line x1="60" y1="30" x2="60" y2="275" stroke="#2a2520" stroke-width="2"/>
+          <line x1="60" y1="275" x2="340" y2="275" stroke="#2a2520" stroke-width="2"/>
+          <polygon points="60,30 56,42 64,42" fill="#2a2520"/>
+          <polygon points="340,275 328,271 328,279" fill="#2a2520"/>
+          <text x="30" y="152" font-family="'Noto Sans TC',sans-serif" font-size="11" fill="#2a2520" text-anchor="middle" transform="rotate(-90,30,152)">物價水準 P</text>
+          <text x="200" y="298" font-family="'Noto Sans TC',sans-serif" font-size="11" fill="#2a2520" text-anchor="middle">產出 Y</text>
+          <!-- AD1 -->
+          <path d="M130,60 Q210,140 310,240" fill="none" stroke="#3d5a80" stroke-width="2.5"/>
+          <text x="316" y="238" font-family="'Crimson Pro',serif" font-size="13" fill="#3d5a80" font-weight="700">AD₁</text>
+          <!-- AD2 (shifted left) -->
+          <path d="M90,60 Q170,140 270,240" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-dasharray="8,4"/>
+          <text x="276" y="238" font-family="'Crimson Pro',serif" font-size="13" fill="#c0392b" font-weight="700">AD₂</text>
+          <!-- Points -->
+          <circle cx="218" cy="150" r="4" fill="#3d5a80"/>
+          <line x1="60" y1="150" x2="218" y2="150" stroke="#3d5a80" stroke-width="1" stroke-dasharray="5,3"/>
+          <line x1="218" y1="150" x2="218" y2="275" stroke="#3d5a80" stroke-width="1" stroke-dasharray="5,3"/>
+          <text x="50" y="154" font-family="'Crimson Pro',serif" font-size="12" fill="#3d5a80" text-anchor="end">P₁</text>
+          <text x="218" y="290" font-family="'Crimson Pro',serif" font-size="12" fill="#3d5a80" text-anchor="middle">Y₁</text>
+          <circle cx="178" cy="150" r="4" fill="#c0392b"/>
+          <line x1="178" y1="150" x2="178" y2="275" stroke="#c0392b" stroke-width="1" stroke-dasharray="5,3"/>
+          <text x="178" y="290" font-family="'Crimson Pro',serif" font-size="12" fill="#c0392b" text-anchor="middle">Y₂</text>
+          <!-- Arrow AD shift -->
+          <path d="M205,100 L170,100" fill="none" stroke="#e67e22" stroke-width="2.5" marker-end="url(#arrowO4)"/>
+          <defs><marker id="arrowO4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e67e22"/></marker></defs>
+        </svg>
+      </div>
+    </div>
+    <div class="graph-explain">
+      <p><strong>分析步驟（緊縮貨幣政策）：</strong></p>
+      <p>① Fed 賣出政府債券 → 收回市場上的貨幣 → M<sup>S</sup> 從 MS₁ 左移至 MS₂</p>
+      <p>② 左圖：M<sup>S</sup> 減少，但 M<sup>D</sup> 不變 → 貨幣市場超額需求 → r 從 r₁ 上升到 r₂</p>
+      <p>③ r↑ → 借貸成本上升 → 企業投資 I 減少、消費者耐久財購買減少</p>
+      <p>④ 右圖：在每個物價水準下，需求量都減少 → <strong>AD 整條左移</strong>（AD₁ → AD₂）</p>
+      <p>⑤ 同一 P₁ 下，Y 從 Y₁ 減少到 Y₂</p>
+      <p style="margin-top:8px;color:var(--accent)"><strong>⚠ 關鍵區分：</strong>利率效果＝沿著 AD 移動；貨幣政策＝整條 AD 移動。</p>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-title">政策應用練習</div>
+    <table>
+      <tr><th>事件</th><th>短期影響</th><th>Fed 應如何穩定產出</th></tr>
+      <tr><td>國會削減 G</td><td>AD↓ → Y↓</td><td>增加 M<sup>S</sup>、降低 r</td></tr>
+      <tr><td>股市繁榮</td><td>AD↑ → Y↑(超過自然率)</td><td>減少 M<sup>S</sup>、升高 r</td></tr>
+      <tr><td>油價飆升</td><td>AS↓ → Y↓</td><td>增加 M<sup>S</sup>、降低 r</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ============ Section 5 ============ -->
+<div class="section" id="s5">
+  <div class="section-header"><span class="sn">05</span><h2>利率目標、零利率下界與流動性陷阱 <span class="tag m">貨幣政策</span></h2></div>
+  <h3>為何以利率為操作目標？</h3>
+  <p>M<sup>S</sup> 難以精確衡量，M<sup>D</sup> 隨時波動。若死守 M<sup>S</sup> 固定 → 利率和產出劇烈波動。Fed 改以聯邦基金利率為目標，每天調整 M<sup>S</sup> 配合 M<sup>D</sup> 變動，維持利率穩定。兩種描述等價。</p>
+  <div class="card hl">
+    <h3>零利率下界（Zero Lower Bound）</h3>
+    <p><strong>流動性陷阱</strong>：名目利率已降至 ≈ 0 → 傳統貨幣政策失效 → AD、Y、就業被困在低水準。</p>
+    <h3>替代工具</h3>
+    <dl class="kv">
+      <dt>前瞻引導</dt><dd>Forward Guidance：央行承諾長期維持低利率 → 穩定預期 → 鼓勵投資</dd>
+      <dt>量化寬鬆</dt><dd>QE：央行購買房貸、公司債、長期國債 → 直接壓低長期利率（Fed 2008 年後大規模使用）</dd>
+    </dl>
+  </div>
+</div>
+
+<!-- ============ Section 6 ============ -->
+<div class="section" id="s6">
+  <div class="section-header"><span class="sn">06</span><h2>財政政策方向與基本邏輯 <span class="tag f">財政政策</span></h2></div>
+  <div class="card gr">
+    <dl class="kv">
+      <dt>擴張性</dt><dd>G↑ 和/或 T↓ → AD 右移 → Y↑</dd>
+      <dt>緊縮性</dt><dd>G↓ 和/或 T↑ → AD 左移 → Y↓</dd>
+    </dl>
+    <p>但 AD 最終移動量受<strong>乘數效果</strong>（放大）與<strong>排擠效果</strong>（縮小）共同決定。</p>
+  </div>
+</div>
+
+<!-- ============ Section 7 ============ -->
+<div class="section" id="s7">
+  <div class="section-header"><span class="sn">07</span><h2>乘數效果＋【圖四】乘數效果圖解 <span class="tag f">財政政策</span></h2></div>
+  <p>G 增加 $1 → 收到的人花掉 MPC 部分 → 又成為他人收入 → 再花 → 循環往復 → 最終 Y 增加遠大於 $1。</p>
+
+  <div class="formula-box">
+    <div class="formula-label">邊際消費傾向</div>
+    <div class="formula">MPC = ΔC ／ ΔY</div>
+  </div>
+  <div class="formula-box">
+    <div class="formula-label">支出乘數</div>
+    <div class="formula">乘數 = 1 ／ (1 − MPC)</div>
+  </div>
+
+  <div class="card bl">
+    <h3>公式推導</h3>
+    <p style="text-align:center;font-family:'Crimson Pro',serif;font-size:1.1rem;">
+      Y = C + I + G + NX（恆等式）<br>
+      ΔY = ΔC + ΔG　（ΔI = ΔNX = 0）<br>
+      ΔC = MPC × ΔY 代入 →<br>
+      ΔY = MPC × ΔY + ΔG<br>
+      ΔY(1 − MPC) = ΔG<br><br>
+      <strong style="color:var(--accent);font-size:1.25rem;">ΔY = [1／(1−MPC)] × ΔG</strong>
+    </p>
+  </div>
+
+  <table>
+    <tr><th>MPC</th><th>乘數</th><th>G↑ $20b → Y↑</th></tr>
+    <tr><td>0.5</td><td>2</td><td>$40b</td></tr>
+    <tr><td>0.75</td><td>4</td><td>$80b</td></tr>
+    <tr><td>0.8</td><td>5</td><td>$100b</td></tr>
+    <tr><td>0.9</td><td>10</td><td>$200b</td></tr>
+  </table>
+
+  <!-- GRAPH 4: Multiplier Effect -->
+  <div class="graph-container">
+    <div class="graph-title">【圖四】乘數效果：G 增加 $2b 的 AD 移動</div>
+    <svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;display:block;margin:0 auto;">
+      <line x1="70" y1="30" x2="70" y2="320" stroke="#2a2520" stroke-width="2"/>
+      <line x1="70" y1="320" x2="480" y2="320" stroke="#2a2520" stroke-width="2"/>
+      <polygon points="70,30 66,42 74,42" fill="#2a2520"/>
+      <polygon points="480,320 468,316 468,324" fill="#2a2520"/>
+      <text x="38" y="175" font-family="'Noto Sans TC',sans-serif" font-size="12" fill="#2a2520" text-anchor="middle" transform="rotate(-90,38,175)">物價水準 P</text>
+      <text x="275" y="352" font-family="'Noto Sans TC',sans-serif" font-size="12" fill="#2a2520" text-anchor="middle">產出 Y</text>
+
+      <!-- AD1 (original) -->
+      <path d="M110,55 Q200,150 330,270" fill="none" stroke="#3d5a80" stroke-width="2.5"/>
+      <text x="336" y="268" font-family="'Crimson Pro',serif" font-size="13" fill="#3d5a80" font-weight="700">AD₁</text>
+
+      <!-- AD2 (after initial ΔG=$2b shift) -->
+      <path d="M160,55 Q250,150 380,270" fill="none" stroke="#2e6b5e" stroke-width="2.5" stroke-dasharray="8,4"/>
+      <text x="386" y="268" font-family="'Crimson Pro',serif" font-size="13" fill="#2e6b5e" font-weight="700">AD₂</text>
+
+      <!-- AD3 (after multiplier, further right) -->
+      <path d="M210,55 Q300,150 430,270" fill="none" stroke="#b44a2f" stroke-width="2.5"/>
+      <text x="436" y="268" font-family="'Crimson Pro',serif" font-size="13" fill="#b44a2f" font-weight="700">AD₃</text>
+
+      <!-- P1 line -->
+      <line x1="70" y1="170" x2="400" y2="170" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="60" y="174" font-family="'Crimson Pro',serif" font-size="12" fill="#888" text-anchor="end">P₁</text>
+
+      <!-- Y points on P1 line -->
+      <circle cx="195" cy="170" r="4" fill="#3d5a80"/>
+      <line x1="195" y1="170" x2="195" y2="320" stroke="#3d5a80" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="195" y="336" font-family="'Crimson Pro',serif" font-size="11" fill="#3d5a80" text-anchor="middle">Y₁</text>
+
+      <circle cx="245" cy="170" r="4" fill="#2e6b5e"/>
+      <line x1="245" y1="170" x2="245" y2="320" stroke="#2e6b5e" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="245" y="336" font-family="'Crimson Pro',serif" font-size="11" fill="#2e6b5e" text-anchor="middle">Y₂</text>
+
+      <circle cx="295" cy="170" r="4" fill="#b44a2f"/>
+      <line x1="295" y1="170" x2="295" y2="320" stroke="#b44a2f" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="295" y="336" font-family="'Crimson Pro',serif" font-size="11" fill="#b44a2f" text-anchor="middle">Y₃</text>
+
+      <!-- Brace: $2b -->
+      <line x1="195" y1="300" x2="245" y2="300" stroke="#2e6b5e" stroke-width="2"/>
+      <text x="220" y="314" font-family="'Noto Sans TC',sans-serif" font-size="10" fill="#2e6b5e" text-anchor="middle">$2b</text>
+
+      <!-- Brace: multiplier effect -->
+      <path d="M248,295 L292,295" fill="none" stroke="#b44a2f" stroke-width="2"/>
+      <text x="270" y="314" font-family="'Noto Sans TC',sans-serif" font-size="10" fill="#b44a2f" text-anchor="middle">乘數效果</text>
+
+      <!-- Arrow annotations -->
+      <rect x="105" y="80" width="120" height="40" rx="6" fill="#fef3cd" stroke="#f0e0a0" opacity=".9"/>
+      <text x="165" y="96" font-family="'Noto Sans TC',sans-serif" font-size="10" fill="#2a2520" text-anchor="middle">① G↑$2b</text>
+      <text x="165" y="112" font-family="'Noto Sans TC',sans-serif" font-size="10" fill="#2a2520" text-anchor="middle">→ AD 初始右移 $2b</text>
+
+      <rect x="280" y="80" width="140" height="40" rx="6" fill="#fef3cd" stroke="#f0e0a0" opacity=".9"/>
+      <text x="350" y="96" font-family="'Noto Sans TC',sans-serif" font-size="10" fill="#2a2520" text-anchor="middle">② Y↑ → C↑</text>
+      <text x="350" y="112" font-family="'Noto Sans TC',sans-serif" font-size="10" fill="#2a2520" text-anchor="middle">→ AD 再右移（乘數效果）</text>
+    </svg>
+    <div class="graph-explain">
+      <p><strong>讀圖步驟：</strong></p>
+      <p>① G 增加 $2b → AD₁ 初始右移 $2b 到 AD₂（藍→綠虛線）</p>
+      <p>② Y 增加 → 家戶所得增加 → 消費 C 增加 → AD 再進一步右移到 AD₃（綠虛線→紅色）</p>
+      <p>③ 總移動量 = 初始 $2b + 乘數效果的部分 = [1/(1−MPC)] × $2b</p>
+      <p>④ 例如 MPC=0.8 → 總移動 = 5 × $2b = $10b</p>
+    </div>
+  </div>
+
+  <div class="callout"><strong>重要：</strong>乘數效果適用於 GDP 所有組成部分（C、I、G、NX）的變動，不僅限於 G。</div>
+</div>
+
+<!-- ============ Section 8 ============ -->
+<div class="section" id="s8">
+  <div class="section-header"><span class="sn">08</span><h2>排擠效果＋【圖五】排擠效果圖解 <span class="tag f">財政政策</span></h2></div>
+  <p>擴張性財政政策增加產出 → 推升利率 → 民間投資被壓縮 → 部分抵消 AD 的增加。</p>
+
+  <div class="graph-container">
+    <div class="graph-title">【圖五】排擠效果：G↑ $2b 時利率上升抵消部分需求</div>
+    <div class="dual-graph">
+      <div class="graph-panel">
+        <svg viewBox="0 0 360 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
+          <text x="180" y="18" font-family="'Noto Sans TC',sans-serif" font-size="13" fill="#888" text-anchor="middle">貨幣市場</text>
+          <line x1="60" y1="30" x2="60" y2="275" stroke="#2a2520" stroke-width="2"/>
+          <line x1="60" y1="275" x2="340" y2="275" stroke="#2a2520" stroke-width="2"/>
+          <polygon points="60,30 56,42 64,42" fill="#2a2520"/>
+          <polygon points="340,275 328,271 328,279" fill="#2a2520"/>
+          <text x="30" y="152" font-family="'Noto Sans TC',sans-serif" font-size="11" fill="#2a2520" text-anchor="middle" transform="rotate(-90,30,152)">利率 r</text>
+          <text x="200" y="298" font-family="'Noto Sans TC',sans-serif" font-size="11" fill="#2a2520" text-anchor="middle">貨幣數量 M</text>
+          <!-- MS -->
+          <line x1="200" y1="45" x2="200" y2="268" stroke="#b44a2f" stroke-width="2.5"/>
+          <text x="210" y="43" font-family="'Crimson Pro',serif" font-size="12" fill="#b44a2f" font-weight="700">M<tspan baseline-shift="super" font-size="9">S</tspan></text>
+          <!-- MD1 -->
+          <line x1="90" y1="90" x2="300" y2="250" stroke="#3d5a80" stroke-width="2.5"/>
+          <text x="306" y="248" font-family="'Crimson Pro',serif" font-size="11" fill="#3d5a80" font-weight="700">MD₁</text>
+          <!-- MD2 (shifted right due to Y↑) -->
+          <line x1="120" y1="60" x2="320" y2="230" stroke="#3d5a80" stroke-width="2.5" stroke-dasharray="8,4"/>
+          <text x="326" y="228" font-family="'Crimson Pro',serif" font-size="11" fill="#3d5a80" font-weight="700">MD₂</text>
+          <!-- E1 -->
+          <circle cx="200" cy="175" r="4" fill="#2e6b5e"/>
+          <line x1="60" y1="175" x2="200" y2="175" stroke="#2e6b5e" stroke-width="1.2" stroke-dasharray="5,3"/>
+          <text x="50" y="179" font-family="'Crimson Pro',serif" font-size="12" fill="#2e6b5e" text-anchor="end">r₁</text>
+          <!-- E2 -->
+          <circle cx="200" cy="140" r="4" fill="#c0392b"/>
+          <line x1="60" y1="140" x2="200" y2="140" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="5,3"/>
+          <text x="50" y="144" font-family="'Crimson Pro',serif" font-size="12" fill="#c0392b" text-anchor="end">r₂</text>
+          <!-- Arrow MD shift -->
+          <path d="M175,200 C190,195 195,180 195,170" fill="none" stroke="#e67e22" stroke-width="2" marker-end="url(#arrowO5)"/>
+          <defs><marker id="arrowO5" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e67e22"/></marker></defs>
+          <text x="152" y="208" font-family="'Noto Sans TC',sans-serif" font-size="10" fill="#e67e22" font-weight="700">Y↑→MD↑</text>
+        </svg>
+      </div>
+      <div class="graph-panel">
+        <svg viewBox="0 0 360 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
+          <text x="180" y="18" font-family="'Noto Sans TC',sans-serif" font-size="13" fill="#888" text-anchor="middle">商品市場</text>
+          <line x1="60" y1="30" x2="60" y2="275" stroke="#2a2520" stroke-width="2"/>
+          <line x1="60" y1="275" x2="340" y2="275" stroke="#2a2520" stroke-width="2"/>
+          <polygon points="60,30 56,42 64,42" fill="#2a2520"/>
+          <polygon points="340,275 328,271 328,279" fill="#2a2520"/>
+          <text x="30" y="152" font-family="'Noto Sans TC',sans-serif" font-size="11" fill="#2a2520" text-anchor="middle" transform="rotate(-90,30,152)">物價水準 P</text>
+          <text x="200" y="298" font-family="'Noto Sans TC',sans-serif" font-size="11" fill="#2a2520" text-anchor="middle">產出 Y</text>
+          <!-- AD1 -->
+          <path d="M100,55 Q185,140 290,245" fill="none" stroke="#3d5a80" stroke-width="2.5"/>
+          <text x="296" y="243" font-family="'Crimson Pro',serif" font-size="12" fill="#3d5a80" font-weight="700">AD₁</text>
+          <!-- AD3 (乘數 full effect, no crowding out) -->
+          <path d="M185,55 Q270,140 340,210" fill="none" stroke="#2e6b5e" stroke-width="2" stroke-dasharray="6,4"/>
+          <text x="330" y="198" font-family="'Crimson Pro',serif" font-size="11" fill="#2e6b5e" font-weight="700">AD₃</text>
+          <text x="330" y="212" font-family="'Noto Sans TC',sans-serif" font-size="9" fill="#2e6b5e">(若無排擠)</text>
+          <!-- AD2 (actual, with crowding out) -->
+          <path d="M145,55 Q230,140 320,230" fill="none" stroke="#b44a2f" stroke-width="2.5"/>
+          <text x="326" y="228" font-family="'Crimson Pro',serif" font-size="12" fill="#b44a2f" font-weight="700">AD₂</text>
+          <text x="326" y="242" font-family="'Noto Sans TC',sans-serif" font-size="9" fill="#b44a2f">(實際)</text>
+          <!-- P1 line -->
+          <line x1="60" y1="155" x2="320" y2="155" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+          <text x="50" y="159" font-family="'Crimson Pro',serif" font-size="12" fill="#888" text-anchor="end">P₁</text>
+          <!-- Y1 -->
+          <circle cx="185" cy="155" r="3.5" fill="#3d5a80"/>
+          <line x1="185" y1="155" x2="185" y2="275" stroke="#3d5a80" stroke-width="1" stroke-dasharray="4,3"/>
+          <text x="185" y="290" font-family="'Crimson Pro',serif" font-size="11" fill="#3d5a80" text-anchor="middle">Y₁</text>
+          <!-- Y2 actual -->
+          <circle cx="228" cy="155" r="3.5" fill="#b44a2f"/>
+          <line x1="228" y1="155" x2="228" y2="275" stroke="#b44a2f" stroke-width="1" stroke-dasharray="4,3"/>
+          <text x="228" y="290" font-family="'Crimson Pro',serif" font-size="11" fill="#b44a2f" text-anchor="middle">Y₂</text>
+          <!-- Y3 if no crowding -->
+          <circle cx="265" cy="155" r="3.5" fill="#2e6b5e"/>
+          <line x1="265" y1="155" x2="265" y2="275" stroke="#2e6b5e" stroke-width="1" stroke-dasharray="4,3"/>
+          <text x="265" y="290" font-family="'Crimson Pro',serif" font-size="11" fill="#2e6b5e" text-anchor="middle">Y₃</text>
+          <!-- Bracket: $2b -->
+          <line x1="185" y1="265" x2="215" y2="265" stroke="#888" stroke-width="1.5"/>
+          <text x="200" y="260" font-family="'Noto Sans TC',sans-serif" font-size="9" fill="#888" text-anchor="middle">$2b</text>
+          <!-- Bracket: crowding out -->
+          <rect x="230" y="258" width="33" height="16" rx="3" fill="#fef3cd" stroke="#f0e0a0"/>
+          <text x="246" y="270" font-family="'Noto Sans TC',sans-serif" font-size="8" fill="#b44a2f" text-anchor="middle">排擠</text>
+        </svg>
+      </div>
+    </div>
+    <div class="graph-explain">
+      <p><strong>分析步驟：</strong></p>
+      <p>① G↑ $2b → AD₁ 右移 → Y↑ → 所得增加 → 貨幣需求 M<sup>D</sup> 增加</p>
+      <p>② 左圖：M<sup>S</sup> 不變但 M<sup>D</sup> 右移（MD₁→MD₂）→ 利率從 r₁ 上升到 r₂</p>
+      <p>③ r↑ → 企業投資 I 減少 → 部分需求被「排擠」掉</p>
+      <p>④ 右圖：若無排擠，AD 會移到 AD₃（綠虛線）；但排擠使 AD 只到 AD₂（紅色實線）</p>
+      <p>⑤ <strong>最終結果：</strong>Y₁ → Y₂（而非 Y₃），排擠效果削減了部分財政擴張的效果</p>
+      <p style="margin-top:8px;padding:8px 12px;background:#fff;border-radius:6px;border:1px solid var(--border);">
+        <strong>淨效果排序：</strong> 初始 ΔG < <span style="color:#b44a2f">實際 ΔY（含排擠）</span> < <span style="color:#2e6b5e">乘數×ΔG（無排擠）</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ Section 9 ============ -->
+<div class="section" id="s9">
+  <div class="section-header"><span class="sn">09</span><h2>減稅的效果 <span class="tag f">財政政策</span></h2></div>
+  <p>減稅 → 可支配所得↑ → C↑ → AD 右移。移動幅度同樣受乘數與排擠效果影響。</p>
+  <div class="card gr">
+    <dl class="kv">
+      <dt>永久減稅</dt><dd>家戶預期長期所得增加 → 大幅增加 C → AD 影響<strong>較大</strong></dd>
+      <dt>暫時減稅</dt><dd>家戶知道不持續 → 多儲蓄 → AD 影響<strong>較小</strong></dd>
+    </dl>
+  </div>
+  <div class="callout"><strong>減稅 vs. 增加 G 的比較：</strong>同樣 $1，G↑ 直接讓 AD 增加 $1；但減稅 $1 → 家戶只消費 MPC×$1（如 MPC=0.8 則 $0.8），初始推力較小。</div>
+</div>
+
+<!-- ============ Section 10 ============ -->
+<div class="section" id="s10">
+  <div class="section-header"><span class="sn">10</span><h2>財政政策與總供給 <span class="tag f">財政政策</span></h2></div>
+  <div class="card bl">
+    <h3>減稅的供給面效果</h3>
+    <p>降低稅率 → 勞動者工作誘因增加 → 勞動供給↑ → 產出供給↑ → <strong>AS 右移</strong>。此觀點的擁護者稱為「供給學派」（Supply-siders）。</p>
+    <h3>政府支出的供給面效果</h3>
+    <p>例：政府投資道路 → 企業生產力提高 → AS 右移。此效果主要在<strong>長期</strong>顯現。</p>
+  </div>
+</div>
+
+<!-- ============ Section 11 ============ -->
+<div class="section" id="s11">
+  <div class="section-header"><span class="sn">11</span><h2>主動穩定政策正反辯論</h2></div>
+  <div class="compare-grid">
+    <div class="col">
+      <h4>✅ 支持主動穩定</h4>
+      <p>凱因斯：動物本能（animal spirits）→ AD 波動 → 產出就業不穩定。加上海外景氣、股市等外部衝擊，政府不介入 → 經濟痛苦。</p>
+      <p><strong>主張：</strong>GDP < 自然率 → 擴張政策；GDP > 自然率 → 緊縮政策。</p>
+    </div>
+    <div class="col">
+      <h4>❌ 反對主動穩定</h4>
+      <p><strong>時間落後（Time Lag）</strong>：貨幣政策 ≥ 6 個月；財政政策需立法 → 數月至數年。等生效時經濟已改變，政策反而加劇波動。</p>
+      <p><strong>主張：</strong>聚焦長期目標（經濟成長、低通膨），不要頻繁干預。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ Section 12 ============ -->
+<div class="section" id="s12">
+  <div class="section-header"><span class="sn">12</span><h2>自動穩定因子（Automatic Stabilizers）</h2></div>
+  <p>無須刻意立法，經濟衰退時自動啟動的財政機制：</p>
+  <div class="card gr">
+    <dl class="kv">
+      <dt>稅制</dt><dd>衰退 → 所得↓ → 稅額自動↓ → 可支配所得不至大跌 → 支撐 C 與 AD</dd>
+      <dt>移轉支出</dt><dd>衰退 → 失業增加 → 失業保險、社會救助自動↑ → 支撐家戶所得 → 支撐 AD</dd>
+    </dl>
+  </div>
+  <div class="callout"><strong>優勢：</strong>不需立法、不需等待政治程序，反應速度遠比主動政策快。</div>
+</div>
+
+<!-- ============ Section 13 ============ -->
+<div class="section" id="s13">
+  <div class="section-header"><span class="sn">13</span><h2>貨幣 vs. 財政政策總對照＋公式速查</h2></div>
+  <table>
+    <tr><th></th><th>貨幣政策</th><th>財政政策</th></tr>
+    <tr><td><strong>決策者</strong></td><td>中央銀行（Fed）</td><td>政府（總統＋國會）</td></tr>
+    <tr><td><strong>工具</strong></td><td>公開市場操作 → M<sup>S</sup>/利率</td><td>G 和 T</td></tr>
+    <tr><td><strong>傳導</strong></td><td>M<sup>S</sup> → r → I → AD</td><td>G/T → C（乘數＋排擠）→ AD</td></tr>
+    <tr><td><strong>擴張</strong></td><td>M<sup>S</sup>↑ → r↓</td><td>G↑ 和/或 T↓</td></tr>
+    <tr><td><strong>緊縮</strong></td><td>M<sup>S</sup>↓ → r↑</td><td>G↓ 和/或 T↑</td></tr>
+    <tr><td><strong>時間落後</strong></td><td>≥ 6 個月</td><td>立法程序數月至數年</td></tr>
+    <tr><td><strong>零利率困境</strong></td><td>傳統工具失效→QE/前瞻引導</td><td>不受限，可直接增 G</td></tr>
+    <tr><td><strong>副作用</strong></td><td>通膨/資產泡沫風險</td><td>排擠民間投資、政府債務增加</td></tr>
+  </table>
+
+  <hr class="divider">
+
+  <h3>📋 公式速查表</h3>
+  <div class="formula-box"><div class="formula-label">國民所得恆等式</div><div class="formula">Y = C + I + G + NX</div></div>
+  <div class="formula-box"><div class="formula-label">邊際消費傾向</div><div class="formula">MPC = ΔC ／ ΔY</div></div>
+  <div class="formula-box"><div class="formula-label">支出乘數</div><div class="formula">Multiplier = 1 ／ (1 − MPC)</div></div>
+  <div class="formula-box"><div class="formula-label">產出變動（無排擠）</div><div class="formula">ΔY = [1 ／ (1 − MPC)] × ΔG</div></div>
+  <div class="formula-box"><div class="formula-label">貨幣市場均衡</div><div class="formula">M<sup>S</sup> = M<sup>D</sup>(r, Y, P)　→　解出 r*</div></div>
+
+  <hr class="divider">
+
+  <h3>⚠ 易混淆點＆常見陷阱</h3>
+  <div class="card hl">
+    <p><strong>1. 沿線移動 vs. 整條移動：</strong>P 變動 → 沿著 AD 移動（利率效果）；M<sup>S</sup> 或 G/T 變動 → 整條 AD 移動。</p>
+    <p><strong>2. 乘數對所有組成部分都適用：</strong>不只 G 變動，NX、I、C 的外生變動都會透過乘數放大。</p>
+    <p><strong>3. 排擠效果只出現在財政政策：</strong>因為是 G↑→Y↑→M<sup>D</sup>↑→r↑→I↓ 的回饋迴路。貨幣政策本身就在控制 r，不存在排擠。</p>
+    <p><strong>4. 減稅初始推力 < 等額增加 G：</strong>G↑$1 直接進入 AD；T↓$1 只有 MPC×$1 進入 AD。</p>
+    <p><strong>5. 零利率下界：</strong>傳統貨幣政策失效 ≠ 貨幣政策完全無用（還有 QE 和前瞻引導）。</p>
+    <p><strong>6. 自動穩定因子 vs. 主動政策：</strong>前者自動啟動、無時間落後；後者需刻意決策、有落後問題。</p>
+  </div>
+</div>
+
+<div class="footer">
+  基於 Mankiw "Principles of Economics" Ch11 整理 · 含五張核心圖解 · 僅供學習參考
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>費小雪的麵包奇遇 ─ Ch7~Ch11 故事複習小抄</title>
+<style>
+  /* ─── 基本重置與字體 ─── */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei',
+                 'Hiragino Sans', 'Helvetica Neue', sans-serif;
+    color: #1a1a1a;
+    line-height: 1.75;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 50px 56px 80px;
+    background: #faf8f4;
+    font-size: 14.5px;
+  }
+
+  /* ─── 公式專用字體 ─── */
+  .formula, .fblock {
+    font-family: 'Latin Modern Math', 'Cambria Math', 'STIX Two Math',
+                 'Times New Roman', Georgia, serif;
+    font-style: italic;
+  }
+  .formula {
+    background: #efeae0;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.96em;
+  }
+  .fblock {
+    display: block;
+    text-align: center;
+    margin: 12px 0;
+    font-size: 1.1em;
+    background: #efeae0;
+    padding: 10px 16px;
+    border-radius: 4px;
+  }
+
+  /* ─── 標題區 ─── */
+  .cover {
+    border-top: 3px solid #1a1a1a;
+    border-bottom: 1px solid #ccc;
+    padding: 18px 0 22px;
+    margin-bottom: 36px;
+  }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0 0 10px;
+    letter-spacing: -0.5px;
+    line-height: 1.25;
+  }
+  .lede {
+    font-size: 14px;
+    color: #555;
+    max-width: 640px;
+  }
+  .toc {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 18px;
+    font-size: 11.5px;
+  }
+  .toc div {
+    padding: 8px 10px;
+    border-top: 3px solid;
+    color: #333;
+  }
+  .toc div span { color: #888; display: block; margin-bottom: 2px; }
+  .toc .t1 { border-color: #c2761c; }
+  .toc .t2 { border-color: #0d8a78; }
+  .toc .t3 { border-color: #b53a17; }
+  .toc .t4 { border-color: #6e1fb0; }
+  .toc .t5 { border-color: #1e4ec2; }
+
+  /* ─── 章節（幕）區塊 ─── */
+  .act {
+    margin-bottom: 38px;
+    border-left: 5px solid;
+    padding: 4px 0 4px 22px;
+  }
+  .act-1 { border-color: #c2761c; }
+  .act-2 { border-color: #0d8a78; }
+  .act-3 { border-color: #b53a17; }
+  .act-4 { border-color: #6e1fb0; }
+  .act-5 { border-color: #1e4ec2; }
+
+  .act-num {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #888;
+    font-weight: 500;
+  }
+  h2 {
+    font-size: 21px;
+    font-weight: 700;
+    margin: 4px 0 4px;
+    letter-spacing: -0.3px;
+  }
+  .ch-tag {
+    display: inline-block;
+    font-size: 11px;
+    color: #555;
+    background: #ece8df;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-bottom: 12px;
+  }
+  h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 18px 0 6px;
+    color: #2a2a2a;
+  }
+
+  /* ─── 段落 ─── */
+  p { margin: 8px 0; }
+  .character { color: #c2410c; font-weight: 600; }
+  .scene { background: #fff8e8; padding: 10px 14px; border-radius: 4px;
+           margin: 10px 0; font-size: 13.5px; }
+  .scene::before {
+    content: '🎬 情節';
+    font-weight: 600; font-size: 11px; letter-spacing: 1px;
+    color: #b76b00; display: block; margin-bottom: 4px;
+  }
+
+  /* ─── 表格 ─── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 13px;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid #d4d0c4;
+    vertical-align: top;
+  }
+  th {
+    background: #1a1a1a;
+    color: white;
+    font-weight: 500;
+    font-size: 12.5px;
+    letter-spacing: 0.5px;
+  }
+  tbody tr:nth-child(even) { background: #f3efe7; }
+
+  /* ─── 記憶錨 ─── */
+  .anchor {
+    background: #fffaee;
+    border: 1px dashed #d6a25b;
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-size: 13px;
+    border-radius: 4px;
+  }
+  .anchor strong {
+    color: #b76b00;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  /* ─── 心法區 ─── */
+  .mantra {
+    background: #1a1a1a;
+    color: #f9f5e8;
+    padding: 28px 32px;
+    text-align: center;
+    margin: 36px 0;
+    border-radius: 6px;
+  }
+  .mantra-label {
+    font-size: 10px; letter-spacing: 4px;
+    color: #c2761c; margin-bottom: 12px;
+  }
+  .mantra-text {
+    font-size: 19px;
+    line-height: 1.7;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  .mantra-note {
+    font-size: 12px; color: #aaa9a3; margin-top: 14px;
+  }
+
+  /* ─── 補充小框 ─── */
+  .extra {
+    background: #f0eee5;
+    padding: 16px 20px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+  .extra h3 { margin-top: 0; }
+
+  /* ─── 警示框 ─── */
+  .warn {
+    background: #fdf0ec;
+    border-left: 4px solid #b53a17;
+    padding: 10px 14px;
+    margin: 14px 0;
+    font-size: 13px;
+  }
+  .warn::before {
+    content: '⚠ 易錯陷阱';
+    display: block;
+    font-weight: 600;
+    color: #b53a17;
+    font-size: 11.5px;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  ol, ul { padding-left: 22px; }
+  li { margin-bottom: 4px; }
+
+  /* ─── 故事地圖 ─── */
+  .story-map {
+    background: white;
+    border: 1px solid #d4d0c4;
+    border-radius: 6px;
+    padding: 24px 20px;
+    margin: 28px 0;
+  }
+  .story-map svg { width: 100%; height: auto; display: block; }
+
+  /* ─── 列印樣式 ─── */
+  @page { size: A4; margin: 14mm 14mm 16mm 14mm; }
+  @media print {
+    body {
+      background: white;
+      padding: 0;
+      max-width: 100%;
+      font-size: 11pt;
+    }
+    .act { page-break-inside: avoid; }
+    .story-map { page-break-before: always; page-break-inside: avoid; }
+    .summary-table, .mantra { page-break-inside: avoid; }
+    .no-print { display: none; }
+    .cover { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ 封面 ============ -->
+<div class="cover">
+  <div class="eyebrow">經濟學期末複習 ／ 整合性故事記憶法</div>
+  <h1>費小雪的麵包奇遇</h1>
+  <p class="lede">凱因斯夜市的一家麵包店，意外串起通膨、開放經濟、AD-AS 與貨幣財政政策。用五幕劇背完 Ch7~Ch11 的全部考點。</p>
+
+  <div class="toc">
+    <div class="t1"><span>第一幕 ／ Ch7</span>央行阿伯印鈔票<br>貨幣成長與通膨</div>
+    <div class="t2"><span>第二幕 ／ Ch8</span>進口德國麵粉<br>開放經濟基礎</div>
+    <div class="t3"><span>第三幕 ／ Ch9</span>張董蓋夜市捷運<br>開放經濟模型</div>
+    <div class="t4"><span>第四幕 ／ Ch10</span>股災與油價<br>AD-AS 模型</div>
+    <div class="t5"><span>第五幕 ／ Ch11</span>央行政府救經濟<br>貨幣與財政政策</div>
+  </div>
+</div>
+
+<!-- ============ 角色介紹 ============ -->
+<div class="extra">
+  <h3>登場人物</h3>
+  <p>
+    <span class="character">費小雪</span>｜主角，「雪雪麵包工坊」老闆（諧音 Fisher，記費雪效果）<br>
+    <span class="character">凱博士</span>｜經濟學家，每幕關鍵時刻登場（紀念凱因斯）<br>
+    <span class="character">央行阿伯</span>｜中央銀行掌門人（鮑爾風格）<br>
+    <span class="character">張董政府</span>｜決策官員，動不動就要蓋公共建設<br>
+    <span class="character">銀行家貝吉爾</span>｜麵包店往來銀行專員<br>
+    <span class="character">員工小蘇</span>｜每天跑銀行的櫃台小妹
+  </p>
+</div>
+
+<!-- ============ 第一幕 ============ -->
+<section class="act act-1">
+  <div class="act-num">ACT 1</div>
+  <h2>🏦 央行阿伯印鈔票事件</h2>
+  <span class="ch-tag">Ch7 貨幣成長與通膨</span>
+
+  <div class="scene">
+    某禮拜一早晨，新聞跑馬燈寫著：「央行阿伯今天宣布印鈔票，貨幣供給 M 直接翻倍！」費小雪一開始很開心，以為錢變多自己就變富——隔週菠蘿麵包就從 10 元被迫漲到 20 元。
+  </div>
+
+  <h3>核心公式：貨幣數量學說</h3>
+  <p>費小雪攤開筆記，列出方程式：</p>
+  <span class="fblock">M × V = P × Y</span>
+  <p>M 翻倍、V（流通速度）與 Y（實質產量）短期不變，所以 P 必須翻倍。</p>
+  <p>凱博士登場：「妳的實質產量沒變、只有名目價格動——這叫 <strong>古典二分法</strong>；長期下印鈔票不影響任何實質變數，這叫 <strong>貨幣中立性</strong>。」</p>
+
+  <h3>通膨六宗罪 + 通膨稅</h3>
+  <table>
+    <thead><tr><th style="width:38%">故事場景</th><th style="width:62%">對應成本</th></tr></thead>
+    <tbody>
+      <tr><td>員工小蘇每天跑銀行 3 次</td><td><strong>鞋皮成本</strong>（減少持幣的真實資源浪費）</td></tr>
+      <tr><td>每週重印價目表</td><td><strong>菜單成本</strong>（改價的成本）</td></tr>
+      <tr><td>同行漲價節奏不一</td><td><strong>相對價格扭曲</strong>（資源配置失靈）</td></tr>
+      <tr><td>帳面利潤虛胖被多課稅</td><td><strong>稅賦扭曲</strong>（名目資本利得被課稅）</td></tr>
+      <tr><td>阿嬤 30 年定存縮水</td><td><strong>任意財富重分配</strong>（傷債權人、利債務人）</td></tr>
+      <tr><td>員工把名目當實質</td><td><strong>計算與混淆成本</strong></td></tr>
+      <tr><td>政府靠印鈔還債</td><td><strong>通貨膨脹稅</strong>（對持幣人課的隱形稅）</td></tr>
+    </tbody>
+  </table>
+
+  <h3>費雪效果（Fisher Effect）</h3>
+  <p>銀行家貝吉爾告訴費小雪：通膨率 π = 10%，活存名目利率要從 3% 跳到 13%。</p>
+  <span class="fblock">i = r + π &nbsp;&nbsp;｜&nbsp;&nbsp; r = i − π</span>
+  <p>長期下 <span class="formula">π</span> 與 <span class="formula">i</span> 一對一同步調整，<strong>實質利率 r 不變</strong>（一對一原則）。</p>
+
+  <div class="anchor">
+    <strong>第一幕記憶錨</strong>
+    MV=PY ｜ 貨幣中立性 ｜ 古典二分法 ｜ 通膨六宗罪 + 通膨稅 ｜ 費雪效果 i=r+π
+  </div>
+</section>
+
+<!-- ============ 第二幕 ============ -->
+<section class="act act-2">
+  <div class="act-num">ACT 2</div>
+  <h2>🌏 進口德國麵粉、出口鳳梨酥</h2>
+  <span class="ch-tag">Ch8 開放經濟基礎概念</span>
+
+  <div class="scene">
+    費小雪決定從德國進口高筋麵粉（imports↑），同時研發的「鳳梨酥麵包」紅遍亞洲，賣到日本（exports↑）。她開始算帳，發現出口與進口、商品與金融資產，是兩道同步的流動。
+  </div>
+
+  <h3>兩大流動定義</h3>
+  <span class="fblock">NX = Exports − Imports</span>
+  <p>淨出口（Net Exports，又稱貿易餘額）。NX &gt; 0 即貿易順差。</p>
+
+  <span class="fblock">NCO = 國人購買外國資產 − 外國人購買本國資產</span>
+  <p>淨資本外流（Net Capital Outflow，又稱淨對外投資）。</p>
+
+  <h3>會計恆等式（最重要！）</h3>
+  <span class="fblock">NX = NCO</span>
+  <p>賣鳳梨酥給日本人 → 賺日圓 → NX↑；拿日圓買日本不動產 → NCO↑（兩者必同步）。</p>
+
+  <table>
+    <thead><tr><th>情境</th><th>NX</th><th>NCO</th><th>說明</th></tr></thead>
+    <tbody>
+      <tr><td>貿易順差</td><td>&gt; 0</td><td>&gt; 0</td><td>多收外幣→拿去買外國資產（資本外流）</td></tr>
+      <tr><td>貿易逆差</td><td>&lt; 0</td><td>&lt; 0</td><td>多買外國品→賣本國資產給外國人融資</td></tr>
+    </tbody>
+  </table>
+
+  <h3>從國民所得推出儲蓄恆等式</h3>
+  <span class="fblock">Y = C + I + G + NX</span>
+  <span class="fblock">S = I + NCO</span>
+  <p>國民儲蓄 = 國內投資 + 淨資本外流（開放經濟下的核心關係）。</p>
+
+  <h3>匯率三兄弟</h3>
+  <ol>
+    <li><strong>名目匯率（e）</strong>：每單位本國幣能換多少外幣。台幣升值＝e↑。</li>
+    <li><strong>實質匯率</strong>＝<span class="formula">(e × P<sub>本</sub>) / P<sub>外</sub></span>，考慮兩國物價後的相對價格。</li>
+    <li><strong>升值 appreciation</strong> vs <strong>貶值 depreciation</strong>。</li>
+  </ol>
+
+  <h3>購買力平價 PPP</h3>
+  <p>基於 <strong>單一價格法則</strong>（同商品全球同價）。一單位本國幣應在全球買到等量商品，故 <span class="formula">e × P<sub>本</sub> = P<sub>外</sub></span>，<strong>實質匯率 = 1</strong>。</p>
+
+  <div class="warn">
+    PPP 只是長期趨勢。短期常偏離，因為：（1）很多商品不可貿易（理髮、房地產）；（2）商品差異化（德國車 ≠ 日本車）。實際實質匯率會隨時間波動。
+  </div>
+
+  <div class="anchor">
+    <strong>第二幕記憶錨</strong>
+    NX ｜ NCO ｜ NX=NCO ｜ S=I+NCO ｜ 名目/實質匯率 ｜ 單一價格法則 → PPP
+  </div>
+</section>
+
+<!-- ============ 第三幕 ============ -->
+<section class="act act-3">
+  <div class="act-num">ACT 3</div>
+  <h2>🚇 張董蓋夜市捷運：三市場連動</h2>
+  <span class="ch-tag">Ch9 開放經濟模型</span>
+
+  <div class="scene">
+    某天張董宣布：「夜市要蓋捷運！」政府支出 G↑，但稅 T 不變，預算赤字暴增。費小雪急忙找凱博士。凱博士在白板上畫了三個市場，把它們鎖在一起。
+  </div>
+
+  <h3>三市場拆解</h3>
+
+  <p><strong>市場 1｜可貸資金市場（決定實質利率 r）</strong></p>
+  <ul>
+    <li>供給：S（家庭儲蓄 + (T−G)）</li>
+    <li>需求：I + NCO</li>
+    <li>政府赤字 → S 左移 → r↑</li>
+  </ul>
+
+  <p><strong>市場 2｜NCO 對 r 的反向關係</strong></p>
+  <ul>
+    <li>r↑ → 本國資產更吸引人 → NCO↓</li>
+  </ul>
+
+  <p><strong>市場 3｜外匯市場（決定實質匯率 e）</strong></p>
+  <ul>
+    <li>供給：NCO（本國人拿台幣換外幣去買外國資產）</li>
+    <li>需求：NX（外國人換台幣來買台灣出口品）</li>
+    <li>NCO↓ → 外匯供給左移 → e↑（本國貨幣升值）</li>
+  </ul>
+
+  <p><strong>結果：</strong>e↑ → 出口貴、進口便宜 → NX↓。</p>
+
+  <h3>三大政策衝擊對照</h3>
+  <table>
+    <thead><tr><th>衝擊</th><th>r</th><th>NCO</th><th>e</th><th>NX</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td>預算赤字 G↑</td><td>↑</td><td>↓</td><td>↑</td><td>↓</td><td>雙赤字現象</td></tr>
+      <tr><td>限制進口（關稅）</td><td>不變</td><td>不變</td><td>↑</td><td>不變</td><td>長期 NX 不變</td></tr>
+      <tr><td>資本外逃</td><td>↑</td><td>↑</td><td>↓</td><td>↑</td><td>本幣貶值</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn">
+    <strong>貿易政策陷阱</strong>：政府徵關稅以為能護出口，但 NCO 沒改變 → NX 長期也不變，只是新台幣升值抵銷掉保護效果。出口商和進口商「同時」被打到。
+  </div>
+
+  <div class="anchor">
+    <strong>第三幕記憶錨</strong>
+    可貸資金市場（S = I + NCO）｜ NCO 對 r 反向 ｜ 外匯市場（NCO = NX，e 為價格）｜ 雙赤字 ｜ 資本外逃 ｜ 貿易政策無效論
+  </div>
+</section>
+
+<!-- ============ 第四幕 ============ -->
+<section class="act act-4">
+  <div class="act-num">ACT 4</div>
+  <h2>📉 股災 + 油價飆漲</h2>
+  <span class="ch-tag">Ch10 總合需求與總合供給（AD-AS）</span>
+
+  <div class="scene">
+    禮拜一台股崩盤 2000 點，費小雪的客人財富縮水、不敢買麵包。隔週中東戰爭爆發、油價飆漲，烤箱燃料費暴增。凱博士拿出 AD-AS 圖（縱軸 P、橫軸 Y）。
+  </div>
+
+  <h3>AD 曲線為什麼下傾？三大效果（P↓ 時）</h3>
+  <p>從 <span class="formula">Y = C + I + G + NX</span> 出發：</p>
+  <ol>
+    <li><strong>財富效果</strong>（P↓ → C↑）：實質貨幣價值↑ → 民眾覺得更富 → 消費 C↑</li>
+    <li><strong>利率效果</strong>（P↓ → I↑）：買東西用較少錢 → 多錢買債券 → r↓ → 投資 I↑</li>
+    <li><strong>匯率效果</strong>（P↓ → NX↑）：實質匯率↓（本幣貶）→ 出口便宜 → NX↑</li>
+  </ol>
+
+  <h3>AS 兩條曲線</h3>
+  <p><strong>LRAS（長期）垂直於自然產出 Y<sub>N</sub></strong>：長期由勞動、資本、自然資源、技術決定，與 P 無關。</p>
+  <p><strong>SRAS（短期）上斜</strong>，三個解釋：</p>
+  <ol>
+    <li><strong>黏性工資理論</strong>：合約鎖住工資，P↑→實質工資↓→廠商多雇人→Y↑</li>
+    <li><strong>黏性價格理論</strong>：菜單成本讓部分廠商沒立刻調價→需求大時銷量↑</li>
+    <li><strong>誤認理論</strong>：廠商誤把總體物價上漲當成自家產品相對價格上升→多生產</li>
+  </ol>
+
+  <h3>兩種衝擊的故事情節</h3>
+
+  <p><strong>情節 A｜股災 → AD 左移（需求衝擊）</strong></p>
+  <ol>
+    <li>股災 → C↓ → AD 左移</li>
+    <li>短期：P↓、Y↓、失業↑（A → B，<strong>衰退</strong>）</li>
+    <li>長期：預期物價 P<sup>E</sup>↓ → SRAS 右移 → Y 回到 Y<sub>N</sub>、P 更低（B → C）</li>
+  </ol>
+
+  <p><strong>情節 B｜油價飆漲 → SRAS 左移（供給衝擊）</strong></p>
+  <ol>
+    <li>成本↑ → SRAS 左移</li>
+    <li>短期：P↑、Y↓、失業↑ ＝ <strong>停滯性通膨 stagflation</strong>（最痛苦！）</li>
+    <li>政策兩難：救 Y 會讓 P 更高；壓 P 會讓 Y 更低</li>
+  </ol>
+
+  <div class="anchor">
+    <strong>第四幕記憶錨</strong>
+    AD 下傾三效果（財富、利率、匯率）｜ LRAS 垂直 ｜ SRAS 三理論（黏工資、黏物價、誤認）｜ AD 衝擊 vs 供給衝擊 ｜ stagflation
+  </div>
+</section>
+
+<!-- ============ 第五幕 ============ -->
+<section class="act act-5">
+  <div class="act-num">ACT 5</div>
+  <h2>🏛 央行與政府聯手救經濟</h2>
+  <span class="ch-tag">Ch11 貨幣與財政政策的影響</span>
+
+  <div class="scene">
+    費小雪的麵包店生意慘澹。央行阿伯與張董政府決定出手。凱博士登場最後一次，講了核心模型——凱因斯的流動性偏好理論。
+  </div>
+
+  <h3>流動性偏好理論</h3>
+  <p>利率 r 由貨幣供需決定：</p>
+  <ul>
+    <li><strong>MS（貨幣供給）</strong>：央行決定，垂直線（不受 r 影響）</li>
+    <li><strong>MD（貨幣需求）</strong>取決於 <strong>Y、r、P</strong>：
+      <ul>
+        <li>Y↑ → 交易需求↑ → MD 右移</li>
+        <li>r↑ → 持幣機會成本↑ → 沿 MD 線往左上（故 MD 對 r 下傾）</li>
+        <li>P↑ → 名目交易額↑ → MD 右移</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>貨幣政策傳遞鏈</h3>
+  <span class="fblock">公開市場買債 → MS↑ → r↓ → I↑ → AD 右移 → Y↑、P↑</span>
+
+  <h3>財政政策：兩大效果對打</h3>
+
+  <p><strong>A. 乘數效果（放大 AD）</strong></p>
+  <span class="fblock">乘數 = 1 / (1 − MPC)</span>
+  <p>政府花 20 億蓋捷運 → 建商收入↑ → 工人消費↑ → 餐廳收入↑ → ……。若 MPC = 0.75，乘數 = 4，AD 最終右移 80 億。</p>
+
+  <p><strong>B. 排擠效果（縮小 AD）</strong></p>
+  <p>G↑ → Y↑ → MD↑ → r↑ → I↓ → AD 增幅被抵銷。<strong>真實 AD 增加 &lt; 名目支出 × 乘數</strong>。</p>
+
+  <p><strong>C. 自動穩定因子</strong></p>
+  <p>稅收（衰退時自動↓）、失業救濟（衰退時自動↑），不需政策決議就自動緩衝。</p>
+
+  <h3>大魔王：流動性陷阱 / 零利率下界（ZLB）</h3>
+  <p>名目利率降到 0 後，傳統降息失效。央行轉用：</p>
+  <ul>
+    <li><strong>前瞻引導</strong>（forward guidance）：承諾長期低利率，刺激投資</li>
+    <li><strong>量化寬鬆 QE</strong>：買更多種類的資產（房貸債、公司債、長天期國債）</li>
+  </ul>
+
+  <h3>為什麼 Fed 改盯利率目標？</h3>
+  <p>因為 MS 難精確衡量、MD 又常波動，導致 r 失控。Fed 改採 <strong>聯邦基金利率目標</strong>，根據需求變化反向調整 MS，把 r 穩住。</p>
+
+  <div class="anchor">
+    <strong>第五幕記憶錨</strong>
+    流動性偏好（MS、MD by Y/r/P）｜ 乘數 1/(1−MPC) ｜ 排擠效果 ｜ 自動穩定因子 ｜ 流動性陷阱 / ZLB ｜ QE ｜ 前瞻引導 ｜ 利率目標
+  </div>
+</section>
+
+<!-- ============ 故事 → 知識點 對照表 ============ -->
+<section class="summary-table">
+  <h2 style="border-left: none; margin-top: 50px; padding-left: 0;">故事 → 知識點 對照速查表</h2>
+  <table>
+    <thead><tr><th style="width:42%">故事人物/情節</th><th style="width:48%">對應觀念</th><th style="width:10%">章節</th></tr></thead>
+    <tbody>
+      <tr><td>央行阿伯印鈔</td><td>MV=PY、貨幣中立性</td><td>Ch7</td></tr>
+      <tr><td>員工小蘇跑銀行</td><td>鞋皮成本</td><td>Ch7</td></tr>
+      <tr><td>重印價目表</td><td>菜單成本</td><td>Ch7</td></tr>
+      <tr><td>阿嬤定存縮水</td><td>任意財富重分配</td><td>Ch7</td></tr>
+      <tr><td>銀行家貝吉爾調利率</td><td>費雪效果 i = r + π</td><td>Ch7</td></tr>
+      <tr><td>進口德國麵粉 + 出口鳳梨酥</td><td>NX = Exports − Imports</td><td>Ch8</td></tr>
+      <tr><td>買日本不動產</td><td>NCO（淨資本外流）</td><td>Ch8</td></tr>
+      <tr><td>「永遠記住 NX=NCO」</td><td>會計恆等式</td><td>Ch8</td></tr>
+      <tr><td>一條麵包賣多少日圓</td><td>名目匯率、實質匯率、PPP</td><td>Ch8</td></tr>
+      <tr><td>張董蓋捷運 (G↑)</td><td>預算赤字 → r↑ → NCO↓ → e↑ → NX↓</td><td>Ch9</td></tr>
+      <tr><td>雙赤字現象</td><td>Twin deficits</td><td>Ch9</td></tr>
+      <tr><td>信心崩潰外資逃</td><td>Capital flight：r↑、e↓、NX↑</td><td>Ch9</td></tr>
+      <tr><td>關稅護出口</td><td>貿易政策長期 NX 無效</td><td>Ch9</td></tr>
+      <tr><td>股災</td><td>AD 左移 → 衰退</td><td>Ch10</td></tr>
+      <tr><td>油價飆漲</td><td>SRAS 左移 → 停滯性通膨</td><td>Ch10</td></tr>
+      <tr><td>「為什麼 AD 下傾？」</td><td>財富、利率、匯率效果</td><td>Ch10</td></tr>
+      <tr><td>LRAS 垂直</td><td>自然產出 Y<sub>N</sub></td><td>Ch10</td></tr>
+      <tr><td>央行降息救麵包店</td><td>MS↑ → r↓ → I↑</td><td>Ch11</td></tr>
+      <tr><td>蓋捷運滾雪球</td><td>乘數 1/(1−MPC)</td><td>Ch11</td></tr>
+      <tr><td>蓋捷運推升利率</td><td>排擠效果</td><td>Ch11</td></tr>
+      <tr><td>衰退自動發失業金</td><td>自動穩定因子</td><td>Ch11</td></tr>
+      <tr><td>利率降到 0</td><td>流動性陷阱、ZLB、QE、前瞻引導</td><td>Ch11</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ 一句話心法 ============ -->
+<div class="mantra">
+  <div class="mantra-label">ONE-SENTENCE MANTRA</div>
+  <div class="mantra-text">央行印鈔害物價　→　出口外幣換資產　→　政府赤字推匯率　→　股災油價衝 AD/AS　→　央行政府再出手</div>
+  <div class="mantra-note">念熟這一句，能依序回想五章主軸：通膨 → 開放會計 → 開放模型 → AD-AS → 政策工具</div>
+</div>
+
+<!-- ============ 補充：故事沒明說但要記 ============ -->
+<section class="extra">
+  <h3>故事沒明說、但必須額外記的補充</h3>
+  <ol>
+    <li><strong>貨幣需求 MD 同時受 Y、r、P 影響</strong>（不是只受 r）。</li>
+    <li><strong>AD 移動因素</strong>：C、I、G、NX 的「外生」變動（非 P 引起的）。</li>
+    <li><strong>SRAS 移動因素</strong>：預期物價 P<sup>E</sup>、勞動、資本、自然資源、技術。</li>
+    <li><strong>乘數公式</strong>：<span class="formula">ΔY = ΔG × 1/(1−MPC)</span>，只在 G 衝動式變動階段有效。</li>
+    <li><strong>NCO 對 r 的圖</strong>：縱軸 r、橫軸 NCO，<strong>負斜率</strong>（r↑ → NCO↓）。</li>
+    <li><strong>可貸資金市場開放後</strong>：需求 = I + NCO（NCO 已含在需求側）。</li>
+    <li><strong>貨幣中立性 vs 短期非中立</strong>：長期下印鈔只影響 P，短期下 AD 右移會推升 Y（因 SRAS 上斜）。</li>
+    <li><strong>費雪效果是「長期」現象</strong>：短期內名目利率調整可能不完全。</li>
+  </ol>
+</section>
+
+<!-- ============ 故事地圖 SVG ============ -->
+<div class="story-map">
+  <h3 style="margin-top:0;">📍 故事地圖：五幕一頁覽</h3>
+  <svg viewBox="0 0 680 760" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+
+    <text x="340" y="30" text-anchor="middle" font-size="16" font-weight="700">費小雪的麵包奇遇 — 故事地圖</text>
+    <text x="340" y="52" text-anchor="middle" font-size="12" fill="#666">凱因斯夜市 × 五幕劇 × 串起 Ch7→Ch11</text>
+
+    <!-- 第一幕 -->
+    <g>
+      <rect x="40" y="80" width="600" height="110" rx="8" fill="#faeeda" stroke="#c2761c" stroke-width="0.8"/>
+      <text x="60" y="108" font-size="15" font-weight="700" fill="#854f0b">第一幕｜央行阿伯印鈔票</text>
+      <text x="60" y="128" font-size="12" fill="#633806">Ch7 貨幣成長與通膨</text>
+      <text x="60" y="152" font-size="12" fill="#412402">MV=PY、貨幣中立性、古典二分法</text>
+      <text x="60" y="170" font-size="12" fill="#412402">通膨六宗罪：鞋皮、菜單、相對價、稅扭、財富重分、混淆</text>
+      <text x="380" y="152" font-size="12" fill="#412402">通貨膨脹稅</text>
+      <text x="380" y="170" font-size="12" fill="#412402">費雪效果 i = r + π</text>
+    </g>
+    <line x1="340" y1="190" x2="340" y2="208" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- 第二幕 -->
+    <g>
+      <rect x="40" y="210" width="600" height="110" rx="8" fill="#e1f5ee" stroke="#0d8a78" stroke-width="0.8"/>
+      <text x="60" y="238" font-size="15" font-weight="700" fill="#085041">第二幕｜進口德國麵粉、出口鳳梨酥</text>
+      <text x="60" y="258" font-size="12" fill="#085041">Ch8 開放經濟基礎概念</text>
+      <text x="60" y="282" font-size="12" fill="#04342c">NX = Exports − Imports</text>
+      <text x="60" y="300" font-size="12" fill="#04342c">NCO = 國人買外資產 − 外人買本資產</text>
+      <text x="380" y="282" font-size="12" fill="#04342c">恆等式：NX = NCO</text>
+      <text x="380" y="300" font-size="12" fill="#04342c">名目匯率、實質匯率、PPP</text>
+    </g>
+    <line x1="340" y1="320" x2="340" y2="338" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- 第三幕 -->
+    <g>
+      <rect x="40" y="340" width="600" height="110" rx="8" fill="#faece7" stroke="#b53a17" stroke-width="0.8"/>
+      <text x="60" y="368" font-size="15" font-weight="700" fill="#712b13">第三幕｜張董蓋夜市捷運</text>
+      <text x="60" y="388" font-size="12" fill="#712b13">Ch9 開放經濟模型（三市場連動）</text>
+      <text x="60" y="412" font-size="12" fill="#4a1b0c">可貸資金：G↑ → S↓ → r↑</text>
+      <text x="60" y="430" font-size="12" fill="#4a1b0c">外匯市場：NCO↓ → e↑ → NX↓</text>
+      <text x="380" y="412" font-size="12" fill="#4a1b0c">雙赤字、資本外逃</text>
+      <text x="380" y="430" font-size="12" fill="#4a1b0c">貿易政策長期無效</text>
+    </g>
+    <line x1="340" y1="450" x2="340" y2="468" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- 第四幕 -->
+    <g>
+      <rect x="40" y="470" width="600" height="120" rx="8" fill="#eeedfe" stroke="#6e1fb0" stroke-width="0.8"/>
+      <text x="60" y="498" font-size="15" font-weight="700" fill="#3c3489">第四幕｜股災 + 油價飆漲</text>
+      <text x="60" y="518" font-size="12" fill="#3c3489">Ch10 AD-AS 模型</text>
+      <text x="60" y="542" font-size="12" fill="#26215c">AD 下傾：財富、利率、匯率效果</text>
+      <text x="60" y="560" font-size="12" fill="#26215c">LRAS 垂直＝自然產出</text>
+      <text x="60" y="578" font-size="12" fill="#26215c">SRAS 三理論：黏工資、黏物價、誤認</text>
+      <text x="380" y="542" font-size="12" fill="#26215c">股災 = AD 左移 → 衰退</text>
+      <text x="380" y="560" font-size="12" fill="#26215c">油價 = SRAS 左移</text>
+      <text x="380" y="578" font-size="12" fill="#26215c">→ 停滯性通膨 stagflation</text>
+    </g>
+    <line x1="340" y1="590" x2="340" y2="608" stroke="#666" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- 第五幕 -->
+    <g>
+      <rect x="40" y="610" width="600" height="130" rx="8" fill="#e6f1fb" stroke="#1e4ec2" stroke-width="0.8"/>
+      <text x="60" y="638" font-size="15" font-weight="700" fill="#0c447c">第五幕｜央行與政府聯手救經濟</text>
+      <text x="60" y="658" font-size="12" fill="#0c447c">Ch11 貨幣與財政政策</text>
+      <text x="60" y="682" font-size="12" fill="#042c53">流動性偏好：r 由 MS、MD 決定</text>
+      <text x="60" y="700" font-size="12" fill="#042c53">MS↑→r↓→I↑→AD 右移</text>
+      <text x="60" y="718" font-size="12" fill="#042c53">乘數效果 1/(1−MPC)、自動穩定因子</text>
+      <text x="380" y="682" font-size="12" fill="#042c53">排擠效果</text>
+      <text x="380" y="700" font-size="12" fill="#042c53">流動性陷阱 / ZLB</text>
+      <text x="380" y="718" font-size="12" fill="#042c53">QE、前瞻引導、聯邦基金利率目標</text>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ 結尾 ============ -->
+<div style="text-align:center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; font-size: 11px; color: #888;">
+  Made with 🥖 for 期末考 ｜ 用故事記憶經濟學 ｜ 範圍：Ch7 ~ Ch11
+</div>
+
+</body>
+</html>
