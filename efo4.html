@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>經濟學圖表移動觸發因子速查表 ─ Ch7~Ch11</title>
+<style>
+  /* ─── 重置與基礎 ─── */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei',
+                 'Hiragino Sans', 'Helvetica Neue', sans-serif;
+    color: #1a1a1a;
+    line-height: 1.6;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 48px 56px 80px;
+    background: #faf8f4;
+    font-size: 14px;
+  }
+
+  /* ─── 公式字體 ─── */
+  .formula, .axis-label {
+    font-family: 'Latin Modern Math', 'Cambria Math', 'STIX Two Math',
+                 'Times New Roman', Georgia, serif;
+    font-style: italic;
+  }
+
+  /* ─── 封面 ─── */
+  .cover {
+    border-top: 3px solid #1a1a1a;
+    border-bottom: 1px solid #ccc;
+    padding: 18px 0 22px;
+    margin-bottom: 32px;
+  }
+  .eyebrow {
+    font-size: 10.5px; letter-spacing: 3px;
+    color: #888; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 10px;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+  }
+  .lede {
+    font-size: 13.5px;
+    color: #555;
+    max-width: 680px;
+  }
+
+  /* ─── 圖編號標籤導覽 ─── */
+  .toc {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .toc a {
+    padding: 8px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #222;
+    font-size: 11.5px;
+    text-align: center;
+    border: 1px solid #ccc;
+    transition: background 0.15s;
+  }
+  .toc a strong { display: block; font-size: 13px; margin-bottom: 2px; }
+  .toc .tag-L { background: #e6f1fb; border-color: #1e4ec2; }
+  .toc .tag-M { background: #efeae0; border-color: #555; }
+  .toc .tag-S { background: #eeedfe; border-color: #6e1fb0; }
+
+  /* ─── 區段標題 ─── */
+  .section-header {
+    margin: 40px 0 16px;
+    padding: 14px 18px;
+    border-radius: 4px;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .section-long { background: #1e4ec2; color: white; }
+  .section-mid { background: #2a2a2a; color: white; }
+  .section-short { background: #6e1fb0; color: white; }
+  .section-header .label {
+    font-size: 10.5px; letter-spacing: 2px;
+    opacity: 0.7; display: block; margin-bottom: 2px;
+    font-weight: 500;
+  }
+
+  /* ─── 圖卡片 ─── */
+  .chart-card {
+    background: white;
+    border: 1px solid #d4d0c4;
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    page-break-inside: avoid;
+  }
+  .chart-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .chart-id {
+    font-family: 'Latin Modern Math', 'Cambria Math', Georgia, serif;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    color: white;
+  }
+  .id-L { background: #1e4ec2; }
+  .id-M { background: #2a2a2a; }
+  .id-S { background: #6e1fb0; }
+
+  .chart-name {
+    font-size: 16px;
+    font-weight: 700;
+    flex: 1;
+  }
+  .chart-ch {
+    font-size: 11px;
+    padding: 2px 8px;
+    background: #ece8df;
+    border-radius: 3px;
+    color: #555;
+  }
+
+  .chart-body {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 24px;
+    margin-top: 12px;
+  }
+  .chart-preview {
+    background: #faf8f4;
+    border-radius: 4px;
+    padding: 12px;
+  }
+  .chart-preview svg { width: 100%; height: auto; display: block; }
+  .preview-caption {
+    font-size: 11px;
+    color: #666;
+    text-align: center;
+    margin-top: 6px;
+  }
+  .axis-info {
+    font-size: 11.5px;
+    background: #f3efe7;
+    padding: 8px 10px;
+    border-radius: 3px;
+    margin-top: 8px;
+  }
+  .axis-info strong { color: #444; }
+
+  /* ─── 移動觸發表 ─── */
+  .trigger-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  .trigger-table th, .trigger-table td {
+    text-align: left;
+    padding: 7px 10px;
+    border-bottom: 1px solid #d4d0c4;
+    vertical-align: top;
+  }
+  .trigger-table th {
+    background: #1a1a1a;
+    color: white;
+    font-weight: 500;
+    font-size: 11.5px;
+    letter-spacing: 0.5px;
+  }
+  .trigger-table tbody tr:nth-child(even) { background: #f5f2eb; }
+
+  .arrow-up { color: #b53a17; font-weight: 700; }
+  .arrow-down { color: #1e4ec2; font-weight: 700; }
+  .arrow-right { color: #0d8a78; font-weight: 700; }
+  .arrow-left { color: #b53a17; font-weight: 700; }
+  .no-change { color: #888; font-style: italic; }
+
+  /* ─── 提示框 ─── */
+  .tip {
+    background: #fffaee;
+    border-left: 3px solid #d6a25b;
+    padding: 8px 12px;
+    margin-top: 10px;
+    font-size: 12px;
+    border-radius: 3px;
+  }
+  .tip::before {
+    content: '💡 ';
+  }
+
+  .warn {
+    background: #fdf0ec;
+    border-left: 3px solid #b53a17;
+    padding: 8px 12px;
+    margin-top: 10px;
+    font-size: 12px;
+    border-radius: 3px;
+  }
+  .warn::before {
+    content: '⚠ ';
+    color: #b53a17;
+    font-weight: 700;
+  }
+
+  /* ─── 跨圖聯動小框 ─── */
+  .linkage {
+    background: #e6f1fb;
+    border: 1px solid #1e4ec2;
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-size: 12.5px;
+  }
+  .linkage strong {
+    color: #0c447c;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ─── 列印樣式 ─── */
+  @page { size: A4; margin: 12mm 14mm 14mm 14mm; }
+  @media print {
+    body {
+      background: white;
+      padding: 0;
+      max-width: 100%;
+      font-size: 10.5pt;
+    }
+    .chart-card { page-break-inside: avoid; }
+    .cover { page-break-after: avoid; }
+    .toc a { font-size: 9pt; }
+  }
+
+  /* ─── 平板小螢幕 ─── */
+  @media (max-width: 720px) {
+    body { padding: 24px 18px; }
+    .chart-body { grid-template-columns: 1fr; }
+    .toc { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ 封面 ═══ -->
+<div class="cover">
+  <div class="eyebrow">經濟學期末考 ／ 圖表速查工具</div>
+  <h1>圖表移動觸發因子速查表</h1>
+  <p class="lede">考試時題目給情境後，<strong>哪條曲線要動、往哪邊動</strong>？一頁查完 Ch7~Ch11 所有 XY 軸圖。按「長期 / 中期 / 短期」分類。</p>
+
+  <div class="toc">
+    <a href="#L1" class="tag-L"><strong>L1</strong>Ch7 貨幣市場</a>
+    <a href="#L2" class="tag-L"><strong>L2</strong>Ch9 可貸資金</a>
+    <a href="#L34" class="tag-L"><strong>L3+L4</strong>NCO + 外匯</a>
+    <a href="#M1" class="tag-M"><strong>M1</strong>Ch10 AD-AS</a>
+    <a href="#S1" class="tag-S"><strong>S1</strong>Ch11 貨幣市場</a>
+    <a href="#mistakes" class="tag-M" style="background:#fdf0ec; border-color:#b53a17;"><strong>⚠</strong>易混淆</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ═══ 第一區：長期分析圖 🔵 ═══ -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section-header section-long">
+  <span class="label">SECTION 1 — LONG-RUN</span>
+  🔵 長期分析（古典觀，物價可完全調整）
+</div>
+
+<!-- ─── L1: Ch7 貨幣市場 ─── -->
+<div class="chart-card" id="L1">
+  <div class="chart-header">
+    <span class="chart-id id-L">L1</span>
+    <span class="chart-name">Ch7 貨幣市場（古典版）</span>
+    <span class="chart-ch">Ch7 貨幣成長與通膨</span>
+  </div>
+
+  <div class="chart-body">
+    <div class="chart-preview">
+      <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- 軸 -->
+        <line x1="40" y1="20" x2="40" y2="170" stroke="#333" stroke-width="1"/>
+        <line x1="40" y1="170" x2="220" y2="170" stroke="#333" stroke-width="1"/>
+        <!-- 軸標籤 -->
+        <text x="20" y="30" font-family="serif" font-style="italic" font-size="11" fill="#333">1/P</text>
+        <text x="48" y="14" font-size="9" fill="#888">貨幣價值</text>
+        <text x="200" y="186" font-family="serif" font-style="italic" font-size="11" fill="#333">M</text>
+        <text x="170" y="186" font-size="9" fill="#888">貨幣數量</text>
+        <text x="222" y="30" font-family="serif" font-style="italic" font-size="11" fill="#888">P</text>
+        <text x="222" y="40" font-size="8" fill="#888">物價(反)</text>
+
+        <!-- MS 垂直線 -->
+        <line x1="120" y1="40" x2="120" y2="170" stroke="#1e4ec2" stroke-width="2"/>
+        <text x="125" y="50" font-family="serif" font-style="italic" font-size="11" fill="#1e4ec2">MS</text>
+
+        <!-- MS' 右移示意 -->
+        <line x1="170" y1="40" x2="170" y2="170" stroke="#1e4ec2" stroke-width="1.5" stroke-dasharray="3 2"/>
+        <text x="175" y="50" font-family="serif" font-style="italic" font-size="10" fill="#1e4ec2">MS'</text>
+        <path d="M125 90 L 165 90" stroke="#1e4ec2" stroke-width="1" marker-end="url(#arr-blue)"/>
+
+        <!-- MD 下傾 -->
+        <path d="M55 40 Q 110 100, 200 165" fill="none" stroke="#b53a17" stroke-width="2"/>
+        <text x="195" y="155" font-family="serif" font-style="italic" font-size="11" fill="#b53a17">MD</text>
+
+        <!-- 均衡點 -->
+        <circle cx="120" cy="100" r="3" fill="#1a1a1a"/>
+        <text x="80" y="100" font-size="9" fill="#333">A</text>
+        <circle cx="170" cy="135" r="3" fill="#1a1a1a"/>
+        <text x="178" y="138" font-size="9" fill="#333">B</text>
+
+        <defs>
+          <marker id="arr-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#1e4ec2" stroke-width="1.5"/>
+          </marker>
+        </defs>
+      </svg>
+      <div class="preview-caption">MS 右移 → A→B：1/P↓（P↑）</div>
+      <div class="axis-info">
+        <strong>縱軸：</strong>貨幣價值 <span class="formula">1/P</span>（左）｜物價 <span class="formula">P</span>（右，反向）<br>
+        <strong>橫軸：</strong>貨幣數量 <span class="formula">M</span><br>
+        <strong>曲線：</strong>MS（垂直）、MD（下傾）
+      </div>
+    </div>
+
+    <div>
+      <table class="trigger-table">
+        <thead><tr><th>衝擊情境</th><th>MS</th><th>MD</th><th>結果</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>央行印鈔（OMO 買債）</td>
+            <td><span class="arrow-right">→ 右移</span></td>
+            <td><span class="no-change">不動</span></td>
+            <td><span class="arrow-down">1/P ↓</span> ＝ <span class="arrow-up">P ↑</span></td>
+          </tr>
+          <tr>
+            <td>央行緊縮（賣債）</td>
+            <td><span class="arrow-left">← 左移</span></td>
+            <td><span class="no-change">不動</span></td>
+            <td><span class="arrow-up">1/P ↑</span> ＝ <span class="arrow-down">P ↓</span></td>
+          </tr>
+          <tr>
+            <td>實質 Y 增加（經濟成長）</td>
+            <td><span class="no-change">不動</span></td>
+            <td><span class="arrow-right">→ 右移</span></td>
+            <td><span class="arrow-up">1/P ↑</span> ＝ <span class="arrow-down">P ↓</span></td>
+          </tr>
+          <tr>
+            <td>流通速度 V ↑</td>
+            <td><span class="no-change">不動</span></td>
+            <td><span class="arrow-left">← 左移</span></td>
+            <td><span class="arrow-down">1/P ↓</span> ＝ <span class="arrow-up">P ↑</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="tip">縱軸的「物價 P」是由上往下增加（**反向**）。背口訣：MS 右移 → 錢變多 → 錢變不值錢 → 1/P↓ → 物價P↑。</div>
+      <div class="warn">這張圖只適用「<strong>長期</strong>」，假設 Y 與 V 不變（古典二分法）。短期分析不能用！</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── L2: Ch9 可貸資金市場 ─── -->
+<div class="chart-card" id="L2">
+  <div class="chart-header">
+    <span class="chart-id id-L">L2</span>
+    <span class="chart-name">Ch9 可貸資金市場（開放經濟版）</span>
+    <span class="chart-ch">Ch9 開放經濟模型</span>
+  </div>
+
+  <div class="chart-body">
+    <div class="chart-preview">
+      <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+        <line x1="40" y1="20" x2="40" y2="170" stroke="#333" stroke-width="1"/>
+        <line x1="40" y1="170" x2="220" y2="170" stroke="#333" stroke-width="1"/>
+        <text x="25" y="30" font-family="serif" font-style="italic" font-size="12" fill="#333">r</text>
+        <text x="48" y="14" font-size="9" fill="#888">實質利率</text>
+        <text x="195" y="186" font-family="serif" font-style="italic" font-size="11" fill="#333">LF</text>
+        <text x="160" y="186" font-size="9" fill="#888">可貸資金</text>
+
+        <!-- S 上斜 -->
+        <line x1="60" y1="160" x2="200" y2="40" stroke="#0d8a78" stroke-width="2"/>
+        <text x="200" y="50" font-family="serif" font-style="italic" font-size="11" fill="#0d8a78">S</text>
+
+        <!-- S' 左移 (預算赤字) -->
+        <line x1="100" y1="160" x2="220" y2="60" stroke="#0d8a78" stroke-width="1.5" stroke-dasharray="3 2"/>
+        <text x="218" y="55" font-family="serif" font-style="italic" font-size="10" fill="#0d8a78">S'</text>
+
+        <!-- D = I + NCO 下傾 -->
+        <line x1="60" y1="40" x2="200" y2="160" stroke="#b53a17" stroke-width="2"/>
+        <text x="160" y="155" font-family="serif" font-style="italic" font-size="11" fill="#b53a17">I+NCO</text>
+
+        <!-- 均衡點 -->
+        <circle cx="130" cy="100" r="3" fill="#1a1a1a"/>
+        <text x="115" y="95" font-size="9" fill="#333">A</text>
+        <circle cx="155" cy="105" r="3" fill="#1a1a1a"/>
+        <text x="160" y="100" font-size="9" fill="#333">B</text>
+
+        <path d="M85 100 L 30 100" stroke="#888" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <path d="M155 105 L 30 105" stroke="#888" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <text x="20" y="103" font-size="8" fill="#888">r↑</text>
+      </svg>
+      <div class="preview-caption">預算赤字 → S 左移 → r ↑、LF ↓</div>
+      <div class="axis-info">
+        <strong>縱軸：</strong>實質利率 <span class="formula">r</span><br>
+        <strong>橫軸：</strong>可貸資金 <span class="formula">LF</span><br>
+        <strong>曲線：</strong>S（上斜）、I+NCO（下傾）<br>
+        <strong>核心：</strong><span class="formula">S = I + NCO</span>
+      </div>
+    </div>
+
+    <div>
+      <table class="trigger-table">
+        <thead><tr><th>衝擊情境</th><th>供給 S</th><th>需求 I+NCO</th><th>r</th><th>LF</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>政府預算赤字（G↑）</td>
+            <td><span class="arrow-left">← 左移</span></td>
+            <td><span class="no-change">不動</span></td>
+            <td><span class="arrow-up">↑</span></td>
+            <td><span class="arrow-down">↓</span></td>
+          </tr>
+          <tr>
+            <td>政府預算盈餘（T↑）</td>
+            <td><span class="arrow-right">→ 右移</span></td>
+            <td><span class="no-change">不動</span></td>
+            <td><span class="arrow-down">↓</span></td>
+            <td><span class="arrow-up">↑</span></td>
+          </tr>
+          <tr>
+            <td>儲蓄獎勵（IRA 減稅）</td>
+            <td><span class="arrow-right">→ 右移</span></td>
+            <td><span class="no-change">不動</span></td>
+            <td><span class="arrow-down">↓</span></td>
+            <td><span class="arrow-up">↑</span></td>
+          </tr>
+          <tr>
+            <td>投資稅減免（ITC）</td>
+            <td><span class="no-change">不動</span></td>
+            <td><span class="arrow-right">→ 右移</span></td>
+            <td><span class="arrow-up">↑</span></td>
+            <td><span class="arrow-up">↑</span></td>
+          </tr>
+          <tr>
+            <td>資本外逃（NCO↑）</td>
+            <td><span class="no-change">不動</span></td>
+            <td><span class="arrow-right">→ 右移</span></td>
+            <td><span class="arrow-up">↑</span></td>
+            <td><span class="arrow-up">↑</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="tip">需求側是 <strong>I + NCO</strong>（不是只有 I！）這是 Ch9 開放與 Ch6 封閉的關鍵差異。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── L3+L4: NCO-r 圖 + 外匯市場（聯動） ─── -->
+<div class="chart-card" id="L34">
+  <div class="chart-header">
+    <span class="chart-id id-L">L3+L4</span>
+    <span class="chart-name">NCO 對 r 圖（L3） + 外匯市場（L4）— 聯動</span>
+    <span class="chart-ch">Ch9 開放經濟模型</span>
+  </div>
+
+  <div class="chart-body">
+    <div class="chart-preview">
+      <!-- 兩張圖並排 -->
+      <svg viewBox="0 0 240 220" xmlns="http://www.w3.org/2000/svg">
+        <!-- L3 NCO-r 圖 -->
+        <text x="60" y="14" text-anchor="middle" font-size="10" font-weight="600" fill="#1e4ec2">L3 NCO 對 r</text>
+        <line x1="20" y1="30" x2="20" y2="100" stroke="#333" stroke-width="1"/>
+        <line x1="20" y1="100" x2="115" y2="100" stroke="#333" stroke-width="1"/>
+        <text x="10" y="40" font-family="serif" font-style="italic" font-size="10">r</text>
+        <text x="100" y="112" font-family="serif" font-style="italic" font-size="10">NCO</text>
+        <!-- NCO 線（負斜率）-->
+        <line x1="30" y1="40" x2="110" y2="95" stroke="#b53a17" stroke-width="1.8"/>
+        <text x="100" y="55" font-family="serif" font-style="italic" font-size="9" fill="#b53a17">NCO</text>
+
+        <!-- L4 外匯市場 -->
+        <text x="180" y="14" text-anchor="middle" font-size="10" font-weight="600" fill="#1e4ec2">L4 外匯市場</text>
+        <line x1="140" y1="30" x2="140" y2="100" stroke="#333" stroke-width="1"/>
+        <line x1="140" y1="100" x2="230" y2="100" stroke="#333" stroke-width="1"/>
+        <text x="130" y="40" font-family="serif" font-style="italic" font-size="10">e</text>
+        <text x="215" y="112" font-size="9" fill="#888">外匯量</text>
+        <!-- 供給 NCO (垂直) -->
+        <line x1="180" y1="35" x2="180" y2="100" stroke="#0d8a78" stroke-width="1.8"/>
+        <text x="182" y="45" font-family="serif" font-style="italic" font-size="9" fill="#0d8a78">NCO</text>
+        <!-- 需求 NX (下傾) -->
+        <line x1="148" y1="35" x2="225" y2="95" stroke="#b53a17" stroke-width="1.8"/>
+        <text x="218" y="48" font-family="serif" font-style="italic" font-size="9" fill="#b53a17">NX</text>
+        <circle cx="180" cy="70" r="2.5" fill="#1a1a1a"/>
+
+        <!-- 連動箭頭 (從 L2 來) -->
+        <text x="60" y="135" text-anchor="middle" font-size="9" fill="#666">r↑（L2 決定）</text>
+        <path d="M60 140 L 60 160 L 110 160" stroke="#666" stroke-width="1" fill="none" stroke-dasharray="2 2" marker-end="url(#arr-gray)"/>
+        <text x="60" y="180" text-anchor="middle" font-size="9" fill="#666">NCO↓</text>
+        <path d="M110 180 L 140 180 L 140 170" stroke="#666" stroke-width="1" fill="none" stroke-dasharray="2 2" marker-end="url(#arr-gray)"/>
+        <text x="180" y="135" text-anchor="middle" font-size="9" fill="#666">NCO 供給左移</text>
+        <text x="180" y="148" text-anchor="middle" font-size="9" fill="#666">→ e↑（升值）</text>
+        <text x="180" y="200" text-anchor="middle" font-size="9" fill="#666">→ NX↓</text>
+
+        <defs>
+          <marker id="arr-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#666" stroke-width="1.5"/>
+          </marker>
+        </defs>
+      </svg>
+      <div class="preview-caption">L2 → L3 → L4 三市場連動鏈</div>
+      <div class="axis-info">
+        <strong>L3 縱軸：</strong>r ｜<strong>橫軸：</strong>NCO（負斜率）<br>
+        <strong>L4 縱軸：</strong>實質匯率 <span class="formula">e</span> ｜<strong>橫軸：</strong>外匯量<br>
+        <strong>L4 曲線：</strong>NCO 供給（垂直）、NX 需求（下傾）
+      </div>
+    </div>
+
+    <div>
+      <table class="trigger-table">
+        <thead><tr><th>L2 的 r 變動</th><th>NCO</th><th>外匯供給</th><th>實質匯率 e</th><th>NX</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="arrow-up">r ↑</span></td>
+            <td><span class="arrow-down">↓</span></td>
+            <td><span class="arrow-left">← 左移</span></td>
+            <td><span class="arrow-up">↑（升值）</span></td>
+            <td><span class="arrow-down">↓</span></td>
+          </tr>
+          <tr>
+            <td><span class="arrow-down">r ↓</span></td>
+            <td><span class="arrow-up">↑</span></td>
+            <td><span class="arrow-right">→ 右移</span></td>
+            <td><span class="arrow-down">↓（貶值）</span></td>
+            <td><span class="arrow-up">↑</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="linkage">
+        <strong>📊 完整政策三市場聯動鏈（必背！）</strong>
+        <strong>預算赤字</strong>：G↑ → <span class="formula">S↓ (L2)</span> → r↑ → <span class="formula">NCO↓ (L3)</span> → 外匯供給↓ → e↑（升值, L4）→ NX↓<br>
+        <strong>資本外逃</strong>：信心崩潰 → <span class="formula">NCO↑ (L3)</span> → 外匯供給↑ → e↓（貶值, L4）→ NX↑；同時 L2 的需求 (I+NCO)↑ → r↑<br>
+        <strong>關稅/進口配額</strong>：NX 需求曲線右移 → e↑（升值, L4）→ 出口受傷抵銷保護效果 → <strong>NX 長期不變</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ═══ 第二區：中期分析（兼短長） 🟢 ═══ -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section-header section-mid">
+  <span class="label">SECTION 2 — BOTH SR & LR</span>
+  🟢 中期分析（短期與長期同時呈現）
+</div>
+
+<!-- ─── M1: Ch10 AD-AS ─── -->
+<div class="chart-card" id="M1">
+  <div class="chart-header">
+    <span class="chart-id id-M">M1</span>
+    <span class="chart-name">Ch10 AD-AS 模型</span>
+    <span class="chart-ch">Ch10 總合需求與總合供給</span>
+  </div>
+
+  <div class="chart-body">
+    <div class="chart-preview">
+      <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+        <line x1="40" y1="20" x2="40" y2="170" stroke="#333" stroke-width="1"/>
+        <line x1="40" y1="170" x2="220" y2="170" stroke="#333" stroke-width="1"/>
+        <text x="25" y="30" font-family="serif" font-style="italic" font-size="12">P</text>
+        <text x="48" y="14" font-size="9" fill="#888">物價水準</text>
+        <text x="200" y="186" font-family="serif" font-style="italic" font-size="11">Y</text>
+        <text x="160" y="186" font-size="9" fill="#888">實質產出</text>
+
+        <!-- LRAS 垂直 -->
+        <line x1="130" y1="30" x2="130" y2="170" stroke="#6e1fb0" stroke-width="2"/>
+        <text x="115" y="25" font-family="serif" font-style="italic" font-size="10" fill="#6e1fb0">LRAS</text>
+        <text x="115" y="178" font-size="9" fill="#6e1fb0">Y_N</text>
+
+        <!-- SRAS 正斜率 -->
+        <line x1="60" y1="160" x2="200" y2="50" stroke="#0d8a78" stroke-width="2"/>
+        <text x="195" y="55" font-family="serif" font-style="italic" font-size="11" fill="#0d8a78">SRAS</text>
+
+        <!-- AD 負斜率 -->
+        <line x1="60" y1="40" x2="210" y2="165" stroke="#b53a17" stroke-width="2"/>
+        <text x="180" y="155" font-family="serif" font-style="italic" font-size="11" fill="#b53a17">AD</text>
+
+        <!-- 均衡 -->
+        <circle cx="130" cy="100" r="3" fill="#1a1a1a"/>
+        <text x="116" y="95" font-size="9">A</text>
+
+        <text x="65" y="190" font-size="8" fill="#888">衰退 ←</text>
+        <text x="175" y="190" font-size="8" fill="#888">→ 過熱</text>
+      </svg>
+      <div class="preview-caption">長期均衡：AD = SRAS = LRAS 三線交於一點</div>
+      <div class="axis-info">
+        <strong>縱軸：</strong>物價水準 <span class="formula">P</span><br>
+        <strong>橫軸：</strong>實質產出 <span class="formula">Y</span><br>
+        <strong>三條線：</strong><br>
+        ・AD：負斜率（財富/利率/匯率效果）<br>
+        ・SRAS：正斜率（黏工資/黏物價/誤認）<br>
+        ・LRAS：垂直於 <span class="formula">Y<sub>N</sub></span>（自然產出）
+      </div>
+    </div>
+
+    <div>
+      <h4 style="font-size:13px; margin:0 0 6px; color:#b53a17;">▌AD 移動因素</h4>
+      <table class="trigger-table">
+        <thead><tr><th>衝擊</th><th>AD</th><th>解釋</th></tr></thead>
+        <tbody>
+          <tr><td>股災（財富↓）</td><td><span class="arrow-left">← 左移</span></td><td>C↓</td></tr>
+          <tr><td>消費者信心崩潰</td><td><span class="arrow-left">← 左移</span></td><td>C↓</td></tr>
+          <tr><td>央行降息</td><td><span class="arrow-right">→ 右移</span></td><td>I↑</td></tr>
+          <tr><td>政府支出 G↑</td><td><span class="arrow-right">→ 右移</span></td><td>G 直接推升</td></tr>
+          <tr><td>減稅</td><td><span class="arrow-right">→ 右移</span></td><td>C↑</td></tr>
+          <tr><td>國外景氣好</td><td><span class="arrow-right">→ 右移</span></td><td>NX↑</td></tr>
+          <tr><td>本幣升值（如美元）</td><td><span class="arrow-left">← 左移</span></td><td>NX↓</td></tr>
+          <tr><td>預期通膨上升</td><td><span class="arrow-right">→ 右移</span></td><td>搶在漲價前消費</td></tr>
+        </tbody>
+      </table>
+
+      <h4 style="font-size:13px; margin:14px 0 6px; color:#0d8a78;">▌SRAS 移動因素（短期供給衝擊）</h4>
+      <table class="trigger-table">
+        <thead><tr><th>衝擊</th><th>SRAS</th><th>結果</th></tr></thead>
+        <tbody>
+          <tr><td>油價飆漲（成本↑）</td><td><span class="arrow-left">← 左移</span></td><td>P↑、Y↓ = <strong>停滯性通膨</strong></td></tr>
+          <tr><td>工資談判大漲</td><td><span class="arrow-left">← 左移</span></td><td>成本上升</td></tr>
+          <tr><td>預期物價 <span class="formula">P<sup>E</sup></span> ↑</td><td><span class="arrow-left">← 左移</span></td><td>黏性工資理論</td></tr>
+          <tr><td>預期物價 <span class="formula">P<sup>E</sup></span> ↓</td><td><span class="arrow-right">→ 右移</span></td><td>SR→LR 自我調整</td></tr>
+          <tr><td>油價下跌</td><td><span class="arrow-right">→ 右移</span></td><td>成本下降</td></tr>
+        </tbody>
+      </table>
+
+      <h4 style="font-size:13px; margin:14px 0 6px; color:#6e1fb0;">▌LRAS 移動因素（永久性改變）</h4>
+      <table class="trigger-table">
+        <thead><tr><th>衝擊</th><th>LRAS</th></tr></thead>
+        <tbody>
+          <tr><td>技術進步、勞動力增加、資本累積</td><td><span class="arrow-right">→ 右移</span></td></tr>
+          <tr><td>大規模失業、自然災害、戰爭</td><td><span class="arrow-left">← 左移</span></td></tr>
+          <tr><td>移民、女性勞參率上升</td><td><span class="arrow-right">→ 右移</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="tip">短期 vs 長期判讀法：題目只問「立刻發生什麼」用 AD ∩ SRAS；題目問「長期最終狀態」要把 SRAS 往「使 Y 回到 Y<sub>N</sub>」的方向移到 LRAS 上。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ═══ 第三區：短期分析 🟣 ═══ -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section-header section-short">
+  <span class="label">SECTION 3 — SHORT-RUN</span>
+  🟣 短期分析（凱因斯觀，物價有黏性）
+</div>
+
+<!-- ─── S1: Ch11 貨幣市場 ─── -->
+<div class="chart-card" id="S1">
+  <div class="chart-header">
+    <span class="chart-id id-S">S1</span>
+    <span class="chart-name">Ch11 貨幣市場（流動性偏好）</span>
+    <span class="chart-ch">Ch11 貨幣與財政政策</span>
+  </div>
+
+  <div class="chart-body">
+    <div class="chart-preview">
+      <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+        <line x1="40" y1="20" x2="40" y2="170" stroke="#333" stroke-width="1"/>
+        <line x1="40" y1="170" x2="220" y2="170" stroke="#333" stroke-width="1"/>
+        <text x="25" y="30" font-family="serif" font-style="italic" font-size="12">r</text>
+        <text x="48" y="14" font-size="9" fill="#888">名目利率</text>
+        <text x="200" y="186" font-family="serif" font-style="italic" font-size="11">M</text>
+        <text x="160" y="186" font-size="9" fill="#888">貨幣數量</text>
+
+        <!-- MS 垂直 -->
+        <line x1="120" y1="30" x2="120" y2="170" stroke="#1e4ec2" stroke-width="2"/>
+        <text x="105" y="25" font-family="serif" font-style="italic" font-size="11" fill="#1e4ec2">MS</text>
+
+        <!-- MS' 右移 -->
+        <line x1="160" y1="30" x2="160" y2="170" stroke="#1e4ec2" stroke-width="1.5" stroke-dasharray="3 2"/>
+        <text x="148" y="25" font-family="serif" font-style="italic" font-size="10" fill="#1e4ec2">MS'</text>
+
+        <!-- MD 下傾 -->
+        <path d="M55 40 Q 120 105, 200 165" fill="none" stroke="#b53a17" stroke-width="2"/>
+        <text x="190" y="155" font-family="serif" font-style="italic" font-size="11" fill="#b53a17">MD</text>
+
+        <!-- 均衡 A -->
+        <circle cx="120" cy="100" r="3" fill="#1a1a1a"/>
+        <text x="105" y="95" font-size="9">A</text>
+        <!-- 均衡 B (降息後) -->
+        <circle cx="160" cy="125" r="3" fill="#1a1a1a"/>
+        <text x="165" y="120" font-size="9">B</text>
+
+        <!-- r 變動標示 -->
+        <path d="M40 100 L 30 100" stroke="#666" stroke-width="0.5"/>
+        <path d="M40 125 L 30 125" stroke="#666" stroke-width="0.5"/>
+        <text x="18" y="103" font-size="8" fill="#666">r₁</text>
+        <text x="18" y="128" font-size="8" fill="#666">r₂</text>
+      </svg>
+      <div class="preview-caption">央行 MS 右移 → r ↓（A→B）</div>
+      <div class="axis-info">
+        <strong>縱軸：</strong>名目利率 <span class="formula">r</span><br>
+        <strong>橫軸：</strong>貨幣數量 <span class="formula">M</span><br>
+        <strong>曲線：</strong>MS（垂直）、MD（下傾）<br>
+        <strong>MD 受 Y、r、P 影響</strong>
+      </div>
+    </div>
+
+    <div>
+      <table class="trigger-table">
+        <thead><tr><th>衝擊情境</th><th>MS</th><th>MD</th><th>r 變動</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>央行 OMO 買債（擴張）</td>
+            <td><span class="arrow-right">→ 右移</span></td>
+            <td><span class="no-change">不動</span></td>
+            <td><span class="arrow-down">↓</span></td>
+          </tr>
+          <tr>
+            <td>央行 OMO 賣債（緊縮）</td>
+            <td><span class="arrow-left">← 左移</span></td>
+            <td><span class="no-change">不動</span></td>
+            <td><span class="arrow-up">↑</span></td>
+          </tr>
+          <tr>
+            <td>央行降低存準率</td>
+            <td><span class="arrow-right">→ 右移</span></td>
+            <td><span class="no-change">不動</span></td>
+            <td><span class="arrow-down">↓</span></td>
+          </tr>
+          <tr>
+            <td>Y 上升（如 G↑ 後）</td>
+            <td><span class="no-change">不動</span></td>
+            <td><span class="arrow-right">→ 右移</span></td>
+            <td><span class="arrow-up">↑</span>（排擠效果來源）</td>
+          </tr>
+          <tr>
+            <td>物價 P 上升</td>
+            <td><span class="no-change">不動</span></td>
+            <td><span class="arrow-right">→ 右移</span></td>
+            <td><span class="arrow-up">↑</span>（AD 下傾的利率效果）</td>
+          </tr>
+          <tr>
+            <td>大眾持幣偏好上升（恐慌）</td>
+            <td><span class="no-change">不動</span></td>
+            <td><span class="arrow-right">→ 右移</span></td>
+            <td><span class="arrow-up">↑</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="linkage">
+        <strong>📊 政策傳遞鏈（兩圖連動）</strong>
+        <strong>貨幣政策</strong>：MS↑ → r↓（S1）→ I↑ → AD 右移（M1）→ Y↑、P↑<br>
+        <strong>財政政策</strong>：G↑ → AD 右移（M1）→ Y↑ → MD↑ → r↑（S1）→ I↓ → 抵銷部分 AD 增加（<strong>排擠效果</strong>）
+      </div>
+      <div class="warn">短期下，名目 r ≈ 實質 r（因預期通膨假定不變）。題目若提到「<strong>長期</strong>名目利率」或「費雪效果」，要切換到 Ch7 的長期觀念。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ═══ 易混淆陷阱 ═══ -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section-header section-mid" id="mistakes" style="background:#b53a17;">
+  <span class="label">DANGER ZONE</span>
+  ⚠ 最容易畫錯的兩組圖（每年必考混淆）
+</div>
+
+<div class="chart-card">
+  <div class="chart-header">
+    <span class="chart-id" style="background:#b53a17;">①</span>
+    <span class="chart-name">Ch7 貨幣市場 vs Ch11 貨幣市場</span>
+  </div>
+
+  <table class="trigger-table">
+    <thead>
+      <tr>
+        <th>比較項目</th>
+        <th style="background:#1e4ec2;">L1 — Ch7 貨幣市場</th>
+        <th style="background:#6e1fb0;">S1 — Ch11 貨幣市場</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>時期</strong></td>
+        <td>長期（古典觀）</td>
+        <td>短期（凱因斯觀）</td>
+      </tr>
+      <tr>
+        <td><strong>縱軸</strong></td>
+        <td>貨幣價值 <span class="formula">1/P</span>（物價反向）</td>
+        <td>名目利率 <span class="formula">r</span></td>
+      </tr>
+      <tr>
+        <td><strong>橫軸</strong></td>
+        <td>貨幣數量 M</td>
+        <td>貨幣數量 M（一樣！）</td>
+      </tr>
+      <tr>
+        <td><strong>核心關係</strong></td>
+        <td><span class="formula">MV = PY</span>（決定 P）</td>
+        <td>流動性偏好（決定 r）</td>
+      </tr>
+      <tr>
+        <td><strong>應用題目</strong></td>
+        <td>印鈔→通膨關係、貨幣中立性</td>
+        <td>貨幣政策對 Y/失業的衝擊</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="tip">最快辨識法：題目問「<strong>物價/通膨</strong>」→ 用 L1；題目問「<strong>利率/Y</strong>」→ 用 S1。</div>
+</div>
+
+<div class="chart-card">
+  <div class="chart-header">
+    <span class="chart-id" style="background:#b53a17;">②</span>
+    <span class="chart-name">Ch6 可貸資金市場 vs Ch9 可貸資金市場</span>
+  </div>
+
+  <table class="trigger-table">
+    <thead>
+      <tr>
+        <th>比較項目</th>
+        <th style="background:#888;">Ch6（封閉經濟）</th>
+        <th style="background:#1e4ec2;">L2 — Ch9（開放經濟）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>需求</strong></td>
+        <td>只有 I</td>
+        <td><strong>I + NCO</strong></td>
+      </tr>
+      <tr>
+        <td><strong>恆等式</strong></td>
+        <td>S = I</td>
+        <td>S = I + NCO</td>
+      </tr>
+      <tr>
+        <td><strong>外溢效果</strong></td>
+        <td>無</td>
+        <td>r 變動會影響 NCO → 外匯市場 → NX</td>
+      </tr>
+      <tr>
+        <td><strong>判讀關鍵字</strong></td>
+        <td>「國內」、無 NX/匯率資訊</td>
+        <td>「開放」、「貿易」、有 NX/匯率/NCO</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="warn">期末考的開放經濟模型題目，<strong>必須畫 Ch9 版</strong>。若只畫 Ch6 版會少掉外匯市場、NCO 等關鍵聯動，至少扣一半分數。</div>
+</div>
+
+<!-- ═══ 結尾 ═══ -->
+<div style="text-align:center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; font-size: 11px; color: #888;">
+  Made for 期末考 ｜ 把所有 XY 圖一頁查完 ｜ 範圍：Ch7 ~ Ch11
+</div>
+
+</body>
+</html>
