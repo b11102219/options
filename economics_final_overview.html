@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>經濟學期末考 ・ 因果鍊與圖形總覽</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script>
+  window.MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$','$$']]},
+    svg: {fontCache: 'global'}
+  };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  :root{
+    --bg:#FBF9F4;
+    --bg-card:#FFFFFF;
+    --bg-table:#F5F0E1;
+    --bg-soft:#F0EBDD;
+    --ink:#1F1B16;
+    --ink-soft:#4A463F;
+    --ink-mute:#8A8479;
+    --line:#D8D0BE;
+    --green:#2D5A4A;
+    --green-soft:#5E8A78;
+    --red:#B8473A;
+    --red-soft:#E6C9C4;
+    --blue:#2E4A6B;
+    --blue-soft:#9FB4CC;
+    --gold:#A47E1B;
+    --serif:'Noto Serif TC', serif;
+    --sans:'Noto Sans TC', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:15px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:32px 28px 80px}
+  /* ====== Header ====== */
+  header.top{
+    border-bottom:2px solid var(--ink);
+    padding-bottom:18px;
+    margin-bottom:32px;
+  }
+  header.top .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.18em;
+    color:var(--green);
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+  header.top h1{
+    font-family:var(--serif);
+    font-weight:700;
+    font-size:36px;
+    margin:0 0 6px;
+    letter-spacing:-.01em;
+  }
+  header.top .sub{
+    color:var(--ink-soft);
+    font-size:14px;
+  }
+  /* ====== Section ====== */
+  section{margin:48px 0}
+  h2.sec{
+    font-family:var(--serif);
+    font-size:24px;
+    font-weight:700;
+    margin:0 0 4px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--ink);
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+  }
+  h2.sec .num{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--green);
+    letter-spacing:.1em;
+  }
+  h2.sec .en{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-mute);
+    margin-left:auto;
+    font-weight:400;
+  }
+  h3{
+    font-family:var(--serif);
+    font-size:18px;
+    margin:28px 0 10px;
+    color:var(--green);
+  }
+  h4{
+    font-family:var(--sans);
+    font-weight:700;
+    font-size:14px;
+    margin:18px 0 6px;
+    color:var(--ink);
+  }
+  p{margin:8px 0}
+  /* ====== Tables ====== */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--bg-card);
+    font-size:13.5px;
+    margin:12px 0;
+  }
+  th,td{
+    border:1px solid var(--line);
+    padding:8px 10px;
+    text-align:left;
+    vertical-align:top;
+  }
+  thead th{
+    background:var(--green);
+    color:#fff;
+    font-weight:700;
+    font-size:13px;
+  }
+  tbody tr:nth-child(even){background:var(--bg-soft)}
+  td.cell-formula{font-family:var(--mono);font-size:13px;background:var(--bg-table)}
+  td.cell-direction{text-align:center;font-weight:700;font-family:var(--mono)}
+  .up{color:var(--red)}
+  .down{color:var(--blue)}
+  .neutral{color:var(--ink-mute)}
+  /* ====== Cards ====== */
+  .card{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    padding:18px 20px;
+    margin:14px 0;
+  }
+  .card.warn{border-left:4px solid var(--red);background:#FCF5F3}
+  .card.key{border-left:4px solid var(--green);background:#F3F7F5}
+  .card.tip{border-left:4px solid var(--gold);background:#FCF7E8}
+  .card .head{
+    font-family:var(--serif);
+    font-weight:700;
+    color:var(--green);
+    margin-bottom:4px;
+  }
+  .card.warn .head{color:var(--red)}
+  .card.tip .head{color:var(--gold)}
+  /* ====== Chain ====== */
+  .chain{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:6px 8px;
+    padding:10px 14px;
+    background:var(--bg-table);
+    border-left:3px solid var(--green);
+    font-size:13.5px;
+    margin:8px 0;
+  }
+  .chain .node{
+    background:#fff;
+    border:1px solid var(--line);
+    padding:3px 9px;
+    border-radius:2px;
+    white-space:nowrap;
+  }
+  .chain .node.start{background:var(--green);color:#fff;border-color:var(--green);font-weight:700}
+  .chain .node.end{background:var(--red);color:#fff;border-color:var(--red);font-weight:700}
+  .chain .arrow{color:var(--ink-mute);font-family:var(--mono);font-weight:700}
+  /* ====== Formula box ====== */
+  .formula-box{
+    background:var(--bg-table);
+    border:1px solid var(--line);
+    padding:10px 14px;
+    margin:8px 0;
+    font-size:15px;
+    overflow-x:auto;
+  }
+  /* ====== Grid layouts ====== */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  @media (max-width:860px){
+    .grid-2,.grid-3{grid-template-columns:1fr}
+  }
+  /* ====== Figure ====== */
+  figure{
+    margin:14px 0;
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    padding:14px;
+  }
+  figure svg{display:block;margin:0 auto;max-width:100%;height:auto}
+  figcaption{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-top:8px;
+    padding-top:8px;
+    border-top:1px dashed var(--line);
+    font-family:var(--sans);
+  }
+  figcaption .fig-no{
+    font-family:var(--mono);
+    color:var(--green);
+    font-weight:700;
+    margin-right:6px;
+  }
+  /* ====== SVG common styles ====== */
+  .ax{stroke:#1F1B16;stroke-width:1.4;fill:none}
+  .ax-label{font-family:'IBM Plex Mono', monospace;font-size:11px;fill:#1F1B16}
+  .curve-d{stroke:#B8473A;stroke-width:2;fill:none}
+  .curve-s{stroke:#2E4A6B;stroke-width:2;fill:none}
+  .curve-d2{stroke:#B8473A;stroke-width:2;fill:none;stroke-dasharray:6,3;opacity:.9}
+  .curve-s2{stroke:#2E4A6B;stroke-width:2;fill:none;stroke-dasharray:6,3;opacity:.9}
+  .curve-lras{stroke:#2D5A4A;stroke-width:2;fill:none}
+  .curve-sras{stroke:#A47E1B;stroke-width:2;fill:none}
+  .curve-sras2{stroke:#A47E1B;stroke-width:2;fill:none;stroke-dasharray:6,3}
+  .curve-ad{stroke:#B8473A;stroke-width:2;fill:none}
+  .curve-ad2{stroke:#B8473A;stroke-width:2;fill:none;stroke-dasharray:6,3}
+  .curve-md{stroke:#B8473A;stroke-width:2;fill:none}
+  .curve-md2{stroke:#B8473A;stroke-width:2;fill:none;stroke-dasharray:6,3}
+  .curve-ms{stroke:#2E4A6B;stroke-width:2;fill:none}
+  .curve-ms2{stroke:#2E4A6B;stroke-width:2;fill:none;stroke-dasharray:6,3}
+  .proj{stroke:#8A8479;stroke-width:1;fill:none;stroke-dasharray:3,3}
+  .pt{fill:#1F1B16;stroke:#fff;stroke-width:1.5}
+  .pt2{fill:#B8473A;stroke:#fff;stroke-width:1.5}
+  .pt3{fill:#2D5A4A;stroke:#fff;stroke-width:1.5}
+  .curve-lbl{font-family:'IBM Plex Mono', monospace;font-size:12px;font-weight:600}
+  .pt-lbl{font-family:'IBM Plex Mono', monospace;font-size:11px;fill:#1F1B16}
+  .arrow-shift{stroke:#1F1B16;stroke-width:1.5;fill:none;marker-end:url(#arr)}
+  .title-svg{font-family:'Noto Serif TC',serif;font-size:13px;font-weight:700;fill:#2D5A4A}
+  /* ====== TOC ====== */
+  .toc{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    padding:18px 22px;
+    margin:0 0 28px;
+  }
+  .toc h3{margin:0 0 10px;font-size:15px;color:var(--ink)}
+  .toc ol{margin:0;padding-left:20px;columns:2;font-size:13.5px}
+  .toc a{color:var(--green);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  /* ====== Footer ====== */
+  footer.bot{
+    margin-top:48px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+    font-size:12px;
+    color:var(--ink-mute);
+    text-align:center;
+  }
+  /* ====== Legend ====== */
+  .legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    font-size:12px;
+    padding:8px 12px;
+    background:var(--bg-soft);
+    border:1px solid var(--line);
+    margin:8px 0;
+    font-family:var(--mono);
+  }
+  .legend span{display:inline-flex;align-items:center;gap:4px}
+  .legend i{display:inline-block;width:18px;height:2px}
+  .legend i.solid-d{background:#B8473A}
+  .legend i.dash-d{background:repeating-linear-gradient(to right,#B8473A 0 4px,transparent 4px 7px);height:2px}
+  .legend i.solid-s{background:#2E4A6B}
+  .legend i.dash-s{background:repeating-linear-gradient(to right,#2E4A6B 0 4px,transparent 4px 7px);height:2px}
+  .legend i.proj-i{background:repeating-linear-gradient(to right,#8A8479 0 3px,transparent 3px 6px);height:1px}
+  /* Anchor offset */
+  section{scroll-margin-top:20px}
+  .pill{
+    display:inline-block;
+    font-family:var(--mono);
+    font-size:11px;
+    padding:2px 7px;
+    background:var(--bg-soft);
+    border:1px solid var(--line);
+    margin-right:4px;
+    color:var(--ink-soft);
+  }
+  .pill.green{background:var(--green);color:#fff;border-color:var(--green)}
+  .pill.red{background:var(--red);color:#fff;border-color:var(--red)}
+  ul.tight{margin:6px 0;padding-left:20px}
+  ul.tight li{margin:3px 0}
+  .triple-panel{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:8px;
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    padding:12px;
+    margin:14px 0;
+  }
+  .triple-panel figure{border:none;padding:0;margin:0;background:transparent}
+  .triple-panel .panel-title{
+    grid-column:1/-1;
+    font-family:var(--serif);
+    font-weight:700;
+    color:var(--green);
+    font-size:14px;
+    padding-bottom:4px;
+    border-bottom:1px dashed var(--line);
+    margin-bottom:4px;
+  }
+  @media (max-width:860px){
+    .triple-panel{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">Macroeconomics · Final Exam · Comprehensive Overview</div>
+  <h1>經濟學期末考 ・ 因果鍊與圖形總覽</h1>
+  <div class="sub">範圍：Ch 6 可貸資金市場 → Ch 6-2 貨幣體系 → Ch 7 貨幣成長與通膨 → Ch 8 開放經濟基礎 → Ch 9 開放經濟模型 → Ch 10 AD–AS → Ch 11 貨幣與財政政策</div>
+</header>
+
+<div class="toc">
+  <h3>導覽目錄</h3>
+  <ol>
+    <li><a href="#map">跨章節因果地圖（總覽）</a></li>
+    <li><a href="#formulas">核心公式速查表</a></li>
+    <li><a href="#ch6">Ch 6 可貸資金市場</a></li>
+    <li><a href="#ch6b">Ch 6-2 貨幣體系</a></li>
+    <li><a href="#ch7">Ch 7 貨幣成長與通膨</a></li>
+    <li><a href="#ch8">Ch 8 開放經濟基礎</a></li>
+    <li><a href="#ch9">Ch 9 開放經濟模型（三市場）</a></li>
+    <li><a href="#ch10">Ch 10 AD–AS</a></li>
+    <li><a href="#ch11">Ch 11 貨幣與財政政策</a></li>
+    <li><a href="#shocks">政策／事件衝擊大總表（跨章節）</a></li>
+  </ol>
+</div>
+
+<!-- ======================================================
+     §1 跨章節因果地圖
+     ====================================================== -->
+<section id="map">
+<h2 class="sec"><span class="num">§ 1</span>跨章節因果地圖（總覽）<span class="en">CAUSAL MAP</span></h2>
+
+<p>這張地圖把六章核心變數串起來。<b>同一個外生衝擊</b>（例如 MS↑、G↑、政治不穩）會在<b>不同模型</b>留下不同足跡，但所有足跡都來自下方這張總圖。</p>
+
+<figure>
+<svg viewBox="0 0 1100 540" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1F1B16"/>
+    </marker>
+    <marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2D5A4A"/>
+    </marker>
+    <marker id="arrr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#B8473A"/>
+    </marker>
+  </defs>
+
+  <!-- Layer labels -->
+  <text x="20" y="25" class="title-svg" style="font-size:11px;fill:#8A8479">外生衝擊</text>
+  <text x="20" y="135" class="title-svg" style="font-size:11px;fill:#8A8479">資金／貨幣市場</text>
+  <text x="20" y="265" class="title-svg" style="font-size:11px;fill:#8A8479">中介變數</text>
+  <text x="20" y="395" class="title-svg" style="font-size:11px;fill:#8A8479">總體市場（AD–AS）</text>
+  <text x="20" y="515" class="title-svg" style="font-size:11px;fill:#8A8479">最終結果</text>
+
+  <!-- Layer 1: shocks -->
+  <g>
+    <rect x="120" y="10" width="130" height="36" fill="#2D5A4A" rx="2"/>
+    <text x="185" y="33" text-anchor="middle" font-family="Noto Sans TC" font-size="13" font-weight="700" fill="#fff">財政政策 G↑、T↓</text>
+
+    <rect x="280" y="10" width="130" height="36" fill="#2D5A4A" rx="2"/>
+    <text x="345" y="33" text-anchor="middle" font-family="Noto Sans TC" font-size="13" font-weight="700" fill="#fff">貨幣政策 MS↑</text>
+
+    <rect x="440" y="10" width="130" height="36" fill="#2D5A4A" rx="2"/>
+    <text x="505" y="33" text-anchor="middle" font-family="Noto Sans TC" font-size="13" font-weight="700" fill="#fff">儲蓄/投資稅優</text>
+
+    <rect x="600" y="10" width="130" height="36" fill="#2D5A4A" rx="2"/>
+    <text x="665" y="33" text-anchor="middle" font-family="Noto Sans TC" font-size="13" font-weight="700" fill="#fff">貿易政策（關稅↑）</text>
+
+    <rect x="760" y="10" width="130" height="36" fill="#2D5A4A" rx="2"/>
+    <text x="825" y="33" text-anchor="middle" font-family="Noto Sans TC" font-size="13" font-weight="700" fill="#fff">資本外逃</text>
+
+    <rect x="920" y="10" width="160" height="36" fill="#2D5A4A" rx="2"/>
+    <text x="1000" y="33" text-anchor="middle" font-family="Noto Sans TC" font-size="13" font-weight="700" fill="#fff">SRAS 衝擊（油價↑）</text>
+  </g>
+
+  <!-- Layer 2: 可貸資金 / 貨幣市場 -->
+  <g>
+    <rect x="100" y="145" width="170" height="60" fill="#F5F0E1" stroke="#2E4A6B" stroke-width="1.5"/>
+    <text x="185" y="167" text-anchor="middle" font-family="Noto Serif TC" font-size="13" font-weight="700" fill="#2E4A6B">可貸資金市場</text>
+    <text x="185" y="186" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1F1B16">S = I + NCO</text>
+    <text x="185" y="200" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1F1B16">價格 = 實質利率 r</text>
+
+    <rect x="320" y="145" width="170" height="60" fill="#F5F0E1" stroke="#2E4A6B" stroke-width="1.5"/>
+    <text x="405" y="167" text-anchor="middle" font-family="Noto Serif TC" font-size="13" font-weight="700" fill="#2E4A6B">貨幣市場（流動性偏好）</text>
+    <text x="405" y="186" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1F1B16">MS = MD</text>
+    <text x="405" y="200" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1F1B16">價格 = 名目利率 i</text>
+
+    <rect x="540" y="145" width="170" height="60" fill="#F5F0E1" stroke="#2E4A6B" stroke-width="1.5"/>
+    <text x="625" y="167" text-anchor="middle" font-family="Noto Serif TC" font-size="13" font-weight="700" fill="#2E4A6B">外匯市場</text>
+    <text x="625" y="186" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1F1B16">NCO = NX</text>
+    <text x="625" y="200" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1F1B16">價格 = 實質匯率 ε</text>
+
+    <rect x="760" y="145" width="170" height="60" fill="#F5F0E1" stroke="#2E4A6B" stroke-width="1.5"/>
+    <text x="845" y="167" text-anchor="middle" font-family="Noto Serif TC" font-size="13" font-weight="700" fill="#2E4A6B">NCO 市場</text>
+    <text x="845" y="186" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1F1B16">NCO = f(r)，斜率負</text>
+    <text x="845" y="200" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1F1B16">r↑ → NCO↓</text>
+  </g>
+
+  <!-- Layer 3: 中介變數 -->
+  <g>
+    <rect x="100" y="275" width="120" height="36" fill="#fff" stroke="#A47E1B" stroke-width="1.5"/>
+    <text x="160" y="298" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="700">利率 r, i</text>
+
+    <rect x="240" y="275" width="120" height="36" fill="#fff" stroke="#A47E1B" stroke-width="1.5"/>
+    <text x="300" y="298" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="700">投資 I</text>
+
+    <rect x="380" y="275" width="120" height="36" fill="#fff" stroke="#A47E1B" stroke-width="1.5"/>
+    <text x="440" y="298" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="700">消費 C</text>
+
+    <rect x="520" y="275" width="120" height="36" fill="#fff" stroke="#A47E1B" stroke-width="1.5"/>
+    <text x="580" y="298" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="700">NCO（資本外流）</text>
+
+    <rect x="660" y="275" width="120" height="36" fill="#fff" stroke="#A47E1B" stroke-width="1.5"/>
+    <text x="720" y="298" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="700">實質匯率 ε</text>
+
+    <rect x="800" y="275" width="120" height="36" fill="#fff" stroke="#A47E1B" stroke-width="1.5"/>
+    <text x="860" y="298" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="700">淨出口 NX</text>
+
+    <rect x="940" y="275" width="140" height="36" fill="#fff" stroke="#A47E1B" stroke-width="1.5"/>
+    <text x="1010" y="298" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="700">物價 P</text>
+  </g>
+
+  <!-- Layer 4: AD-AS -->
+  <g>
+    <rect x="250" y="405" width="280" height="60" fill="#F3F7F5" stroke="#2D5A4A" stroke-width="1.5"/>
+    <text x="390" y="427" text-anchor="middle" font-family="Noto Serif TC" font-size="13" font-weight="700" fill="#2D5A4A">總和需求 AD = C + I + G + NX</text>
+    <text x="390" y="445" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1F1B16">財富效果 ・ 利率效果 ・ 匯率效果</text>
+    <text x="390" y="459" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1F1B16">短期 P 與 Y 共同決定</text>
+
+    <rect x="580" y="405" width="280" height="60" fill="#F3F7F5" stroke="#2D5A4A" stroke-width="1.5"/>
+    <text x="720" y="427" text-anchor="middle" font-family="Noto Serif TC" font-size="13" font-weight="700" fill="#2D5A4A">總和供給 SRAS / LRAS</text>
+    <text x="720" y="445" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1F1B16">SR 正斜率（黏性）</text>
+    <text x="720" y="459" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1F1B16">LR 垂直於 Y_N（自然產出）</text>
+  </g>
+
+  <!-- Layer 5: outcomes -->
+  <g>
+    <rect x="200" y="500" width="120" height="32" fill="#B8473A" rx="2"/>
+    <text x="260" y="521" text-anchor="middle" font-family="Noto Sans TC" font-size="12" font-weight="700" fill="#fff">產出 Y</text>
+
+    <rect x="340" y="500" width="120" height="32" fill="#B8473A" rx="2"/>
+    <text x="400" y="521" text-anchor="middle" font-family="Noto Sans TC" font-size="12" font-weight="700" fill="#fff">就業／失業 u</text>
+
+    <rect x="480" y="500" width="140" height="32" fill="#B8473A" rx="2"/>
+    <text x="550" y="521" text-anchor="middle" font-family="Noto Sans TC" font-size="12" font-weight="700" fill="#fff">通膨率 π</text>
+
+    <rect x="640" y="500" width="140" height="32" fill="#B8473A" rx="2"/>
+    <text x="710" y="521" text-anchor="middle" font-family="Noto Sans TC" font-size="12" font-weight="700" fill="#fff">名目利率 i = r + π</text>
+
+    <rect x="800" y="500" width="140" height="32" fill="#B8473A" rx="2"/>
+    <text x="870" y="521" text-anchor="middle" font-family="Noto Sans TC" font-size="12" font-weight="700" fill="#fff">貿易餘額 NX</text>
+  </g>
+
+  <!-- Arrows: Shock → Market -->
+  <!-- 財政 G↑ → 可貸資金 -->
+  <line x1="185" y1="46" x2="185" y2="143" stroke="#2D5A4A" stroke-width="1.5" marker-end="url(#arrg)"/>
+  <!-- 貨幣 MS → 貨幣市場 -->
+  <line x1="345" y1="46" x2="405" y2="143" stroke="#2D5A4A" stroke-width="1.5" marker-end="url(#arrg)"/>
+  <!-- 儲蓄/投資稅優 → 可貸資金 -->
+  <line x1="505" y1="46" x2="220" y2="148" stroke="#2D5A4A" stroke-width="1.2" marker-end="url(#arrg)" opacity=".7"/>
+  <!-- 貿易政策 → 外匯 -->
+  <line x1="665" y1="46" x2="625" y2="143" stroke="#2D5A4A" stroke-width="1.5" marker-end="url(#arrg)"/>
+  <!-- 資本外逃 → NCO -->
+  <line x1="825" y1="46" x2="845" y2="143" stroke="#2D5A4A" stroke-width="1.5" marker-end="url(#arrg)"/>
+  <!-- SRAS shock → SRAS box -->
+  <line x1="1000" y1="46" x2="720" y2="403" stroke="#2D5A4A" stroke-width="1.2" marker-end="url(#arrg)" opacity=".5"/>
+
+  <!-- Market → 中介變數 -->
+  <line x1="185" y1="207" x2="160" y2="273" stroke="#1F1B16" stroke-width="1" marker-end="url(#arr)"/>
+  <line x1="220" y1="207" x2="280" y2="273" stroke="#1F1B16" stroke-width="1" marker-end="url(#arr)"/>
+  <line x1="405" y1="207" x2="180" y2="273" stroke="#1F1B16" stroke-width="1" marker-end="url(#arr)" opacity=".6"/>
+  <line x1="625" y1="207" x2="720" y2="273" stroke="#1F1B16" stroke-width="1" marker-end="url(#arr)"/>
+  <line x1="710" y1="207" x2="800" y2="273" stroke="#1F1B16" stroke-width="1" marker-end="url(#arr)" opacity=".6"/>
+  <line x1="845" y1="207" x2="580" y2="273" stroke="#1F1B16" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- 中介變數 → AD/AS -->
+  <line x1="300" y1="311" x2="350" y2="403" stroke="#B8473A" stroke-width="1" marker-end="url(#arrr)"/>
+  <line x1="440" y1="311" x2="400" y2="403" stroke="#B8473A" stroke-width="1" marker-end="url(#arrr)"/>
+  <line x1="860" y1="311" x2="450" y2="403" stroke="#B8473A" stroke-width="1" marker-end="url(#arrr)"/>
+
+  <!-- AD/AS → outcomes -->
+  <line x1="390" y1="465" x2="260" y2="498" stroke="#1F1B16" stroke-width="1" marker-end="url(#arr)"/>
+  <line x1="390" y1="465" x2="400" y2="498" stroke="#1F1B16" stroke-width="1" marker-end="url(#arr)"/>
+  <line x1="720" y1="465" x2="550" y2="498" stroke="#1F1B16" stroke-width="1" marker-end="url(#arr)"/>
+  <line x1="720" y1="465" x2="710" y2="498" stroke="#1F1B16" stroke-width="1" marker-end="url(#arr)"/>
+  <line x1="860" y1="311" x2="870" y2="498" stroke="#1F1B16" stroke-width="1" marker-end="url(#arr)" opacity=".5"/>
+</svg>
+<figcaption><span class="fig-no">圖 0</span>跨章節因果地圖。綠色實心方塊＝外生衝擊；藍框＝市場；黃框＝中介變數；綠框＝AD–AS；紅色圓角＝最終可觀察結果。期末考申論題的標準寫法，就是把箭頭照著走一遍。</figcaption>
+</figure>
+
+</section>
+
+<!-- ======================================================
+     §2 核心公式速查表
+     ====================================================== -->
+<section id="formulas">
+<h2 class="sec"><span class="num">§ 2</span>核心公式速查表<span class="en">FORMULA QUICK REFERENCE</span></h2>
+
+<table>
+<thead>
+<tr><th style="width:14%">章</th><th style="width:30%">公式</th><th>意義／用法</th></tr>
+</thead>
+<tbody>
+<tr><td>Ch 6 國民所得恆等式</td><td class="cell-formula">$Y = C + I + G + NX$</td><td>支出面 GDP。封閉經濟時 $NX=0$。</td></tr>
+<tr><td>Ch 6 儲蓄分解</td><td class="cell-formula">$S = S_{private} + S_{public} = (Y-T-C)+(T-G)$</td><td>封閉經濟 $S = I$；開放經濟 $S = I + NCO$。</td></tr>
+<tr><td>Ch 6-2 貨幣乘數</td><td class="cell-formula">$\text{Money Multiplier} = \dfrac{1}{R}$</td><td>$R$ 為法定準備率。$R$↓ → 乘數↑ → MS↑。</td></tr>
+<tr><td>Ch 7 數量方程式</td><td class="cell-formula">$M \times V = P \times Y$</td><td>長期 $V$ 視為穩定，$Y$ 由實物面決定 → $M\!\uparrow\!\Rightarrow\!P\!\uparrow$。</td></tr>
+<tr><td>Ch 7 費雪效果</td><td class="cell-formula">$i = r + \pi^e$</td><td>長期 $\pi$↑ → $i$ 等幅上升；$r$ 不變（貨幣中立）。</td></tr>
+<tr><td>Ch 8 實質匯率</td><td class="cell-formula">$\varepsilon = \dfrac{e \times P}{P^*}$</td><td>$e$ 為名目匯率（外幣/本幣）。$\varepsilon$↑ → 本國貨品變貴 → NX↓。</td></tr>
+<tr><td>Ch 8 PPP（購買力平價）</td><td class="cell-formula">$P = e \times P^*\ \Rightarrow\ e = \dfrac{P^*}{P}$</td><td>本國通膨高 → 本國貨幣貶值。</td></tr>
+<tr><td>Ch 8 恆等式</td><td class="cell-formula">$NCO = NX$</td><td>會計恆等式，永遠成立。</td></tr>
+<tr><td>Ch 9 開放可貸資金</td><td class="cell-formula">$S = I + NCO$</td><td>供給：S；需求：I + NCO。</td></tr>
+<tr><td>Ch 10 AD 下移三效果</td><td class="cell-formula">$P\!\downarrow \Rightarrow C\!\uparrow,\ I\!\uparrow,\ NX\!\uparrow$</td><td>財富效果（C）、利率效果（I）、匯率效果（NX）。</td></tr>
+<tr><td>Ch 11 支出乘數</td><td class="cell-formula">$\text{Multiplier} = \dfrac{1}{1-MPC}$</td><td>$MPC=0.5\!\to\!2$；$0.75\!\to\!4$；$0.9\!\to\!10$。</td></tr>
+<tr><td>Ch 11 流動性偏好</td><td class="cell-formula">$M^d = L(i, Y)$；MS 由央行外生決定</td><td>$Y$↑ → $M^d$↑ → $i$↑（排擠效果起源）。</td></tr>
+</tbody>
+</table>
+
+<div class="legend">
+  <span><i class="solid-d"></i>需求 D（紅色實線）</span>
+  <span><i class="dash-d"></i>新需求 D'（紅色虛線）</span>
+  <span><i class="solid-s"></i>供給 S（藍色實線）</span>
+  <span><i class="dash-s"></i>新供給 S'（藍色虛線）</span>
+  <span><i class="proj-i"></i>均衡點投影（灰色虛線）</span>
+</div>
+</section>
+
+<!-- ======================================================
+     §3 Ch6 可貸資金市場
+     ====================================================== -->
+<section id="ch6">
+<h2 class="sec"><span class="num">§ 3</span>Ch 6 可貸資金市場<span class="en">LOANABLE FUNDS MARKET</span></h2>
+
+<div class="grid-2">
+  <div class="card key">
+    <div class="head">市場結構</div>
+    <ul class="tight">
+      <li><b>供給</b>：國民儲蓄 $S$（民間 + 政府）</li>
+      <li><b>需求</b>：投資 $I$（廠商借款蓋廠房／家戶買房）</li>
+      <li><b>價格</b>：實質利率 $r$</li>
+      <li>均衡：$S(r) = I(r)$</li>
+    </ul>
+  </div>
+  <div class="card warn">
+    <div class="head">三個容易混淆的政策方向</div>
+    <ul class="tight">
+      <li><b>儲蓄稅優</b> → $S$ 右移 → $r↓$、$Q↑$（投資增加）</li>
+      <li><b>投資稅優</b> → $I$ 右移 → $r↑$、$Q↑$（儲蓄也增加）</li>
+      <li><b>政府赤字</b>（$G>T$）→ $S$ <b>左</b>移 → $r↑$、$I↓$（<b>排擠</b>）</li>
+    </ul>
+  </div>
+</div>
+
+<h3>圖 1 — 基本均衡</h3>
+<figure>
+<svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">
+  <!-- axes -->
+  <path class="ax" d="M 60 240 L 360 240 M 60 240 L 60 30"/>
+  <text x="60" y="20" text-anchor="middle" class="ax-label">r</text>
+  <text x="365" y="255" class="ax-label">Q (可貸資金)</text>
+  <!-- S: from (80,230) to (340,40), passing through equilibrium at (200,130) -->
+  <line class="curve-s" x1="80" y1="230" x2="340" y2="40"/>
+  <text x="345" y="40" class="curve-lbl" fill="#2E4A6B">S</text>
+  <!-- D: from (80,40) to (340,230), passing through (200,130) -->
+  <line class="curve-d" x1="80" y1="40" x2="340" y2="230"/>
+  <text x="345" y="230" class="curve-lbl" fill="#B8473A">D = I</text>
+  <!-- equilibrium projections -->
+  <line class="proj" x1="200" y1="130" x2="200" y2="240"/>
+  <line class="proj" x1="60" y1="130" x2="200" y2="130"/>
+  <!-- equilibrium point -->
+  <circle class="pt" cx="200" cy="130" r="4"/>
+  <text x="208" y="125" class="pt-lbl">E*</text>
+  <text x="50" y="134" text-anchor="end" class="ax-label">r*</text>
+  <text x="200" y="255" text-anchor="middle" class="ax-label">Q*</text>
+</svg>
+<figcaption><span class="fig-no">圖 1</span>可貸資金市場基本均衡。利率 $r^*$ 同時為「儲蓄報酬」與「借款成本」。</figcaption>
+</figure>
+
+<div class="grid-3">
+<figure>
+<svg viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg">
+  <text x="180" y="18" text-anchor="middle" class="title-svg">政策 1：儲蓄稅優（S 右移）</text>
+  <path class="ax" d="M 60 240 L 340 240 M 60 240 L 60 38"/>
+  <text x="60" y="28" text-anchor="middle" class="ax-label">r</text>
+  <text x="345" y="255" class="ax-label">Q</text>
+  <!-- original S -->
+  <line class="curve-s" x1="80" y1="220" x2="320" y2="60"/>
+  <text x="78" y="220" text-anchor="end" class="curve-lbl" fill="#2E4A6B">S₁</text>
+  <!-- new S2 (right) -->
+  <line class="curve-s2" x1="120" y1="220" x2="340" y2="80"/>
+  <text x="340" y="80" class="curve-lbl" fill="#2E4A6B">S₂</text>
+  <!-- D -->
+  <line class="curve-d" x1="80" y1="60" x2="320" y2="220"/>
+  <text x="325" y="220" class="curve-lbl" fill="#B8473A">D</text>
+  <!-- old eq E1 at intersection of S1 & D -->
+  <!-- S1: y=220 - (160/240)*(x-80) wait, let me compute. S1 from (80,220) to (320,60), slope = (60-220)/(320-80) = -160/240 = -2/3. -->
+  <!-- D from (80,60) to (320,220), slope = 160/240 = 2/3 -->
+  <!-- S1: y = 220 - (2/3)(x-80) ; D: y = 60 + (2/3)(x-80) ; intersect when 220 - (2/3)(x-80)=60+(2/3)(x-80) => 160 = (4/3)(x-80) => x-80=120 => x=200. y=60+(2/3)*120=60+80=140 -->
+  <circle class="pt" cx="200" cy="140" r="4"/>
+  <text x="207" y="135" class="pt-lbl">E₁</text>
+  <line class="proj" x1="60" y1="140" x2="200" y2="140"/>
+  <line class="proj" x1="200" y1="140" x2="200" y2="240"/>
+  <text x="50" y="144" text-anchor="end" class="ax-label">r₁=5%</text>
+  <text x="200" y="255" text-anchor="middle" class="ax-label">Q₁=60</text>
+  <!-- new eq E2: S2 from (120,220) to (340,80), slope = (80-220)/(340-120) = -140/220 ≈ -0.636 -->
+  <!-- D: y = 60 + (2/3)(x-80) -->
+  <!-- S2: y = 220 - (140/220)(x-120) -->
+  <!-- Set equal: 60 + (2/3)(x-80) = 220 - (140/220)(x-120) -->
+  <!-- We'll just place E2 at a sensible point to the right and lower. Compute simply: let's pick a clear point. -->
+  <!-- Easier approach: redraw S2 such that it passes nicely. S2 to ensure intersection with D at (240, 167) -->
+  <!-- Recompute S2: passes through (240,167) and slope -2/3 (parallel shift). At x=240, S₂ y=167. So S2 line: y - 167 = -2/3(x-240). At x=60: y=167+120=287 (off chart). At x=320: y=167-(2/3)(80)= 167-53.3=113.7. Let me redraw using cleaner coords. -->
+  <!-- Replace S2 with one going through (240,167) with same slope as S1 -->
+  <!-- I'll redo: erase previous S2 by drawing again on top, but svg doesn't erase. Better: use clean start. -->
+  <!-- Actually the rendered S2 from (120,220) to (340,80): At x=240, y=220-(140/220)*120 = 220-76.36=143.64. Hmm. Let me just place E2 at the actual intersection (~245, 170 approximately) -->
+  <!-- Quick recalc: S2 line slope = (80-220)/(340-120) = -0.6364. y = 220 - 0.6364(x - 120) -->
+  <!-- D line: y = 60 + (2/3)(x - 80) = 60 + 0.6667(x-80) -->
+  <!-- Set: 220 - 0.6364(x-120) = 60 + 0.6667(x-80) => 220 + 76.36 - 0.6364x = 60 - 53.33 + 0.6667x => 296.36 - 0.6364x = 6.67 + 0.6667x => 289.69 = 1.303x => x ≈ 222.3. y = 60 + 0.6667*(222.3-80) = 60 + 94.87 = 154.87 -->
+  <!-- So E2 ≈ (222, 155) -->
+  <circle class="pt2" cx="222" cy="155" r="4"/>
+  <text x="229" y="151" class="pt-lbl" fill="#B8473A">E₂</text>
+  <line class="proj" x1="60" y1="155" x2="222" y2="155"/>
+  <line class="proj" x1="222" y1="155" x2="222" y2="240"/>
+  <text x="50" y="159" text-anchor="end" class="ax-label" fill="#B8473A">r₂=4%</text>
+  <text x="222" y="270" text-anchor="middle" class="ax-label" fill="#B8473A">Q₂=70</text>
+  <!-- shift arrow -->
+  <path class="arrow-shift" d="M 250 150 Q 280 145 290 140" />
+</svg>
+<figcaption><span class="fig-no">圖 2</span>儲蓄稅優 → $S$ 右移 → $r↓$、$I↑$。</figcaption>
+</figure>
+
+<figure>
+<svg viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg">
+  <text x="180" y="18" text-anchor="middle" class="title-svg">政策 2：投資稅優（D 右移）</text>
+  <path class="ax" d="M 60 240 L 340 240 M 60 240 L 60 38"/>
+  <text x="60" y="28" text-anchor="middle" class="ax-label">r</text>
+  <text x="345" y="255" class="ax-label">Q</text>
+  <!-- S -->
+  <line class="curve-s" x1="80" y1="220" x2="320" y2="60"/>
+  <text x="325" y="60" class="curve-lbl" fill="#2E4A6B">S</text>
+  <!-- D1 -->
+  <line class="curve-d" x1="80" y1="60" x2="320" y2="220"/>
+  <text x="78" y="60" text-anchor="end" class="curve-lbl" fill="#B8473A">D₁</text>
+  <!-- D2 -->
+  <line class="curve-d2" x1="120" y1="60" x2="340" y2="200"/>
+  <text x="345" y="200" class="curve-lbl" fill="#B8473A">D₂</text>
+  <!-- E1 at (200,140) -->
+  <circle class="pt" cx="200" cy="140" r="4"/>
+  <text x="183" y="135" text-anchor="end" class="pt-lbl">E₁</text>
+  <line class="proj" x1="60" y1="140" x2="200" y2="140"/>
+  <line class="proj" x1="200" y1="140" x2="200" y2="240"/>
+  <text x="50" y="144" text-anchor="end" class="ax-label">r₁=5%</text>
+  <text x="200" y="255" text-anchor="middle" class="ax-label">Q₁=60</text>
+  <!-- E2: S y=220-(2/3)(x-80); D2 from (120,60) to (340,200) slope (200-60)/(340-120)=140/220=0.6364; y=60+0.6364(x-120) -->
+  <!-- Set 220-(2/3)(x-80) = 60 + 0.6364(x-120) => 220 + 53.33 - 0.6667x = 60 - 76.36 + 0.6364x => 273.33 - 0.6667x = -16.36+0.6364x => 289.69=1.303x => x≈222.3 -->
+  <!-- y = 220 - (2/3)*(222.3 - 80) = 220 - 94.87 = 125.13 -->
+  <circle class="pt2" cx="222" cy="125" r="4"/>
+  <text x="229" y="121" class="pt-lbl" fill="#B8473A">E₂</text>
+  <line class="proj" x1="60" y1="125" x2="222" y2="125"/>
+  <line class="proj" x1="222" y1="125" x2="222" y2="240"/>
+  <text x="50" y="129" text-anchor="end" class="ax-label" fill="#B8473A">r₂=6%</text>
+  <text x="222" y="270" text-anchor="middle" class="ax-label" fill="#B8473A">Q₂=70</text>
+</svg>
+<figcaption><span class="fig-no">圖 3</span>投資稅優 → $D$ 右移 → $r↑$、$S$ 與 $I$ 都增加。</figcaption>
+</figure>
+
+<figure>
+<svg viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg">
+  <text x="180" y="18" text-anchor="middle" class="title-svg">政策 3：政府赤字（S 左移 → 排擠）</text>
+  <path class="ax" d="M 60 240 L 340 240 M 60 240 L 60 38"/>
+  <text x="60" y="28" text-anchor="middle" class="ax-label">r</text>
+  <text x="345" y="255" class="ax-label">Q</text>
+  <!-- S1 -->
+  <line class="curve-s" x1="80" y1="220" x2="320" y2="60"/>
+  <text x="325" y="60" class="curve-lbl" fill="#2E4A6B">S₁</text>
+  <!-- S2 left -->
+  <line class="curve-s2" x1="40" y1="220" x2="280" y2="60"/>
+  <text x="35" y="220" text-anchor="end" class="curve-lbl" fill="#2E4A6B">S₂</text>
+  <!-- D -->
+  <line class="curve-d" x1="80" y1="60" x2="320" y2="220"/>
+  <text x="325" y="220" class="curve-lbl" fill="#B8473A">D</text>
+  <!-- E1 at (200,140) -->
+  <circle class="pt" cx="200" cy="140" r="4"/>
+  <text x="207" y="135" class="pt-lbl">E₁</text>
+  <line class="proj" x1="60" y1="140" x2="200" y2="140"/>
+  <line class="proj" x1="200" y1="140" x2="200" y2="240"/>
+  <text x="50" y="144" text-anchor="end" class="ax-label">r₁=5%</text>
+  <text x="200" y="255" text-anchor="middle" class="ax-label">Q₁</text>
+  <!-- E2: S2 from (40,220) to (280,60) slope=(60-220)/(280-40)=-160/240=-2/3; y=220-(2/3)(x-40) -->
+  <!-- D: y=60+(2/3)(x-80) -->
+  <!-- Set: 220-(2/3)(x-40)=60+(2/3)(x-80) => 220+26.67 - 0.6667x = 60 - 53.33 + 0.6667x => 246.67 - 0.6667x = 6.67 + 0.6667x => 240 = 1.333x => x = 180 -->
+  <!-- y = 60 + (2/3)*(180-80) = 60 + 66.67 = 126.67 -->
+  <circle class="pt2" cx="180" cy="127" r="4"/>
+  <text x="172" y="123" text-anchor="end" class="pt-lbl" fill="#B8473A">E₂</text>
+  <line class="proj" x1="60" y1="127" x2="180" y2="127"/>
+  <line class="proj" x1="180" y1="127" x2="180" y2="240"/>
+  <text x="50" y="131" text-anchor="end" class="ax-label" fill="#B8473A">r₂=6%</text>
+  <text x="180" y="270" text-anchor="middle" class="ax-label" fill="#B8473A">Q₂(↓)</text>
+</svg>
+<figcaption><span class="fig-no">圖 4</span>政府赤字 → 公部門儲蓄↓ → $S$ <b>左移</b> → $r↑$、$Q↓$ ＝ <b>排擠效果</b>。</figcaption>
+</figure>
+</div>
+
+<div class="card warn">
+  <div class="head">⚠ 常見陷阱</div>
+  <ul class="tight">
+    <li>「政府赤字」不是 $D$ 右移，而是 <b>$S$ 左移</b>（公部門儲蓄 $T-G$ 變負）。</li>
+    <li>投資稅優使 $r↑$，但<b>不是排擠</b>，因為 $I$ 仍然上升。</li>
+    <li>本章利率為「實質利率 $r$」；Ch 11 流動性偏好的利率為「名目利率 $i$」。</li>
+  </ul>
+</div>
+
+<div class="chain"><span class="node start">政府赤字 G↑</span><span class="arrow">→</span><span class="node">公部門儲蓄 (T−G)↓</span><span class="arrow">→</span><span class="node">S 左移</span><span class="arrow">→</span><span class="node">r↑</span><span class="arrow">→</span><span class="node">I↓</span><span class="arrow">→</span><span class="node end">排擠效果</span></div>
+</section>
+
+<!-- ======================================================
+     §4 Ch6-2 貨幣體系
+     ====================================================== -->
+<section id="ch6b">
+<h2 class="sec"><span class="num">§ 4</span>Ch 6-2 貨幣體系<span class="en">MONETARY SYSTEM</span></h2>
+
+<div class="grid-2">
+  <div class="card key">
+    <div class="head">貨幣的三大功能</div>
+    <ul class="tight">
+      <li>交易媒介（Medium of Exchange）</li>
+      <li>計價單位（Unit of Account）</li>
+      <li>價值儲存（Store of Value）</li>
+    </ul>
+  </div>
+  <div class="card key">
+    <div class="head">台灣的貨幣總計數</div>
+    <ul class="tight">
+      <li>$M_{1A}$ ＝ 通貨淨額 + 支存 + 活存</li>
+      <li>$M_{1B}$ ＝ $M_{1A}$ + 活儲</li>
+      <li>$M_{2}$ ＝ $M_{1B}$ + 準貨幣（定存、外匯存款⋯）</li>
+    </ul>
+  </div>
+</div>
+
+<h3>央行三大政策工具 → MS 變動</h3>
+<table>
+<thead>
+<tr><th>工具</th><th>方向：MS↑（寬鬆）</th><th>方向：MS↓（緊縮）</th><th>影響機制</th></tr>
+</thead>
+<tbody>
+<tr><td><b>公開市場操作 OMO</b></td><td>央行<b>買</b>債券</td><td>央行<b>賣</b>債券</td><td>直接改變銀行體系準備金</td></tr>
+<tr><td><b>貼現率</b></td><td>降貼現率</td><td>升貼現率</td><td>銀行向央行借款成本</td></tr>
+<tr><td><b>法定準備率 R</b></td><td>降 R → 乘數 $1/R$↑</td><td>升 R → 乘數↓</td><td>放大或縮小銀行創造存款的能力</td></tr>
+</tbody>
+</table>
+
+<h3>圖 5 — 部分準備制下的貨幣創造</h3>
+<figure>
+<svg viewBox="0 0 720 230" xmlns="http://www.w3.org/2000/svg">
+  <!-- Step 1 -->
+  <rect x="20" y="40" width="180" height="150" fill="#fff" stroke="#2E4A6B" stroke-width="1.4"/>
+  <text x="110" y="32" text-anchor="middle" class="title-svg" style="font-size:12px">第 1 家銀行（R=10%）</text>
+  <line x1="110" y1="50" x2="110" y2="180" stroke="#2E4A6B" stroke-width="1"/>
+  <line x1="30" y1="70" x2="190" y2="70" stroke="#2E4A6B" stroke-width="1"/>
+  <text x="65" y="64" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="700">資產</text>
+  <text x="155" y="64" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="700">負債</text>
+  <text x="35" y="95" font-family="IBM Plex Mono" font-size="11">準備 10</text>
+  <text x="35" y="115" font-family="IBM Plex Mono" font-size="11">放款 90</text>
+  <text x="120" y="95" font-family="IBM Plex Mono" font-size="11">存款 100</text>
+  <text x="110" y="170" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#8A8479">存款 = 100</text>
+  <!-- arrow -->
+  <path d="M 210 115 L 260 115" stroke="#1F1B16" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <text x="235" y="105" text-anchor="middle" font-family="IBM Plex Mono" font-size="10">放款 90</text>
+
+  <!-- Step 2 -->
+  <rect x="270" y="40" width="180" height="150" fill="#fff" stroke="#2E4A6B" stroke-width="1.4"/>
+  <text x="360" y="32" text-anchor="middle" class="title-svg" style="font-size:12px">第 2 家銀行</text>
+  <line x1="360" y1="50" x2="360" y2="180" stroke="#2E4A6B" stroke-width="1"/>
+  <line x1="280" y1="70" x2="440" y2="70" stroke="#2E4A6B" stroke-width="1"/>
+  <text x="320" y="64" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="700">資產</text>
+  <text x="405" y="64" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="700">負債</text>
+  <text x="285" y="95" font-family="IBM Plex Mono" font-size="11">準備 9</text>
+  <text x="285" y="115" font-family="IBM Plex Mono" font-size="11">放款 81</text>
+  <text x="370" y="95" font-family="IBM Plex Mono" font-size="11">存款 90</text>
+  <text x="360" y="170" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#8A8479">存款 = 90</text>
+  <!-- arrow -->
+  <path d="M 460 115 L 510 115" stroke="#1F1B16" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <text x="485" y="105" text-anchor="middle" font-family="IBM Plex Mono" font-size="10">放款 81</text>
+
+  <!-- Step 3 -->
+  <rect x="520" y="40" width="180" height="150" fill="#fff" stroke="#2E4A6B" stroke-width="1.4"/>
+  <text x="610" y="32" text-anchor="middle" class="title-svg" style="font-size:12px">⋯ 直到無限循環</text>
+  <text x="610" y="100" text-anchor="middle" font-family="IBM Plex Mono" font-size="14" font-weight="700">總存款 =</text>
+  <text x="610" y="125" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" font-weight="700" fill="#B8473A">100 × (1/0.10) = 1000</text>
+  <text x="610" y="155" text-anchor="middle" font-family="IBM Plex Mono" font-size="12">貨幣乘數 = 1/R</text>
+  <text x="610" y="172" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#8A8479">R=10% → 乘數=10</text>
+</svg>
+<figcaption><span class="fig-no">圖 5</span>部分準備制下的存款創造：每存入 100、創造 1000。若 R 由 10% 升到 20%，乘數由 10 → 5，<b>MS 立刻減半</b>。</figcaption>
+</figure>
+
+<div class="chain"><span class="node start">央行買債券（OMO）</span><span class="arrow">→</span><span class="node">商銀準備金↑</span><span class="arrow">→</span><span class="node">放款↑、存款連鎖創造</span><span class="arrow">→</span><span class="node end">MS↑</span></div>
+</section>
+
+<!-- ======================================================
+     §5 Ch7 貨幣成長與通膨
+     ====================================================== -->
+<section id="ch7">
+<h2 class="sec"><span class="num">§ 5</span>Ch 7 貨幣成長與通膨<span class="en">MONEY GROWTH &amp; INFLATION</span></h2>
+
+<div class="grid-2">
+  <div class="card key">
+    <div class="head">貨幣數量論四個前提</div>
+    <ol class="tight" style="padding-left:18px">
+      <li>$V$（流通速度）長期穩定</li>
+      <li>$M$ 變動 → 名目 GDP（$PY$）等比例變動</li>
+      <li>$Y$ 由實物面（科技、資源）決定，貨幣中立</li>
+      <li>$M$ 增加 → $P$ 等比例上升 → <b>通膨</b></li>
+    </ol>
+  </div>
+  <div class="card warn">
+    <div class="head">通膨成本（重點！）</div>
+    <ul class="tight">
+      <li><b>鞋皮成本</b>（shoe-leather）：減少持有現金的麻煩</li>
+      <li><b>菜單成本</b>（menu cost）：頻繁改價的成本</li>
+      <li><b>相對價格扭曲</b>：誤導資源配置</li>
+      <li><b>稅制扭曲</b>：名目所得課稅 → 高估資本利得</li>
+      <li><b>計算混亂</b>、<b>財富任意重分配</b></li>
+    </ul>
+  </div>
+</div>
+
+<h3>圖 6 — 貨幣市場（古典觀點：MS↑ → 1/P↓ → P↑）</h3>
+<figure>
+<svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">
+  <path class="ax" d="M 60 240 L 360 240 M 60 240 L 60 30"/>
+  <text x="60" y="20" text-anchor="middle" class="ax-label">1/P (貨幣價值)</text>
+  <text x="365" y="255" class="ax-label">M (數量)</text>
+  <!-- MS1 vertical at x=180 -->
+  <line class="curve-ms" x1="180" y1="30" x2="180" y2="240"/>
+  <text x="180" y="25" text-anchor="middle" class="curve-lbl" fill="#2E4A6B">MS₁</text>
+  <!-- MS2 vertical at x=260 -->
+  <line class="curve-ms2" x1="260" y1="30" x2="260" y2="240"/>
+  <text x="260" y="25" text-anchor="middle" class="curve-lbl" fill="#2E4A6B">MS₂</text>
+  <!-- MD downward sloping -->
+  <line class="curve-md" x1="80" y1="60" x2="340" y2="220"/>
+  <text x="345" y="220" class="curve-lbl" fill="#B8473A">MD</text>
+  <!-- E1 at (180, 60+(160/260)*(180-80)) = 60 + 0.6154*100 = 121.54 -->
+  <circle class="pt" cx="180" cy="122" r="4"/>
+  <text x="172" y="118" text-anchor="end" class="pt-lbl">E₁</text>
+  <line class="proj" x1="60" y1="122" x2="180" y2="122"/>
+  <line class="proj" x1="180" y1="122" x2="180" y2="240"/>
+  <text x="50" y="126" text-anchor="end" class="ax-label">高</text>
+  <text x="180" y="255" text-anchor="middle" class="ax-label">M₁</text>
+  <!-- E2 at x=260, y = 60+0.6154*(260-80)= 60+110.77=170.77 -->
+  <circle class="pt2" cx="260" cy="171" r="4"/>
+  <text x="268" y="167" class="pt-lbl" fill="#B8473A">E₂</text>
+  <line class="proj" x1="60" y1="171" x2="260" y2="171"/>
+  <line class="proj" x1="260" y1="171" x2="260" y2="240"/>
+  <text x="50" y="175" text-anchor="end" class="ax-label" fill="#B8473A">低</text>
+  <text x="260" y="270" text-anchor="middle" class="ax-label" fill="#B8473A">M₂</text>
+  <!-- annotation -->
+  <text x="280" y="50" font-family="IBM Plex Mono" font-size="10" fill="#8A8479">↑MS → ↓(1/P) → ↑P</text>
+</svg>
+<figcaption><span class="fig-no">圖 6</span>貨幣市場：縱軸是<b>貨幣價值 1/P</b>。MS 右移，貨幣價值下跌，等同 $P$ 上升 ＝ 通膨。</figcaption>
+</figure>
+
+<h3>圖 7 — 費雪效果（i = r + π）</h3>
+<figure>
+<svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+  <path class="ax" d="M 60 200 L 360 200 M 60 200 L 60 30"/>
+  <text x="60" y="22" text-anchor="middle" class="ax-label">名目利率 i</text>
+  <text x="370" y="215" class="ax-label">通膨率 π</text>
+  <!-- 45-degree line from (60,200) shifted up by r=20px (real interest rate). Slope = 1 (in pixel terms) -->
+  <!-- Real rate as horizontal line at y=180 (close to base) -->
+  <line stroke="#2D5A4A" stroke-width="1.5" stroke-dasharray="4,3" x1="60" y1="180" x2="360" y2="180"/>
+  <text x="365" y="184" class="curve-lbl" fill="#2D5A4A" style="font-size:11px">r (實質)</text>
+  <!-- Fisher line: i = r + π, starts at (60,180), slope 1 -->
+  <line stroke="#B8473A" stroke-width="2" x1="60" y1="180" x2="240" y2="50"/>
+  <text x="245" y="50" class="curve-lbl" fill="#B8473A">i = r + π</text>
+  <!-- Sample point -->
+  <circle class="pt2" cx="150" cy="115" r="4"/>
+  <line class="proj" x1="60" y1="115" x2="150" y2="115"/>
+  <line class="proj" x1="150" y1="115" x2="150" y2="200"/>
+  <text x="50" y="119" text-anchor="end" class="ax-label">i₁</text>
+  <text x="150" y="215" text-anchor="middle" class="ax-label">π₁</text>
+  <!-- Another point higher -->
+  <circle class="pt" cx="210" cy="73" r="4"/>
+  <line class="proj" x1="60" y1="73" x2="210" y2="73"/>
+  <line class="proj" x1="210" y1="73" x2="210" y2="200"/>
+  <text x="50" y="77" text-anchor="end" class="ax-label">i₂</text>
+  <text x="210" y="215" text-anchor="middle" class="ax-label">π₂</text>
+</svg>
+<figcaption><span class="fig-no">圖 7</span>費雪效果：$π$ 每升 1%，$i$ <b>等幅</b>升 1%（45° 斜線）。$r$ 不變（綠色虛線）＝ 貨幣中立。</figcaption>
+</figure>
+
+<div class="chain"><span class="node start">MS↑（央行印錢）</span><span class="arrow">→</span><span class="node">短期 Y↑（流動性效果）</span><span class="arrow">→</span><span class="node">長期 P↑（中立性）</span><span class="arrow">→</span><span class="node">π↑</span><span class="arrow">→</span><span class="node end">i↑（費雪效果，r 不變）</span></div>
+</section>
+
+<!-- ======================================================
+     §6 Ch8 開放經濟基礎
+     ====================================================== -->
+<section id="ch8">
+<h2 class="sec"><span class="num">§ 6</span>Ch 8 開放經濟基礎<span class="en">OPEN-ECONOMY BASICS</span></h2>
+
+<table>
+<thead>
+<tr><th>名詞</th><th>定義</th><th>公式／例子</th></tr>
+</thead>
+<tbody>
+<tr><td>淨出口 NX</td><td>出口 − 進口</td><td>NX > 0 ＝ 貿易順差；NX < 0 ＝ 貿易逆差</td></tr>
+<tr><td>淨資本外流 NCO</td><td>本國買外國資產 − 外國買本國資產</td><td>NCO > 0 ＝ 資本淨流出</td></tr>
+<tr><td>核心恆等式</td><td>會計上必然成立</td><td class="cell-formula">$NX = NCO$（每一筆貿易必有相對應的資產流動）</td></tr>
+<tr><td>名目匯率 $e$</td><td>外幣/本幣（如 1 USD = 31.85 NTD → e=31.85，但教材以「外幣/本幣」方向定義）</td><td>本書定義 $e$ = 1 單位本幣可換的外幣</td></tr>
+<tr><td>實質匯率 $\varepsilon$</td><td>本國貨品相對外國貨品的價格</td><td class="cell-formula">$\varepsilon = e \cdot P / P^*$</td></tr>
+<tr><td>購買力平價 PPP</td><td>長期實質匯率 = 1</td><td class="cell-formula">$e = P^*/P$；本國 π 高 → 本幣貶</td></tr>
+</tbody>
+</table>
+
+<h3>圖 8 — NX、NCO、S − I 三角恆等式</h3>
+<figure>
+<svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg">
+  <!-- Three boxes connected showing identity -->
+  <rect x="40" y="60" width="140" height="80" fill="#F3F7F5" stroke="#2D5A4A" stroke-width="1.5"/>
+  <text x="110" y="90" text-anchor="middle" class="title-svg">儲蓄 − 投資</text>
+  <text x="110" y="115" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" font-weight="700">S − I</text>
+  <text x="110" y="132" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#8A8479">本國剩餘資金</text>
+
+  <text x="200" y="105" text-anchor="middle" font-family="IBM Plex Mono" font-size="24" font-weight="700">=</text>
+
+  <rect x="230" y="60" width="140" height="80" fill="#F5F0E1" stroke="#2E4A6B" stroke-width="1.5"/>
+  <text x="300" y="90" text-anchor="middle" class="title-svg">淨資本外流</text>
+  <text x="300" y="115" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" font-weight="700">NCO</text>
+  <text x="300" y="132" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#8A8479">資金跑去買外國資產</text>
+
+  <text x="390" y="105" text-anchor="middle" font-family="IBM Plex Mono" font-size="24" font-weight="700">=</text>
+
+  <rect x="420" y="60" width="140" height="80" fill="#FCF5F3" stroke="#B8473A" stroke-width="1.5"/>
+  <text x="490" y="90" text-anchor="middle" class="title-svg" style="fill:#B8473A">淨出口</text>
+  <text x="490" y="115" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" font-weight="700">NX</text>
+  <text x="490" y="132" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#8A8479">物品送到國外</text>
+
+  <text x="300" y="35" text-anchor="middle" class="title-svg" style="font-size:14px">$S - I = NCO = NX$（恆等式）</text>
+  <text x="300" y="175" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#8A8479">三者必須一起變動 — 這是期末考的核心邏輯</text>
+</svg>
+<figcaption><span class="fig-no">圖 8</span>開放經濟最重要的會計恆等式：本國儲蓄超過投資的部分，必定流向國外資產 (NCO)，也必定對應到淨出口 (NX)。</figcaption>
+</figure>
+
+<div class="chain"><span class="node start">本國 π↑</span><span class="arrow">→</span><span class="node">本國 P 相對 P* 上升</span><span class="arrow">→</span><span class="node">PPP：e = P*/P 下跌</span><span class="arrow">→</span><span class="node end">名目匯率貶值（本幣 ↓）</span></div>
+</section>
+
+<!-- ======================================================
+     §7 Ch9 開放經濟模型（三市場聯動）
+     ====================================================== -->
+<section id="ch9">
+<h2 class="sec"><span class="num">§ 7</span>Ch 9 開放經濟模型（三市場聯動）<span class="en">OPEN-ECONOMY MODEL</span></h2>
+
+<p>本章是期末考<b>申論題重災區</b>。任何衝擊都要在<b>三張圖上同時畫出</b>：(1) 可貸資金市場、(2) NCO 市場、(3) 外匯市場。三張圖透過 $r$ 與 NCO 串接。</p>
+
+<div class="card key">
+  <div class="head">三市場連動規則</div>
+  <ul class="tight">
+    <li>可貸資金市場：供給 $S$；需求 $I + NCO$；價格 $r$</li>
+    <li>NCO 市場：$r$ 是外生（由可貸資金市場給定）；$NCO=f(r)$，斜率為負</li>
+    <li>外匯市場：供給 $NCO$（本國人賣本幣換外幣）；需求 $NX$（外國人買本國出口要本幣）；價格 $\varepsilon$</li>
+  </ul>
+</div>
+
+<h3>圖 9 — 開放經濟三市場（基本均衡）</h3>
+<div class="triple-panel">
+  <div class="panel-title">三市場同時均衡 — r 決定 NCO，NCO 決定 ε</div>
+  <figure>
+    <svg viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg">
+      <text x="170" y="20" text-anchor="middle" class="title-svg">A. 可貸資金市場</text>
+      <path class="ax" d="M 60 240 L 320 240 M 60 240 L 60 40"/>
+      <text x="60" y="32" text-anchor="middle" class="ax-label">r</text>
+      <text x="325" y="255" class="ax-label">Q</text>
+      <line class="curve-s" x1="80" y1="220" x2="300" y2="60"/>
+      <text x="305" y="60" class="curve-lbl" fill="#2E4A6B">S</text>
+      <line class="curve-d" x1="80" y1="60" x2="300" y2="220"/>
+      <text x="305" y="220" class="curve-lbl" fill="#B8473A">I + NCO</text>
+      <circle class="pt" cx="190" cy="140" r="4"/>
+      <line class="proj" x1="60" y1="140" x2="190" y2="140"/>
+      <line class="proj" x1="190" y1="140" x2="190" y2="240"/>
+      <text x="50" y="144" text-anchor="end" class="ax-label">r*</text>
+    </svg>
+  </figure>
+  <figure>
+    <svg viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg">
+      <text x="170" y="20" text-anchor="middle" class="title-svg">B. NCO 市場（r 外生）</text>
+      <path class="ax" d="M 60 240 L 320 240 M 190 40 L 190 240"/>
+      <text x="60" y="32" text-anchor="middle" class="ax-label">r</text>
+      <text x="325" y="255" class="ax-label">NCO</text>
+      <!-- NCO downward sloping crossing zero axis at center -->
+      <line class="curve-d" x1="80" y1="60" x2="300" y2="220"/>
+      <text x="305" y="60" class="curve-lbl" fill="#B8473A">NCO</text>
+      <!-- horizontal line for r* -->
+      <line class="proj" x1="60" y1="140" x2="240" y2="140"/>
+      <circle class="pt" cx="190" cy="140" r="4"/>
+      <line class="proj" x1="190" y1="140" x2="190" y2="240"/>
+      <text x="195" y="255" class="ax-label">NCO*</text>
+      <text x="50" y="144" text-anchor="end" class="ax-label">r*</text>
+    </svg>
+  </figure>
+  <figure>
+    <svg viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg">
+      <text x="170" y="20" text-anchor="middle" class="title-svg">C. 外匯市場</text>
+      <path class="ax" d="M 60 240 L 320 240 M 60 240 L 60 40"/>
+      <text x="60" y="32" text-anchor="middle" class="ax-label">ε</text>
+      <text x="325" y="255" class="ax-label">Q (本幣)</text>
+      <!-- Supply = NCO (vertical since NCO determined elsewhere) -->
+      <line class="curve-s" x1="190" y1="40" x2="190" y2="240"/>
+      <text x="190" y="35" text-anchor="middle" class="curve-lbl" fill="#2E4A6B">S = NCO</text>
+      <!-- Demand = NX (downward) -->
+      <line class="curve-d" x1="80" y1="60" x2="300" y2="220"/>
+      <text x="305" y="220" class="curve-lbl" fill="#B8473A">D = NX</text>
+      <circle class="pt" cx="190" cy="140" r="4"/>
+      <line class="proj" x1="60" y1="140" x2="190" y2="140"/>
+      <line class="proj" x1="190" y1="140" x2="190" y2="240"/>
+      <text x="50" y="144" text-anchor="end" class="ax-label">ε*</text>
+      <text x="190" y="255" text-anchor="middle" class="ax-label">NCO*</text>
+    </svg>
+  </figure>
+</div>
+<p style="text-align:center;font-size:12.5px;color:var(--ink-soft)"><span class="fig-no" style="color:var(--green);font-family:var(--mono);font-weight:700">圖 9</span>三市場基本均衡：r* 由 A 決定 → 帶到 B 決定 NCO* → NCO* 是 C 的供給 → 決定 ε*。</p>
+
+<h3>圖 10 — 預算赤字（開放經濟版本：雙刃劍）</h3>
+<div class="triple-panel">
+  <div class="panel-title">財政擴張 → r↑ → NCO↓ → ε↑（本幣升）→ NX↓</div>
+  <figure>
+    <svg viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg">
+      <text x="170" y="20" text-anchor="middle" class="title-svg">A. 可貸資金（S 左移）</text>
+      <path class="ax" d="M 60 240 L 320 240 M 60 240 L 60 40"/>
+      <text x="60" y="32" text-anchor="middle" class="ax-label">r</text>
+      <text x="325" y="255" class="ax-label">Q</text>
+      <line class="curve-s" x1="80" y1="220" x2="300" y2="60"/>
+      <text x="78" y="220" text-anchor="end" class="curve-lbl" fill="#2E4A6B">S₁</text>
+      <line class="curve-s2" x1="40" y1="220" x2="260" y2="60"/>
+      <text x="35" y="60" text-anchor="end" class="curve-lbl" fill="#2E4A6B">S₂</text>
+      <line class="curve-d" x1="80" y1="60" x2="300" y2="220"/>
+      <text x="305" y="220" class="curve-lbl" fill="#B8473A">I+NCO</text>
+      <!-- E1 -->
+      <circle class="pt" cx="190" cy="140" r="4"/>
+      <text x="197" y="135" class="pt-lbl">E₁</text>
+      <line class="proj" x1="60" y1="140" x2="190" y2="140"/>
+      <text x="50" y="144" text-anchor="end" class="ax-label">r₁</text>
+      <!-- E2 (S2 ∩ D): S2 line: y=220-(160/220)(x-40)=220-0.727(x-40); D: y=60+0.727(x-80) => 220-0.727(x-40)=60+0.727(x-80) => 220+29.09-0.727x = 60-58.18+0.727x => 249.09-0.727x = 1.82+0.727x => 247.27=1.455x => x≈170 -->
+      <!-- y = 60+0.727*(170-80) = 60+65.45 = 125.45 -->
+      <circle class="pt2" cx="170" cy="125" r="4"/>
+      <text x="163" y="121" text-anchor="end" class="pt-lbl" fill="#B8473A">E₂</text>
+      <line class="proj" x1="60" y1="125" x2="170" y2="125"/>
+      <text x="50" y="129" text-anchor="end" class="ax-label" fill="#B8473A">r₂↑</text>
+    </svg>
+  </figure>
+  <figure>
+    <svg viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg">
+      <text x="170" y="20" text-anchor="middle" class="title-svg">B. r↑ → NCO↓</text>
+      <path class="ax" d="M 60 240 L 320 240 M 190 40 L 190 240"/>
+      <text x="60" y="32" text-anchor="middle" class="ax-label">r</text>
+      <text x="325" y="255" class="ax-label">NCO</text>
+      <line class="curve-d" x1="80" y1="60" x2="300" y2="220"/>
+      <text x="305" y="60" class="curve-lbl" fill="#B8473A">NCO</text>
+      <!-- E1: r1 → NCO1: at r=140, x on line: 80→60, 300→220, line y=60+0.727(x-80), set y=140 => x=80+110.09=190.09 -->
+      <line class="proj" x1="60" y1="140" x2="190" y2="140"/>
+      <circle class="pt" cx="190" cy="140" r="4"/>
+      <line class="proj" x1="190" y1="140" x2="190" y2="240"/>
+      <text x="50" y="144" text-anchor="end" class="ax-label">r₁</text>
+      <text x="195" y="255" class="ax-label">NCO₁</text>
+      <!-- E2: r2=125 → x: 125=60+0.727(x-80) => 0.727(x-80)=65 => x-80=89.4 => x=169.4 -->
+      <line class="proj" x1="60" y1="125" x2="169" y2="125"/>
+      <circle class="pt2" cx="169" cy="125" r="4"/>
+      <line class="proj" x1="169" y1="125" x2="169" y2="240"/>
+      <text x="50" y="129" text-anchor="end" class="ax-label" fill="#B8473A">r₂</text>
+      <text x="155" y="255" text-anchor="end" class="ax-label" fill="#B8473A">NCO₂↓</text>
+      <path class="arrow-shift" d="M 195 145 Q 185 150 175 130"/>
+    </svg>
+  </figure>
+  <figure>
+    <svg viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg">
+      <text x="170" y="20" text-anchor="middle" class="title-svg">C. 外匯：S 左移 → ε↑</text>
+      <path class="ax" d="M 60 240 L 320 240 M 60 240 L 60 40"/>
+      <text x="60" y="32" text-anchor="middle" class="ax-label">ε</text>
+      <text x="325" y="255" class="ax-label">Q (本幣)</text>
+      <line class="curve-s" x1="190" y1="40" x2="190" y2="240"/>
+      <text x="195" y="48" class="curve-lbl" fill="#2E4A6B">S₁</text>
+      <line class="curve-s2" x1="155" y1="40" x2="155" y2="240"/>
+      <text x="148" y="48" text-anchor="end" class="curve-lbl" fill="#2E4A6B">S₂</text>
+      <line class="curve-d" x1="80" y1="60" x2="300" y2="220"/>
+      <text x="305" y="220" class="curve-lbl" fill="#B8473A">NX</text>
+      <!-- E1 at (190,140) -->
+      <circle class="pt" cx="190" cy="140" r="4"/>
+      <line class="proj" x1="60" y1="140" x2="190" y2="140"/>
+      <line class="proj" x1="190" y1="140" x2="190" y2="240"/>
+      <text x="50" y="144" text-anchor="end" class="ax-label">ε₁</text>
+      <text x="190" y="255" text-anchor="middle" class="ax-label">NCO₁</text>
+      <!-- E2 at x=155, D y=60+0.727(155-80)=60+54.55=114.55 -->
+      <circle class="pt2" cx="155" cy="114" r="4"/>
+      <line class="proj" x1="60" y1="114" x2="155" y2="114"/>
+      <line class="proj" x1="155" y1="114" x2="155" y2="240"/>
+      <text x="50" y="118" text-anchor="end" class="ax-label" fill="#B8473A">ε₂↑</text>
+      <text x="155" y="268" text-anchor="middle" class="ax-label" fill="#B8473A">NCO₂</text>
+    </svg>
+  </figure>
+</div>
+<div class="chain"><span class="node start">預算赤字 G↑</span><span class="arrow">→</span><span class="node">S 左移</span><span class="arrow">→</span><span class="node">r↑</span><span class="arrow">→</span><span class="node">NCO↓</span><span class="arrow">→</span><span class="node">外匯供給↓</span><span class="arrow">→</span><span class="node">ε↑（本幣升值）</span><span class="arrow">→</span><span class="node end">NX↓（雙赤字）</span></div>
+
+<h3>圖 11 — 貿易政策（關稅／配額）</h3>
+<div class="triple-panel">
+  <div class="panel-title">關稅 → NX 在每個 ε 都增加 → 外匯需求右移 → ε↑ 但 NX <b>不變</b></div>
+  <figure>
+    <svg viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg">
+      <text x="170" y="20" text-anchor="middle" class="title-svg">A. 可貸資金（不變）</text>
+      <path class="ax" d="M 60 240 L 320 240 M 60 240 L 60 40"/>
+      <text x="60" y="32" text-anchor="middle" class="ax-label">r</text>
+      <text x="325" y="255" class="ax-label">Q</text>
+      <line class="curve-s" x1="80" y1="220" x2="300" y2="60"/>
+      <text x="305" y="60" class="curve-lbl" fill="#2E4A6B">S</text>
+      <line class="curve-d" x1="80" y1="60" x2="300" y2="220"/>
+      <text x="305" y="220" class="curve-lbl" fill="#B8473A">I+NCO</text>
+      <circle class="pt" cx="190" cy="140" r="4"/>
+      <line class="proj" x1="60" y1="140" x2="190" y2="140"/>
+      <text x="50" y="144" text-anchor="end" class="ax-label">r*（不變）</text>
+    </svg>
+  </figure>
+  <figure>
+    <svg viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg">
+      <text x="170" y="20" text-anchor="middle" class="title-svg">B. NCO（不變）</text>
+      <path class="ax" d="M 60 240 L 320 240 M 190 40 L 190 240"/>
+      <text x="60" y="32" text-anchor="middle" class="ax-label">r</text>
+      <text x="325" y="255" class="ax-label">NCO</text>
+      <line class="curve-d" x1="80" y1="60" x2="300" y2="220"/>
+      <text x="305" y="60" class="curve-lbl" fill="#B8473A">NCO</text>
+      <line class="proj" x1="60" y1="140" x2="190" y2="140"/>
+      <circle class="pt" cx="190" cy="140" r="4"/>
+      <line class="proj" x1="190" y1="140" x2="190" y2="240"/>
+      <text x="50" y="144" text-anchor="end" class="ax-label">r*</text>
+      <text x="195" y="255" class="ax-label">NCO*（不變）</text>
+    </svg>
+  </figure>
+  <figure>
+    <svg viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg">
+      <text x="170" y="20" text-anchor="middle" class="title-svg">C. 外匯：D 右移</text>
+      <path class="ax" d="M 60 240 L 320 240 M 60 240 L 60 40"/>
+      <text x="60" y="32" text-anchor="middle" class="ax-label">ε</text>
+      <text x="325" y="255" class="ax-label">Q</text>
+      <line class="curve-s" x1="190" y1="40" x2="190" y2="240"/>
+      <text x="195" y="48" class="curve-lbl" fill="#2E4A6B">S = NCO</text>
+      <line class="curve-d" x1="80" y1="60" x2="300" y2="220"/>
+      <text x="78" y="60" text-anchor="end" class="curve-lbl" fill="#B8473A">D₁ (NX₁)</text>
+      <line class="curve-d2" x1="130" y1="40" x2="340" y2="195"/>
+      <text x="345" y="195" class="curve-lbl" fill="#B8473A">D₂</text>
+      <!-- E1 -->
+      <circle class="pt" cx="190" cy="140" r="4"/>
+      <text x="183" y="135" text-anchor="end" class="pt-lbl">E₁</text>
+      <line class="proj" x1="60" y1="140" x2="190" y2="140"/>
+      <text x="50" y="144" text-anchor="end" class="ax-label">ε₁</text>
+      <!-- E2 at x=190 on D2: D2 from (130,40) to (340,195), slope=155/210=0.738; y=40+0.738(x-130). At x=190: y=40+44.3=84.3 -->
+      <circle class="pt2" cx="190" cy="84" r="4"/>
+      <text x="197" y="80" class="pt-lbl" fill="#B8473A">E₂</text>
+      <line class="proj" x1="60" y1="84" x2="190" y2="84"/>
+      <text x="50" y="88" text-anchor="end" class="ax-label" fill="#B8473A">ε₂↑</text>
+      <text x="190" y="255" text-anchor="middle" class="ax-label">NCO*</text>
+    </svg>
+  </figure>
+</div>
+<div class="chain"><span class="node start">關稅↑（限制進口）</span><span class="arrow">→</span><span class="node">外匯需求 (NX) 右移</span><span class="arrow">→</span><span class="node">ε↑（本幣升）</span><span class="arrow">→</span><span class="node">出口↓、進口↑（抵銷）</span><span class="arrow">→</span><span class="node end">NX 與 NCO 都不變！</span></div>
+<div class="card warn"><div class="head">⚠ 關稅的關鍵反直覺結論</div>關稅<b>不能改善整體貿易餘額</b>，只會改變貿易組成（出口少、進口也少）並讓本幣升值。NCO 由可貸資金市場決定，貿易政策不動 r，因此 NCO 不變 → NX 必須維持不變。</div>
+
+<h3>圖 12 — 資本外逃（capital flight，如墨西哥 1994）</h3>
+<div class="triple-panel">
+  <div class="panel-title">外國人不再買本國資產 → NCO↑（本國資金往外跑）</div>
+  <figure>
+    <svg viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg">
+      <text x="170" y="20" text-anchor="middle" class="title-svg">A. 可貸資金：D 右移</text>
+      <path class="ax" d="M 60 240 L 320 240 M 60 240 L 60 40"/>
+      <text x="60" y="32" text-anchor="middle" class="ax-label">r</text>
+      <text x="325" y="255" class="ax-label">Q</text>
+      <line class="curve-s" x1="80" y1="220" x2="300" y2="60"/>
+      <text x="305" y="60" class="curve-lbl" fill="#2E4A6B">S</text>
+      <line class="curve-d" x1="80" y1="60" x2="300" y2="220"/>
+      <text x="78" y="60" text-anchor="end" class="curve-lbl" fill="#B8473A">D₁</text>
+      <line class="curve-d2" x1="120" y1="60" x2="340" y2="200"/>
+      <text x="345" y="200" class="curve-lbl" fill="#B8473A">D₂</text>
+      <circle class="pt" cx="190" cy="140" r="4"/>
+      <line class="proj" x1="60" y1="140" x2="190" y2="140"/>
+      <text x="50" y="144" text-anchor="end" class="ax-label">r₁</text>
+      <!-- D2: from (120,60) to (340,200) slope=140/220=0.636; y=60+0.636(x-120) -->
+      <!-- S: y=220-0.727(x-80) -->
+      <!-- Set: 220-0.727(x-80)=60+0.636(x-120) => 220+58.18-0.727x = 60-76.36+0.636x => 278.18-0.727x = -16.36+0.636x => 294.55=1.363x => x≈216 -->
+      <!-- y = 60 + 0.636*(216-120) = 60+61.05 = 121.05 -->
+      <circle class="pt2" cx="216" cy="121" r="4"/>
+      <line class="proj" x1="60" y1="121" x2="216" y2="121"/>
+      <text x="50" y="125" text-anchor="end" class="ax-label" fill="#B8473A">r₂↑</text>
+    </svg>
+  </figure>
+  <figure>
+    <svg viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg">
+      <text x="170" y="20" text-anchor="middle" class="title-svg">B. NCO 右移</text>
+      <path class="ax" d="M 60 240 L 320 240 M 190 40 L 190 240"/>
+      <text x="60" y="32" text-anchor="middle" class="ax-label">r</text>
+      <text x="325" y="255" class="ax-label">NCO</text>
+      <line class="curve-d" x1="80" y1="60" x2="300" y2="220"/>
+      <text x="78" y="60" text-anchor="end" class="curve-lbl" fill="#B8473A">NCO₁</text>
+      <line class="curve-d2" x1="120" y1="60" x2="340" y2="220"/>
+      <text x="345" y="220" class="curve-lbl" fill="#B8473A">NCO₂</text>
+      <line class="proj" x1="60" y1="140" x2="190" y2="140"/>
+      <circle class="pt" cx="190" cy="140" r="4"/>
+      <text x="50" y="144" text-anchor="end" class="ax-label">r₁</text>
+      <!-- NCO2 at r2=121: line from (120,60) to (340,220) slope=160/220=0.727; y=60+0.727(x-120). Set y=121: 121=60+0.727(x-120) => x-120=83.9 => x=203.9 -->
+      <circle class="pt2" cx="204" cy="121" r="4"/>
+      <line class="proj" x1="60" y1="121" x2="204" y2="121"/>
+      <line class="proj" x1="204" y1="121" x2="204" y2="240"/>
+      <text x="50" y="125" text-anchor="end" class="ax-label" fill="#B8473A">r₂</text>
+      <text x="210" y="255" class="ax-label" fill="#B8473A">NCO₂↑</text>
+    </svg>
+  </figure>
+  <figure>
+    <svg viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg">
+      <text x="170" y="20" text-anchor="middle" class="title-svg">C. 外匯：S 右移 → ε↓</text>
+      <path class="ax" d="M 60 240 L 320 240 M 60 240 L 60 40"/>
+      <text x="60" y="32" text-anchor="middle" class="ax-label">ε</text>
+      <text x="325" y="255" class="ax-label">Q</text>
+      <line class="curve-s" x1="190" y1="40" x2="190" y2="240"/>
+      <text x="183" y="48" text-anchor="end" class="curve-lbl" fill="#2E4A6B">S₁</text>
+      <line class="curve-s2" x1="230" y1="40" x2="230" y2="240"/>
+      <text x="235" y="48" class="curve-lbl" fill="#2E4A6B">S₂</text>
+      <line class="curve-d" x1="80" y1="60" x2="300" y2="220"/>
+      <text x="305" y="220" class="curve-lbl" fill="#B8473A">D = NX</text>
+      <circle class="pt" cx="190" cy="140" r="4"/>
+      <line class="proj" x1="60" y1="140" x2="190" y2="140"/>
+      <text x="50" y="144" text-anchor="end" class="ax-label">ε₁</text>
+      <!-- E2 at x=230, D y=60+0.727(230-80)=60+109.09=169.09 -->
+      <circle class="pt2" cx="230" cy="169" r="4"/>
+      <line class="proj" x1="60" y1="169" x2="230" y2="169"/>
+      <line class="proj" x1="230" y1="169" x2="230" y2="240"/>
+      <text x="50" y="173" text-anchor="end" class="ax-label" fill="#B8473A">ε₂↓</text>
+      <text x="235" y="255" class="ax-label" fill="#B8473A">NCO₂</text>
+    </svg>
+  </figure>
+</div>
+<div class="chain"><span class="node start">政治不穩 → 資本外逃</span><span class="arrow">→</span><span class="node">NCO 在每個 r 都↑（D & NCO 同時右移）</span><span class="arrow">→</span><span class="node">r↑（本國借不到錢）</span><span class="arrow">→</span><span class="node">本幣供給↑</span><span class="arrow">→</span><span class="node end">ε↓（本幣<b>貶</b>值）、I↓、NX↑</span></div>
+</section>
+
+<!-- ======================================================
+     §8 Ch10 AD-AS
+     ====================================================== -->
+<section id="ch10">
+<h2 class="sec"><span class="num">§ 8</span>Ch 10 總和需求 ・ 總和供給<span class="en">AD–AS MODEL</span></h2>
+
+<div class="grid-2">
+  <div class="card key">
+    <div class="head">AD 為什麼向下傾斜？三大效果</div>
+    <ul class="tight">
+      <li><b>財富效果</b>（C）：$P↓$ → 實質貨幣價值↑ → 消費者更富 → $C↑$</li>
+      <li><b>利率效果</b>（I）：$P↓$ → 持幣需求↓ → 利率↓ → $I↑$</li>
+      <li><b>匯率效果</b>（NX）：$P↓$ → 利率↓ → 資金外流 → 本幣貶值 → $NX↑$</li>
+    </ul>
+  </div>
+  <div class="card key">
+    <div class="head">AD 整條右移的因素</div>
+    <ul class="tight">
+      <li>$C$：股市榮景、消費偏好、減稅</li>
+      <li>$I$：樂觀預期、減利率、投資稅優</li>
+      <li>$G$：政府支出↑</li>
+      <li>$NX$：海外景氣熱、本幣貶值</li>
+    </ul>
+    <p style="margin-top:6px"><b>注意：</b>$P$ 自己變動是「沿著」AD 移動，不是 AD 整條移。</p>
+  </div>
+</div>
+
+<h3>SRAS 為什麼正斜率？三個理論</h3>
+<table>
+<thead>
+<tr><th>理論</th><th>核心想法</th><th>結論</th></tr>
+</thead>
+<tbody>
+<tr><td>黏性工資</td><td>名目工資短期難調</td><td>$P↑$ → 實質工資↓ → 廠商願意多雇用 → $Y↑$</td></tr>
+<tr><td>黏性價格</td><td>有些廠商還沒改價</td><td>$P↑$ 時舊價廠商相對便宜，銷售增加 → $Y↑$</td></tr>
+<tr><td>誤認知</td><td>廠商分不清是相對價變還是物價普遍變</td><td>$P↑$ 被誤認為「自己產品熱賣」 → 增產 → $Y↑$</td></tr>
+</tbody>
+</table>
+
+<h3>圖 13 — AD–AS 基本均衡</h3>
+<figure>
+<svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Coordinate design (shared across Fig 13/14/15):
+       Origin (60,260). LRAS at x=230. Slope ±150/260 ≈ ±0.5769.
+       SRAS₁: (100,230)→(360,80) passes (230,155). AD₁: (100,80)→(360,230) passes (230,155). -->
+  <path class="ax" d="M 60 260 L 380 260 M 60 260 L 60 30"/>
+  <text x="60" y="22" text-anchor="middle" class="ax-label">P</text>
+  <text x="385" y="275" class="ax-label">Y</text>
+  <line class="curve-lras" x1="230" y1="40" x2="230" y2="260"/>
+  <text x="235" y="48" class="curve-lbl" fill="#2D5A4A">LRAS</text>
+  <line class="curve-sras" x1="100" y1="230" x2="360" y2="80"/>
+  <text x="365" y="80" class="curve-lbl" fill="#A47E1B">SRAS</text>
+  <line class="curve-ad" x1="100" y1="80" x2="360" y2="230"/>
+  <text x="365" y="230" class="curve-lbl" fill="#B8473A">AD</text>
+  <circle class="pt" cx="230" cy="155" r="4.5"/>
+  <text x="238" y="151" class="pt-lbl">E*</text>
+  <line class="proj" x1="60" y1="155" x2="230" y2="155"/>
+  <line class="proj" x1="230" y1="155" x2="230" y2="260"/>
+  <text x="50" y="159" text-anchor="end" class="ax-label">P*</text>
+  <text x="230" y="275" text-anchor="middle" class="ax-label">Y_N</text>
+  <text x="68" y="46" font-family="IBM Plex Mono" font-size="10" fill="#8A8479">長期：三線交於 Y_N</text>
+</svg>
+<figcaption><span class="fig-no">圖 13</span>長期均衡：AD、SRAS、LRAS 三線交於自然產出 $Y_N$。</figcaption>
+</figure>
+
+<div class="grid-2">
+<figure>
+<svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- AD shock (stock crash). AD₂ parallel left-shift: (60,80)→(320,230), slope +0.5769.
+       B = AD₂ ∩ SRAS₁ at x=210, y=167.
+       C = AD₂ ∩ LRAS(x=230), y=178.
+       SRAS₂ through C with slope -0.5769: visible (88,260)→(360,103). -->
+  <text x="210" y="22" text-anchor="middle" class="title-svg">AD 衝擊：股市崩盤</text>
+  <path class="ax" d="M 60 260 L 380 260 M 60 260 L 60 38"/>
+  <text x="60" y="30" text-anchor="middle" class="ax-label">P</text>
+  <text x="385" y="275" class="ax-label">Y</text>
+  <line class="curve-lras" x1="230" y1="50" x2="230" y2="260"/>
+  <text x="235" y="58" class="curve-lbl" fill="#2D5A4A">LRAS</text>
+  <line class="curve-sras" x1="100" y1="230" x2="360" y2="80"/>
+  <text x="365" y="80" class="curve-lbl" fill="#A47E1B">SRAS₁</text>
+  <line class="curve-sras2" x1="88" y1="260" x2="360" y2="103"/>
+  <text x="365" y="103" class="curve-lbl" fill="#A47E1B">SRAS₂</text>
+  <line class="curve-ad" x1="100" y1="80" x2="360" y2="230"/>
+  <text x="365" y="230" class="curve-lbl" fill="#B8473A">AD₁</text>
+  <line class="curve-ad2" x1="60" y1="80" x2="320" y2="230"/>
+  <text x="55" y="84" text-anchor="end" class="curve-lbl" fill="#B8473A">AD₂</text>
+  <!-- A (long-run start) -->
+  <circle class="pt" cx="230" cy="155" r="4"/>
+  <text x="238" y="151" class="pt-lbl">A</text>
+  <!-- B short-run after AD shock -->
+  <circle class="pt2" cx="210" cy="167" r="4"/>
+  <text x="202" y="163" text-anchor="end" class="pt-lbl" fill="#B8473A">B</text>
+  <!-- C long-run after SRAS adjusts -->
+  <circle class="pt" cx="230" cy="178" r="4" fill="#2D5A4A"/>
+  <text x="238" y="190" class="pt-lbl" fill="#2D5A4A">C</text>
+  <!-- projections -->
+  <line class="proj" x1="210" y1="167" x2="210" y2="260"/>
+  <line class="proj" x1="60" y1="155" x2="230" y2="155"/>
+  <line class="proj" x1="60" y1="167" x2="210" y2="167"/>
+  <line class="proj" x1="60" y1="178" x2="230" y2="178"/>
+  <text x="50" y="159" text-anchor="end" class="ax-label">P₁</text>
+  <text x="50" y="171" text-anchor="end" class="ax-label" fill="#B8473A">P₂</text>
+  <text x="50" y="186" text-anchor="end" class="ax-label" fill="#2D5A4A">P₃</text>
+  <text x="210" y="275" text-anchor="middle" class="ax-label" fill="#B8473A">Y₂</text>
+  <text x="230" y="275" text-anchor="middle" class="ax-label">Y_N</text>
+</svg>
+<figcaption><span class="fig-no">圖 14</span>股市崩盤 → C↓ → AD 左移。短期 A→B：產出 Y₂ 低於 Y_N、$P↓$（衰退）；長期 $P^e$ 下修 → SRAS 右移 → C 點，產出回 $Y_N$、物價更低（$P_3 &lt; P_2 &lt; P_1$）。</figcaption>
+</figure>
+
+<figure>
+<svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Adverse SRAS shock (oil). SRAS₂ parallel left-shift through (190,155), slope -0.5769.
+       Visible endpoints: (60,230)→(360,57).
+       B = SRAS₂ ∩ AD₁ at x=210, y=143 (lower y = higher P; lower x = lower Y). -->
+  <text x="210" y="22" text-anchor="middle" class="title-svg">SRAS 衝擊：油價上漲（停滯性通膨）</text>
+  <path class="ax" d="M 60 260 L 380 260 M 60 260 L 60 38"/>
+  <text x="60" y="30" text-anchor="middle" class="ax-label">P</text>
+  <text x="385" y="275" class="ax-label">Y</text>
+  <line class="curve-lras" x1="230" y1="50" x2="230" y2="260"/>
+  <text x="235" y="58" class="curve-lbl" fill="#2D5A4A">LRAS</text>
+  <line class="curve-sras" x1="100" y1="230" x2="360" y2="80"/>
+  <text x="365" y="80" class="curve-lbl" fill="#A47E1B">SRAS₁</text>
+  <line class="curve-sras2" x1="60" y1="230" x2="360" y2="57"/>
+  <text x="55" y="234" text-anchor="end" class="curve-lbl" fill="#A47E1B">SRAS₂</text>
+  <line class="curve-ad" x1="100" y1="80" x2="360" y2="230"/>
+  <text x="365" y="230" class="curve-lbl" fill="#B8473A">AD</text>
+  <circle class="pt" cx="230" cy="155" r="4"/>
+  <text x="238" y="159" class="pt-lbl">A</text>
+  <circle class="pt2" cx="210" cy="143" r="4"/>
+  <text x="202" y="139" text-anchor="end" class="pt-lbl" fill="#B8473A">B</text>
+  <line class="proj" x1="210" y1="143" x2="210" y2="260"/>
+  <line class="proj" x1="60" y1="155" x2="230" y2="155"/>
+  <line class="proj" x1="60" y1="143" x2="210" y2="143"/>
+  <text x="50" y="159" text-anchor="end" class="ax-label">P₁</text>
+  <text x="50" y="139" text-anchor="end" class="ax-label" fill="#B8473A">P₂↑</text>
+  <text x="210" y="275" text-anchor="middle" class="ax-label" fill="#B8473A">Y₂↓</text>
+  <text x="230" y="275" text-anchor="middle" class="ax-label">Y_N</text>
+</svg>
+<figcaption><span class="fig-no">圖 15</span>不利供給衝擊（油價↑、工資衝擊）：SRAS 左移 → A→B → 產出 $Y₂↓$ + 物價 $P₂↑$ ＝ <b>停滯性通膨</b>（stagflation）。</figcaption>
+</figure>
+</div>
+
+
+<div class="card warn">
+  <div class="head">⚠ 兩個衝擊方向比較</div>
+  <table style="margin:6px 0">
+    <thead><tr><th>衝擊類型</th><th>Y 短期</th><th>P 短期</th><th>長期</th></tr></thead>
+    <tbody>
+      <tr><td>AD 左移（需求面衰退）</td><td class="cell-direction down">↓</td><td class="cell-direction down">↓</td><td>SRAS 調整 → 回 Y_N</td></tr>
+      <tr><td>AD 右移（需求面擴張）</td><td class="cell-direction up">↑</td><td class="cell-direction up">↑</td><td>SRAS 調整 → 回 Y_N，P 更高</td></tr>
+      <tr><td>SRAS 左移（不利供給衝擊）</td><td class="cell-direction down">↓</td><td class="cell-direction up">↑</td><td>等待 SRAS 回復或 Fed 介入兩難</td></tr>
+      <tr><td>LRAS 右移（科技進步）</td><td class="cell-direction up">↑</td><td class="cell-direction down">↓</td><td>長期成長</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="chain"><span class="node start">股市崩盤</span><span class="arrow">→</span><span class="node">家戶財富↓</span><span class="arrow">→</span><span class="node">C↓</span><span class="arrow">→</span><span class="node">AD 左移</span><span class="arrow">→</span><span class="node">短期：Y↓、P↓、u↑</span><span class="arrow">→</span><span class="node end">長期：P^e↓ → SRAS 右移 → 回 Y_N</span></div>
+</section>
+
+<!-- ======================================================
+     §9 Ch11 貨幣與財政政策
+     ====================================================== -->
+<section id="ch11">
+<h2 class="sec"><span class="num">§ 9</span>Ch 11 貨幣與財政政策<span class="en">MONETARY &amp; FISCAL POLICY</span></h2>
+
+<h3>圖 16 — 流動性偏好 + 貨幣政策傳遞至 AD</h3>
+<div class="grid-2">
+<figure>
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <text x="200" y="22" text-anchor="middle" class="title-svg">A. 貨幣市場（流動性偏好）</text>
+  <path class="ax" d="M 60 260 L 360 260 M 60 260 L 60 40"/>
+  <text x="60" y="32" text-anchor="middle" class="ax-label">i (名目利率)</text>
+  <text x="365" y="275" class="ax-label">M</text>
+  <!-- MS1 vertical at x=180 -->
+  <line class="curve-ms" x1="180" y1="60" x2="180" y2="260"/>
+  <text x="180" y="55" text-anchor="middle" class="curve-lbl" fill="#2E4A6B">MS₁</text>
+  <!-- MS2 right at x=240 -->
+  <line class="curve-ms2" x1="240" y1="60" x2="240" y2="260"/>
+  <text x="240" y="55" text-anchor="middle" class="curve-lbl" fill="#2E4A6B">MS₂</text>
+  <!-- MD downward sloping -->
+  <line class="curve-md" x1="80" y1="80" x2="340" y2="240"/>
+  <text x="345" y="240" class="curve-lbl" fill="#B8473A">MD</text>
+  <!-- E1 at x=180: y = 80 + (160/260)*(180-80) = 80 + 61.54 = 141.54 -->
+  <circle class="pt" cx="180" cy="142" r="4"/>
+  <text x="172" y="138" text-anchor="end" class="pt-lbl">E₁</text>
+  <line class="proj" x1="60" y1="142" x2="180" y2="142"/>
+  <text x="50" y="146" text-anchor="end" class="ax-label">i₁</text>
+  <!-- E2 at x=240, y = 80 + (160/260)*(240-80) = 80 + 98.46 = 178.46 -->
+  <circle class="pt2" cx="240" cy="178" r="4"/>
+  <text x="248" y="174" class="pt-lbl" fill="#B8473A">E₂</text>
+  <line class="proj" x1="60" y1="178" x2="240" y2="178"/>
+  <text x="50" y="182" text-anchor="end" class="ax-label" fill="#B8473A">i₂↓</text>
+  <text x="180" y="275" text-anchor="middle" class="ax-label">M₁</text>
+  <text x="240" y="275" text-anchor="middle" class="ax-label" fill="#B8473A">M₂</text>
+</svg>
+<figcaption><span class="fig-no">圖 16A</span>MS 右移（央行 OMO 買債）→ $i↓$。</figcaption>
+</figure>
+
+<figure>
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <text x="200" y="22" text-anchor="middle" class="title-svg">B. 傳遞到 AD–AS</text>
+  <path class="ax" d="M 60 260 L 360 260 M 60 260 L 60 40"/>
+  <text x="60" y="32" text-anchor="middle" class="ax-label">P</text>
+  <text x="365" y="275" class="ax-label">Y</text>
+  <line class="curve-lras" x1="220" y1="50" x2="220" y2="260"/>
+  <text x="225" y="58" class="curve-lbl" fill="#2D5A4A">LRAS</text>
+  <line class="curve-sras" x1="100" y1="230" x2="340" y2="80"/>
+  <text x="345" y="80" class="curve-lbl" fill="#A47E1B">SRAS</text>
+  <line class="curve-ad" x1="80" y1="80" x2="320" y2="230"/>
+  <text x="80" y="74" text-anchor="end" class="curve-lbl" fill="#B8473A">AD₁</text>
+  <line class="curve-ad2" x1="140" y1="80" x2="380" y2="230"/>
+  <text x="385" y="230" class="curve-lbl" fill="#B8473A">AD₂</text>
+  <!-- E1: AD1 ∩ SRAS. AD1: y=80+0.625(x-80). SRAS: y=230-0.625(x-100). Intersect: 80+0.625(x-80)=230-0.625(x-100) => 80-50+0.625x=230+62.5-0.625x => 30+0.625x=292.5-0.625x => 1.25x=262.5 => x=210; y=80+0.625*130=80+81.25=161.25 -->
+  <circle class="pt" cx="210" cy="161" r="4"/>
+  <text x="202" y="157" text-anchor="end" class="pt-lbl">E₁</text>
+  <line class="proj" x1="60" y1="161" x2="210" y2="161"/>
+  <line class="proj" x1="210" y1="161" x2="210" y2="260"/>
+  <text x="50" y="165" text-anchor="end" class="ax-label">P₁</text>
+  <text x="210" y="275" text-anchor="middle" class="ax-label">Y₁</text>
+  <!-- E2: AD2 ∩ SRAS. AD2: y=80+(150/240)(x-140)=80+0.625(x-140). SRAS y=230-0.625(x-100). Intersect: 80+0.625(x-140)=230-0.625(x-100) => 80-87.5+0.625x=230+62.5-0.625x => -7.5+0.625x=292.5-0.625x => 1.25x=300 => x=240; y=80+0.625*100=142.5 -->
+  <!-- Wait that gives lower P. Should be HIGHER P from AD shift right. Let me recheck. AD2: y=80+0.625(x-140) means at x=140, y=80. At x=380, y=80+0.625*240=80+150=230. AD slope is positive in this rendering (drawing from upper-left to lower-right in our visual chart means as x increases, y increases means moves DOWN screen. So this is downward sloping in standard sense.) -->
+  <!-- At x=240, AD2 y=80+0.625*100=142.5 ✓. SRAS y=230-0.625*140=230-87.5=142.5 ✓ -->
+  <!-- So new equilibrium at (240, 142.5). y is SMALLER → P HIGHER (since y goes down=larger P on chart). Good. -->
+  <circle class="pt2" cx="240" cy="142" r="4"/>
+  <text x="248" y="138" class="pt-lbl" fill="#B8473A">E₂</text>
+  <line class="proj" x1="60" y1="142" x2="240" y2="142"/>
+  <line class="proj" x1="240" y1="142" x2="240" y2="260"/>
+  <text x="50" y="146" text-anchor="end" class="ax-label" fill="#B8473A">P₂↑</text>
+  <text x="240" y="275" text-anchor="middle" class="ax-label" fill="#B8473A">Y₂↑</text>
+</svg>
+<figcaption><span class="fig-no">圖 16B</span>$i↓$ → $I↑$ → $AD$ 右移 → $Y↑$、$P↑$。</figcaption>
+</figure>
+</div>
+
+<h3>圖 17 — 財政擴張：乘數效果 vs 排擠效果</h3>
+<figure>
+<svg viewBox="0 0 460 320" xmlns="http://www.w3.org/2000/svg">
+  <text x="230" y="22" text-anchor="middle" class="title-svg">G↑ → AD 三次移動：初始 → 乘數放大 → 排擠抵銷</text>
+  <path class="ax" d="M 60 280 L 420 280 M 60 280 L 60 40"/>
+  <text x="60" y="32" text-anchor="middle" class="ax-label">P</text>
+  <text x="425" y="295" class="ax-label">Y</text>
+  <line class="curve-lras" x1="240" y1="50" x2="240" y2="280"/>
+  <text x="245" y="58" class="curve-lbl" fill="#2D5A4A">LRAS</text>
+  <line class="curve-sras" x1="100" y1="250" x2="380" y2="80"/>
+  <text x="385" y="80" class="curve-lbl" fill="#A47E1B">SRAS</text>
+  <!-- AD1 -->
+  <line class="curve-ad" x1="80" y1="80" x2="320" y2="250"/>
+  <text x="78" y="74" text-anchor="end" class="curve-lbl" fill="#B8473A">AD₁</text>
+  <!-- AD2 = AD1 + ΔG (initial shift right by 50px) -->
+  <line class="curve-ad2" x1="130" y1="80" x2="370" y2="250"/>
+  <text x="375" y="250" class="curve-lbl" fill="#B8473A">AD₂ (＋ΔG)</text>
+  <!-- AD3 = with multiplier (further right by 30) -->
+  <line stroke="#E89C90" stroke-width="2" stroke-dasharray="3,3" fill="none" x1="160" y1="80" x2="400" y2="250"/>
+  <text x="405" y="240" class="curve-lbl" fill="#E89C90" style="font-size:11px">AD₃ (×乘數)</text>
+  <!-- AD4 = after crowding out (pull back) -->
+  <line stroke="#B8473A" stroke-width="2" stroke-dasharray="2,4" fill="none" x1="115" y1="80" x2="355" y2="250"/>
+  <text x="115" y="74" text-anchor="end" class="curve-lbl" fill="#B8473A" style="font-size:11px">AD₄ (排擠後)</text>
+  <!-- annotations -->
+  <text x="155" y="120" font-family="IBM Plex Mono" font-size="10" fill="#8A8479">①ΔG</text>
+  <text x="195" y="120" font-family="IBM Plex Mono" font-size="10" fill="#E89C90">②乘數</text>
+  <text x="125" y="135" font-family="IBM Plex Mono" font-size="10" fill="#B8473A">③排擠抵銷</text>
+</svg>
+<figcaption><span class="fig-no">圖 17</span>財政擴張 $G↑$：AD 先右移一單位（①），<b>乘數效果</b>再放大成多倍（②），但 $Y↑$ 引起 $MD↑ → i↑ → I↓$，<b>排擠效果</b>把 AD 拉回部分（③→④）。</figcaption>
+</figure>
+
+<div class="grid-2">
+<div class="card key">
+  <div class="head">乘數效果（multiplier）</div>
+  <p>公式：$\dfrac{1}{1-MPC}$</p>
+  <ul class="tight">
+    <li>MPC=0.5 → 乘數 = 2</li>
+    <li>MPC=0.75 → 乘數 = 4</li>
+    <li>MPC=0.9 → 乘數 = 10</li>
+  </ul>
+  <p>$G$ 增 1 元 → AD 不止增 1 元，因為受款人會再消費一部分。</p>
+</div>
+<div class="card warn">
+  <div class="head">排擠效果（crowding out）</div>
+  <p>機制鏈：$G↑ \Rightarrow Y↑ \Rightarrow MD↑ \Rightarrow i↑ \Rightarrow I↓$</p>
+  <p>結果：AD 實際右移幅度 <b>小於</b>「$\Delta G \times$ 乘數」。</p>
+  <p>排擠強度取決於 $I$ 對 $i$ 的敏感度。</p>
+</div>
+</div>
+
+<div class="card tip">
+  <div class="head">💡 流動性陷阱（zero lower bound）</div>
+  <p>當 $i \approx 0$ 時，傳統貨幣政策失效（不能再降）。Fed 改用：</p>
+  <ul class="tight">
+    <li><b>前瞻引導</b>（forward guidance）：承諾長期低利率，刺激投資預期</li>
+    <li><b>量化寬鬆</b>（QE）：直接購買長期公債、MBS、企業債</li>
+  </ul>
+</div>
+
+<div class="chain"><span class="node start">擴張性貨幣（MS↑）</span><span class="arrow">→</span><span class="node">i↓</span><span class="arrow">→</span><span class="node">I↑</span><span class="arrow">→</span><span class="node">AD 右移</span><span class="arrow">→</span><span class="node end">Y↑、P↑</span></div>
+<div class="chain"><span class="node start">擴張性財政（G↑）</span><span class="arrow">→</span><span class="node">AD 初步右移 ΔG</span><span class="arrow">→</span><span class="node">乘數 ×1/(1−MPC)</span><span class="arrow">→</span><span class="node">Y↑ → MD↑ → i↑</span><span class="arrow">→</span><span class="node">I↓（排擠）</span><span class="arrow">→</span><span class="node end">AD 淨右移 < ΔG×乘數</span></div>
+</section>
+
+<!-- ======================================================
+     §10 跨章節衝擊大總表
+     ====================================================== -->
+<section id="shocks">
+<h2 class="sec"><span class="num">§ 10</span>政策／事件衝擊大總表（跨章節）<span class="en">SHOCK MATRIX</span></h2>
+
+<p>同一個衝擊 → 在不同章節的模型留下不同足跡。下表把每個衝擊放在所有相關模型上比對。<b>↑</b> 紅、<b>↓</b> 藍、<b>−</b> 灰＝不變。</p>
+
+<h3>表 A — 國內政策衝擊</h3>
+<table>
+<thead>
+<tr>
+  <th>衝擊／事件</th>
+  <th>Ch6 r</th>
+  <th>Ch6 I</th>
+  <th>Ch7 P</th>
+  <th>Ch9 NCO</th>
+  <th>Ch9 ε</th>
+  <th>Ch9 NX</th>
+  <th>Ch10 Y(SR)</th>
+  <th>Ch10 P(SR)</th>
+  <th>Ch11 i</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>儲蓄稅優（S 右移）</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction up">↑</td>
+  <td class="neutral">−</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction up">↑</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+</tr>
+<tr>
+  <td>投資稅優（D 右移）</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction up">↑</td>
+  <td class="neutral">−</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction up">↑(AD)</td>
+  <td class="cell-direction up">↑</td>
+  <td class="neutral">−</td>
+</tr>
+<tr>
+  <td>政府赤字 G↑（雙赤字版）</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction up">↑</td>
+</tr>
+<tr>
+  <td>關稅↑（貿易政策）</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+  <td class="cell-direction up">↑</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+</tr>
+<tr>
+  <td>擴張性貨幣 MS↑</td>
+  <td class="cell-direction down">↓(短)</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction up">↑(長)</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction down">↓</td>
+</tr>
+<tr>
+  <td>緊縮性貨幣 MS↓</td>
+  <td class="cell-direction up">↑(短)</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction down">↓(長)</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction up">↑</td>
+</tr>
+<tr>
+  <td>消費信心崩潰（C↓）</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction up">↑</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction down">↓</td>
+</tr>
+</tbody>
+</table>
+
+<h3>表 B — 國外／供給衝擊</h3>
+<table>
+<thead>
+<tr>
+  <th>衝擊／事件</th>
+  <th>Ch6 r</th>
+  <th>Ch9 NCO</th>
+  <th>Ch9 ε</th>
+  <th>Ch9 NX</th>
+  <th>Ch10 Y</th>
+  <th>Ch10 P</th>
+  <th>失業 u</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>資本外逃（NCO 整條右移）</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction down">↓(I)</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction up">↑</td>
+</tr>
+<tr>
+  <td>外國景氣熱（NX 需求↑）</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+  <td class="cell-direction up">↑</td>
+  <td class="neutral">−</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction down">↓</td>
+</tr>
+<tr>
+  <td>油價暴漲（SRAS 左移）</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction up">↑</td>
+</tr>
+<tr>
+  <td>科技進步（LRAS 右移）</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+  <td class="cell-direction up">↑</td>
+  <td class="cell-direction down">↓</td>
+  <td class="cell-direction down">↓</td>
+</tr>
+<tr>
+  <td>本國 π 高於外國（長期 PPP）</td>
+  <td class="neutral">−</td>
+  <td class="neutral">−</td>
+  <td class="cell-direction down">↓(本幣貶)</td>
+  <td class="cell-direction up">↑</td>
+  <td class="neutral">−</td>
+  <td class="cell-direction up">↑</td>
+  <td class="neutral">−</td>
+</tr>
+</tbody>
+</table>
+
+<h3>表 C — 哪些政策會排擠？哪些會雙赤字？</h3>
+<table>
+<thead>
+<tr><th>政策</th><th>排擠 I？</th><th>影響 ε 方向</th><th>影響 NX 方向</th><th>適用章節</th></tr>
+</thead>
+<tbody>
+<tr><td>封閉經濟 G↑</td><td>會（傳統排擠）</td><td>n/a</td><td>n/a</td><td>Ch 6</td></tr>
+<tr><td>開放經濟 G↑</td><td>會（且加碼 NX↓）</td><td class="cell-direction up">↑（本幣升）</td><td class="cell-direction down">↓</td><td>Ch 9（雙赤字）</td></tr>
+<tr><td>關稅↑</td><td>不會</td><td class="cell-direction up">↑</td><td class="neutral">−</td><td>Ch 9</td></tr>
+<tr><td>擴張性貨幣</td><td>不會（反而 I↑）</td><td class="cell-direction down">↓（本幣貶）</td><td class="cell-direction up">↑</td><td>Ch 11</td></tr>
+</tbody>
+</table>
+
+<h3>關鍵對比 — 同樣是「刺激景氣」，兩條傳遞路徑完全不同</h3>
+<div class="grid-2">
+  <div class="card key">
+    <div class="head">財政擴張（Fiscal Expansion）</div>
+    <div class="chain" style="margin:6px 0">
+      <span class="node start">G↑</span><span class="arrow">→</span>
+      <span class="node">AD 右移</span><span class="arrow">→</span>
+      <span class="node">Y↑、P↑</span><span class="arrow">→</span>
+      <span class="node">MD↑</span><span class="arrow">→</span>
+      <span class="node">i↑</span><span class="arrow">→</span>
+      <span class="node">I↓ 排擠</span><span class="arrow">→</span>
+      <span class="node end">本幣升、NX↓</span>
+    </div>
+  </div>
+  <div class="card key">
+    <div class="head">貨幣擴張（Monetary Expansion）</div>
+    <div class="chain" style="margin:6px 0">
+      <span class="node start">MS↑</span><span class="arrow">→</span>
+      <span class="node">i↓</span><span class="arrow">→</span>
+      <span class="node">I↑</span><span class="arrow">→</span>
+      <span class="node">AD 右移</span><span class="arrow">→</span>
+      <span class="node">Y↑、P↑</span><span class="arrow">→</span>
+      <span class="node">資金外流 NCO↑</span><span class="arrow">→</span>
+      <span class="node end">本幣貶、NX↑</span>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<footer class="bot">
+  經濟學期末考總覽 ・ 依據課程 PDF 與課本三市場模型整理 ・ 圖中均衡點皆以虛線投影至兩軸對齊<br>
+  〈MathJax 公式 ・ SVG 內嵌 ・ Noto Serif TC × Noto Sans TC〉
+</footer>
+
+</div>
+</body>
+</html>
