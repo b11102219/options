@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>A Field Guide to Logical Fallacies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Fraunces:ital,opsz,wght@1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE6D3;
+    --paper-dark:#E2D9C0;
+    --ink:#20291F;
+    --ink-soft:#4B5245;
+    --rule:#C9BE9F;
+
+    --c-relevance:#A63A2A;
+    --c-relevance-tint:#F0DAD3;
+    --c-presumption:#B4801F;
+    --c-presumption-tint:#F1E3C4;
+    --c-ambiguity:#39707A;
+    --c-ambiguity-tint:#D8E5E4;
+    --c-induction:#54702F;
+    --c-induction-tint:#DDE5CB;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .sheet{
+    max-width:1180px;
+    margin:0 auto;
+    padding:56px 48px 40px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    border-bottom:2px solid var(--ink);
+    padding-bottom:28px;
+    margin-bottom:36px;
+  }
+  .kicker{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:15px;
+    color:var(--ink-soft);
+    margin:0 0 6px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:52px;
+    line-height:1.03;
+    margin:0 0 14px;
+    letter-spacing:-0.01em;
+  }
+  header p.sub{
+    font-size:16px;
+    line-height:1.55;
+    max-width:640px;
+    color:var(--ink-soft);
+    margin:0 0 20px;
+  }
+  .legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:18px;
+  }
+  .legend-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .swatch{
+    width:11px;height:11px;
+    border-radius:50%;
+    flex-shrink:0;
+  }
+
+  /* ---------- Sorting test ---------- */
+  .sort-test{
+    background:var(--paper-dark);
+    border:1.5px solid var(--ink);
+    padding:18px 22px;
+    margin-bottom:36px;
+  }
+  .sort-test h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:17px;
+    margin:0 0 8px;
+  }
+  .sort-test p{
+    font-size:13.5px;
+    line-height:1.55;
+    color:var(--ink-soft);
+    margin:0 0 10px;
+  }
+  .sort-steps{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+  }
+  @media (max-width:880px){
+    .sort-steps{grid-template-columns:1fr 1fr;}
+  }
+  .sort-step{
+    font-size:12.5px;
+    line-height:1.45;
+    padding-left:14px;
+    border-left:2px solid var(--ink);
+  }
+  .sort-step b{
+    display:block;
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:14px;
+    margin-bottom:3px;
+  }
+
+  /* ---------- Families grid ---------- */
+  .families{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:36px;
+  }
+  @media (max-width:880px){
+    .families{grid-template-columns:1fr;}
+    h1{font-size:38px;}
+    .sheet{padding:36px 22px 28px;}
+  }
+
+  .family{
+    border:1.5px solid var(--ink);
+    background:var(--paper-dark);
+  }
+  .family-head{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    padding:18px 20px;
+    border-bottom:1.5px solid var(--ink);
+  }
+  .family-icon{
+    width:38px;height:38px;
+    flex-shrink:0;
+  }
+  .family-name{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:22px;
+    margin:0 0 3px;
+  }
+  .family-def{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    line-height:1.45;
+    margin:0;
+  }
+
+  .specimens{
+    padding:6px 20px 14px;
+  }
+  .specimen{
+    padding:14px 0;
+    border-bottom:1px dashed var(--rule);
+  }
+  .specimen:last-child{border-bottom:none;}
+
+  .specimen-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:10px;
+  }
+  .specimen-name{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:17px;
+  }
+  .habitat{
+    font-size:10.5px;
+    letter-spacing:0.03em;
+    color:var(--ink-soft);
+    white-space:nowrap;
+    font-variant:small-caps;
+  }
+  .field-mark{
+    font-size:13px;
+    font-style:italic;
+    color:var(--ink-soft);
+    margin:3px 0 7px;
+  }
+  .example{
+    font-size:13.5px;
+    line-height:1.5;
+    margin:0;
+    padding-left:12px;
+    border-left:2px solid;
+  }
+
+  .relevance .example{border-color:var(--c-relevance);}
+  .presumption .example{border-color:var(--c-presumption);}
+  .ambiguity .example{border-color:var(--c-ambiguity);}
+  .induction .example{border-color:var(--c-induction);}
+
+  .relevance .family-head, .relevance .family-icon{color:var(--c-relevance);}
+  .presumption .family-head, .presumption .family-icon{color:var(--c-presumption);}
+  .ambiguity .family-head, .ambiguity .family-icon{color:var(--c-ambiguity);}
+  .induction .family-head, .induction .family-icon{color:var(--c-induction);}
+
+  .relevance .family-head{background:var(--c-relevance-tint);}
+  .presumption .family-head{background:var(--c-presumption-tint);}
+  .ambiguity .family-head{background:var(--c-ambiguity-tint);}
+  .induction .family-head{background:var(--c-induction-tint);}
+
+  /* ---------- Footer: field notes ---------- */
+  .notes{
+    margin-top:40px;
+    border-top:2px solid var(--ink);
+    padding-top:28px;
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:40px;
+  }
+  @media (max-width:880px){
+    .notes{grid-template-columns:1fr;}
+  }
+  .notes h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:22px;
+    margin:0 0 12px;
+  }
+  .notes ul{
+    margin:0;
+    padding-left:18px;
+    font-size:14px;
+    line-height:1.6;
+  }
+  .notes li{margin-bottom:8px;}
+
+  details{
+    border-bottom:1px dashed var(--rule);
+    padding:10px 0;
+  }
+  details:first-of-type{border-top:1px dashed var(--rule);}
+  summary{
+    cursor:pointer;
+    font-size:14px;
+    line-height:1.5;
+  }
+  summary::marker{
+    color:var(--ink-soft);
+  }
+  .answer{
+    margin:8px 0 0;
+    font-size:13.5px;
+    font-style:italic;
+    color:var(--ink-soft);
+  }
+
+  footer{
+    margin-top:36px;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+
+  @media print{
+    body{background:white;}
+    .sheet{padding:20px;max-width:100%;}
+    @page{size:landscape;margin:12mm;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header>
+    <p class="kicker">A teaching reference</p>
+    <h1>A Field Guide to Logical Fallacies</h1>
+    <p class="sub">Sixteen commonly sighted specimens, grouped into four families by how they go wrong — so you can name what you're hearing before you argue with it.</p>
+    <div class="legend">
+      <div class="legend-item"><span class="swatch" style="background:var(--c-relevance)"></span>Relevance — points away from the argument</div>
+      <div class="legend-item"><span class="swatch" style="background:var(--c-presumption)"></span>Presumption — assumes what it needs to prove</div>
+      <div class="legend-item"><span class="swatch" style="background:var(--c-ambiguity)"></span>Ambiguity — hides in unclear language</div>
+      <div class="legend-item"><span class="swatch" style="background:var(--c-induction)"></span>Weak Induction — evidence too thin for the claim</div>
+    </div>
+  </header>
+
+  <div class="sort-test">
+    <h2>How a specimen gets sorted</h2>
+    <p>Ask the questions in order and stop at the first "yes." This gives every fallacy exactly one home — the four families are built to be exhaustive of the ways reasoning can fail informally, so nothing falls through the cracks or fits two boxes at once.</p>
+    <div class="sort-steps">
+      <div class="sort-step"><b>1. Unclear language?</b>Does a word, phrase, or grammar shift meaning or scope mid-argument? → Ambiguity</div>
+      <div class="sort-step"><b>2. Unproven premise?</b>Otherwise: does it assume, as already true, the very thing it needs to prove? → Presumption</div>
+      <div class="sort-step"><b>3. Irrelevant content?</b>Otherwise: does it lean on something with no logical bearing on the claim — character, emotion, status, or headcount? → Relevance</div>
+      <div class="sort-step"><b>4. Thin evidence?</b>Otherwise: is the content actually relevant, but too weak, small, or shaky to support the conclusion's strength? → Weak Induction</div>
+    </div>
+  </div>
+
+  <div class="families">
+
+    <!-- RELEVANCE -->
+    <section class="family relevance">
+      <div class="family-head">
+        <svg class="family-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M8 20 L20 20"/>
+          <path d="M20 20 L32 10"/>
+          <path d="M20 20 L32 30"/>
+          <circle cx="8" cy="20" r="3"/>
+        </svg>
+        <div>
+          <p class="family-name">Relevance Fallacies</p>
+          <p class="family-def">Leans on something with no logical bearing on the claim — character, feeling, status, or head count stand in for evidence.</p>
+        </div>
+      </div>
+      <div class="specimens">
+        <div class="specimen">
+          <div class="specimen-top"><span class="specimen-name">Ad Hominem</span><span class="habitat">debates, comments</span></div>
+          <p class="field-mark">Attacks the person instead of the argument.</p>
+          <p class="example">"Don't trust his data on emissions — he drives a pickup truck."</p>
+        </div>
+        <div class="specimen">
+          <div class="specimen-top"><span class="specimen-name">Red Herring</span><span class="habitat">meetings, politics</span></div>
+          <p class="field-mark">Drags in an unrelated topic to change the subject entirely.</p>
+          <p class="example">"Why worry about my late reports — the whole industry is struggling."</p>
+        </div>
+        <div class="specimen">
+          <div class="specimen-top"><span class="specimen-name">Straw Man</span><span class="habitat">op-eds, debates</span></div>
+          <p class="field-mark">Rebuts an exaggerated version nobody actually argued.</p>
+          <p class="example">"She wants protected bike lanes? So she wants to ban cars entirely."</p>
+        </div>
+        <div class="specimen">
+          <div class="specimen-top"><span class="specimen-name">Appeal to Authority</span><span class="habitat">ads, health claims</span></div>
+          <p class="field-mark">Leans on someone's status, not relevant expertise or evidence.</p>
+          <p class="example">"This supplement works — a famous athlete swears by it."</p>
+        </div>
+        <div class="specimen">
+          <div class="specimen-top"><span class="specimen-name">Appeal to Emotion</span><span class="habitat">campaigns, fundraising</span></div>
+          <p class="field-mark">Substitutes feeling for evidence — the emotion itself proves nothing.</p>
+          <p class="example">"Think of the children — how could you vote against this?"</p>
+        </div>
+        <div class="specimen">
+          <div class="specimen-top"><span class="specimen-name">Bandwagon</span><span class="habitat">marketing, trends</span></div>
+          <p class="field-mark">Treats headcount as proof — how many believe it has no bearing on whether it's true.</p>
+          <p class="example">"Millions of people bought it, so it has to be worth it."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRESUMPTION -->
+    <section class="family presumption">
+      <div class="family-head">
+        <svg class="family-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M20 8 a12 12 0 1 1 -8.5 3.5" stroke-dasharray="3 3"/>
+          <path d="M14 8 l-3 4 5 1"/>
+        </svg>
+        <div>
+          <p class="family-name">Presumption Fallacies</p>
+          <p class="family-def">Treats an unproven claim as already settled, then builds on it.</p>
+        </div>
+      </div>
+      <div class="specimens">
+        <div class="specimen">
+          <div class="specimen-top"><span class="specimen-name">Begging the Question</span><span class="habitat">policy talk</span></div>
+          <p class="field-mark">The conclusion is smuggled into the premise.</p>
+          <p class="example">"Free speech matters because people should be free to speak their minds."</p>
+        </div>
+        <div class="specimen">
+          <div class="specimen-top"><span class="specimen-name">False Dilemma</span><span class="habitat">budgets, ultimatums</span></div>
+          <p class="field-mark">Offers only two options when more exist.</p>
+          <p class="example">"Either we cancel the program, or the whole budget collapses."</p>
+        </div>
+        <div class="specimen">
+          <div class="specimen-top"><span class="specimen-name">Loaded Question</span><span class="habitat">interviews, HR</span></div>
+          <p class="field-mark">Bakes an unproven accusation into the question itself.</p>
+          <p class="example">"Have you stopped padding your hours?"</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AMBIGUITY -->
+    <section class="family ambiguity">
+      <div class="family-head">
+        <svg class="family-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M6 14 q4 -4 8 0 t8 0 t8 0 t8 0"/>
+          <path d="M6 24 q4 -4 8 0 t8 0 t8 0 t8 0"/>
+        </svg>
+        <div>
+          <p class="family-name">Ambiguity Fallacies</p>
+          <p class="family-def">Unclear or shifting wording lets the argument seem to work when it doesn't.</p>
+        </div>
+      </div>
+      <div class="specimens">
+        <div class="specimen">
+          <div class="specimen-top"><span class="specimen-name">Equivocation</span><span class="habitat">wordplay, ads</span></div>
+          <p class="field-mark">A key word quietly switches meaning mid-argument.</p>
+          <p class="example">"A feather is light. Nothing light can be dark. So a feather can't be dark."</p>
+        </div>
+        <div class="specimen">
+          <div class="specimen-top"><span class="specimen-name">Amphiboly</span><span class="habitat">headlines, contracts</span></div>
+          <p class="field-mark">Sentence structure allows two different readings.</p>
+          <p class="example">"I photographed the hiker with the drone." (Who has the drone?)</p>
+        </div>
+        <div class="specimen">
+          <div class="specimen-top"><span class="specimen-name">Composition</span><span class="habitat">team reviews</span></div>
+          <p class="field-mark">Assumes what's true of the parts must be true of the whole.</p>
+          <p class="example">"Every player is excellent, so this must be an excellent team."</p>
+        </div>
+        <div class="specimen">
+          <div class="specimen-top"><span class="specimen-name">Division</span><span class="habitat">stereotyping</span></div>
+          <p class="field-mark">Assumes what's true of the whole applies to every part.</p>
+          <p class="example">"It's a wealthy neighborhood, so every resident must be rich."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WEAK INDUCTION -->
+    <section class="family induction">
+      <div class="family-head">
+        <svg class="family-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="14" cy="14" r="8"/>
+          <path d="M20 20 L30 30"/>
+          <circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/>
+        </svg>
+        <div>
+          <p class="family-name">Weak Induction Fallacies</p>
+          <p class="family-def">The content is genuinely relevant — it's just too thin, small, or shaky to earn the conclusion drawn from it.</p>
+        </div>
+      </div>
+      <div class="specimens">
+        <div class="specimen">
+          <div class="specimen-top"><span class="specimen-name">Hasty Generalization</span><span class="habitat">small talk, reviews</span></div>
+          <p class="field-mark">A sweeping claim from a tiny, unrepresentative sample.</p>
+          <p class="example">"Both people I met from that city were rude — people there are rude."</p>
+        </div>
+        <div class="specimen">
+          <div class="specimen-top"><span class="specimen-name">Post Hoc</span><span class="habitat">superstition, sports</span></div>
+          <p class="field-mark">Assumes that because B followed A, A caused B.</p>
+          <p class="example">"I wore my lucky socks and we won — the socks worked."</p>
+        </div>
+        <div class="specimen">
+          <div class="specimen-top"><span class="specimen-name">Slippery Slope</span><span class="habitat">rulemaking, panic</span></div>
+          <p class="field-mark">Predicts an extreme end from one step, without evidence for the chain in between.</p>
+          <p class="example">"Allow one exception and the entire policy falls apart."</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="notes">
+    <div>
+      <h2>Field notes for teaching this</h2>
+      <ul>
+        <li>Start with the family question first — <em>relevance, presumption, ambiguity, or evidence?</em> — before hunting for the exact name. Naming the family builds the instinct faster than memorizing sixteen labels.</li>
+        <li>Use real specimens. Pull one line from an ad, a comment section, or a recent news story and ask learners to sort it into a family before naming it precisely.</li>
+        <li>Warn against fallacy-hunting as a sport: pointing out a fallacy doesn't automatically make the underlying conclusion false. A bad argument for a true thing is still a bad argument — and still worth flagging.</li>
+        <li>Pair each fallacy with its "steelman" fix: what would a non-fallacious version of this same point look like?</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Spot it in the wild</h2>
+      <details>
+        <summary>"You only oppose the merger because you got passed over for VP."</summary>
+        <p class="answer">Ad Hominem — attacks the critic's motive instead of the merits of the merger.</p>
+      </details>
+      <details>
+        <summary>"We can't fund the library and the clinic both — pick one."</summary>
+        <p class="answer">False Dilemma — presents two options when partial or phased funding may exist.</p>
+      </details>
+      <details>
+        <summary>"Our top three customers loved it, so the whole market will."</summary>
+        <p class="answer">Hasty Generalization — three customers is a thin sample for a market-wide claim.</p>
+      </details>
+      <details>
+        <summary>"He's a Nobel physicist, so his opinion on nutrition must be right."</summary>
+        <p class="answer">Appeal to Authority — the expertise doesn't match the subject of the claim.</p>
+      </details>
+    </div>
+  </div>
+
+  <footer>The four-question test is exhaustive by construction — any informal fallacy sorts into exactly one family. These sixteen specimens are a curated sample within it, not the full population of named fallacies (dozens more exist, and new ones get named). Real arguments often stack more than one at once.</footer>
+
+</div>
+</body>
+</html>
